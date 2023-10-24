@@ -6,7 +6,7 @@ partial  class Class1
 	{ 
 		static partial void Welcome4200()
 	{
-		console.WriteLine("i am also here")
+		console.WriteLine("i am also here");
 	}
-	}
+	
 }
