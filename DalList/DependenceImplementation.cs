@@ -3,32 +3,32 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class MilestoneImplementation : IMilestone
+public class DependenceImplementation : IDependence
 {
-    public int Create(Milestone item)
+    public int Create(Dependence item)
     {
 
-        int newId = DataSource.Config.Id_number_Milestone;
+        int newId = DataSource.Config.Id_number_Dependence;
         // item -להעתיק את המספר החדש ל
         return newId;
     }
 
     public void Delete(int id)
     {
-        DataSource.Tasks.Remove(m => (m.Id_number_Milestone) == id);
+        DataSource.Tasks.Remove(m => (m.Id_number_Dependence) == id);
     }
 
-    public Milestone? Read(int id)
+    public Dependence? Read(int id)
     {
         throw new NotImplementedException();
     }
 
-    public List<Milestone> ReadAll()
+    public List<Dependence> ReadAll()
     {
         throw new NotImplementedException();
     }
 
-    public void Update(Milestone item)
+    public void Update(Dependence item)
     {
         throw new NotImplementedException();
     }
