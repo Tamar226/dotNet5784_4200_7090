@@ -8,30 +8,35 @@ public class TaskImplementation : ITask
     public int Create(Task item)
     {
         int newId = DataSource.Config.ID_next_number_Task;
-        // item -להעתיק את המספר החדש ל
+        Task newItem= new Task();
+        DataSource.Tasks.Add(newItem);
         return newId;
         
     }
 
     public void Delete(int id)
     {
-        if (!DataSource.Tasks.Find(tsk => (tsk.Id_number_Task) == id))
-            throw 'we dont have this... '
-        DataSource.Tasks.Remove(tsk => (tsk.Id_number_Task) == id)
+        Task? taskFound = DataSource.Tasks.Find(tsk => tsk.IdNumberTask == id);
+        if (taskFound != null) { throw new Exception($"Task with Id={id} don't exist"); }
+        DataSource.Tasks.Remove(taskFound);
     }
+
 
     public Task? Read(int id)
     {
-        throw new NotImplementedException();
+        Task? taskFound = DataSource.Tasks.Find(tsk => tsk.IdNumberTask == id);
+        if (taskFound == null) { return null; }
+        return taskFound;
     }
 
     public List<Task> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Task>(DataSource.Tasks);
     }
 
     public void Update(Task item)
     {
-        throw new NotImplementedException();
+        Delete(item.IdNumberTask);
+        Create(item);
     }
 }
