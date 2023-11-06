@@ -8,28 +8,34 @@ public class DependenceImplementation : IDependence
     public int Create(Dependence item)
     {
 
-        int newId = DataSource.Config.Id_number_Dependence;
-        // item -להעתיק את המספר החדש ל
+        int newId = DataSource.Config.IDNextNumberDependence;
+        Dependence newItem = new Dependence();
+        DataSource.Dependences.Add(newItem);
         return newId;
     }
 
     public void Delete(int id)
     {
-        DataSource.Tasks.Remove(m => (m.Id_number_Dependence) == id);
+        Dependence? dependenceFound = DataSource.Dependences.Find(dpt => dpt.IdNumberDependence == id);
+        if (dependenceFound == null) { throw new Exception($"Dependence with Id: {id} don't exist"); }
+        DataSource.Dependences.Remove(dependenceFound);
     }
 
     public Dependence? Read(int id)
     {
-        throw new NotImplementedException();
+        Dependence? dependenceFound = DataSource.Dependences.Find(dpt => dpt.IdNumberDependence == id);
+        if (dependenceFound == null) { return null; }
+        return dependenceFound;
     }
 
     public List<Dependence> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Dependence>(DataSource.Dependences);
     }
 
     public void Update(Dependence item)
     {
-        throw new NotImplementedException();
+        Delete(item.IdNumberDependence);
+        Create(item);
     }
 }

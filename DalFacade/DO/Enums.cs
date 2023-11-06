@@ -1,3 +1,3 @@
 ﻿namespace DO;
 
-public enum EngineerExperience { Expert, Junior, Rookie }
+public enum Difficulty { Novice, AdvancedBeginner, Competent, Proficient, Expert };

@@ -7,17 +7,17 @@ public class TaskImplementation : ITask
 {
     public int Create(Task item)
     {
-        int newId = DataSource.Config.ID_next_number_Task;
-        Task newItem= new Task();
+        int newId = DataSource.Config.IDNextNumberTask;
+        Task newItem = new Task();
         DataSource.Tasks.Add(newItem);
         return newId;
-        
+
     }
 
     public void Delete(int id)
     {
         Task? taskFound = DataSource.Tasks.Find(tsk => tsk.IdNumberTask == id);
-        if (taskFound != null) { throw new Exception($"Task with Id={id} don't exist"); }
+        if (taskFound == null) { throw new Exception($"Task with Id: {id} don't exist"); }
         DataSource.Tasks.Remove(taskFound);
     }
 

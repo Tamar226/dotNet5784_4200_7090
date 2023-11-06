@@ -5,29 +5,40 @@ using System.Collections.Generic;
 
 public class EngineerImplementation : IEngineer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public int Create(Engineer item)
     {
-
-        throw 'Task with this ID already are in the maarechet';  
+        Engineer? engineerFound = DataSource.Engineers.Find(eng => eng.IdNumberEngineer == item.IdNumberEngineer);
+        if (engineerFound != null) { throw new Exception($"Engineer with Id: {item.IdNumberEngineer} is already exist"); }
+        DataSource.Engineers.Add(engineerFound);
+        return item.IdNumberEngineer;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        Engineer? engineerFound = DataSource.Engineers.Find(eng => eng.IdNumberEngineer == id);
+        if (engineerFound == null) { throw new Exception($"Engineer with Id: {id} don't exist"); }
+        DataSource.Engineers.Remove(engineerFound);
+        return;
     }
 
     public Engineer? Read(int id)
     {
-        throw new NotImplementedException();
+        Engineer? engineerFound = DataSource.Engineers.Find(eng => eng.IdNumberEngineer == id);
+        if (engineerFound == null) { return null; }
+        return engineerFound;
     }
 
     public List<Engineer> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Engineer>(DataSource.Engineers);
     }
 
     public void Update(Engineer item)
     {
-        throw new NotImplementedException();
+        Delete(item.IdNumberEngineer);
+        Create(item);
     }
 }
