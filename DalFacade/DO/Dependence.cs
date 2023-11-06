@@ -3,7 +3,7 @@
 public record Dependence
 (
     int IdNumberDependence,
-    int IdNumberPendingTask,
-    int IdNumberPreviousTask
+    int DependentTask,
+    int DependsOnTask
 )
 { public Dependence() : this(0, 0, 0) { } };

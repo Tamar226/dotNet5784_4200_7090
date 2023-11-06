@@ -20,19 +20,46 @@ public static class Initialization
     /// </summary>
     private static void createTask()
     {
+        string[] TasksNames = {"Take a shower","Wash the dishes","go to walking","aet supper","doing homework","cry","be happy","be angry",""};
+        foreach (string _name in TasksNames)
+        {
+            int _id;
+            do
+                _id = s_rand.Next(0, 20);
+            while (s_daITask!.Read(_id) != null);
+            DateTime start = new DateTime(1995, 1, 1);
+            int range = (DateTime.Today - start).Days;
+            DateTime _bdt = start.AddDays(s_rand.Next(range));
 
+            string? _alias = (_id % 2) == 0 ? _name + "ALIAS" : null;
 
+           // Student newStu = new(_id, _description, __nickname, _Product, _Notes, _ _name, _alias, false, _bdt);
 
-
+           // s_dalStudent!.Create(newStu);
+        }
     }
+
+
+
+
+ 
 
     /// <summary>
     /// creat new Dependence. a loop that create each one of the dependences own.
     /// </summary>
     private static void createDependence()
     {
+        //IDependence help = s_daIdependence;
+        List<Task> _taskList = s_daITask!.ReadAll();
+
+        for (int i = 1; i < 40; i++)
+        {
+            int num1 = s_rand.Next(1, 20);
 
 
+           // Dependence newDpt = new(s_daIdependence., _taskList[num1].IdNumberTask, _taskList[i - 1].IdNumberTask);
+        }
+       // s_dalEngineer!.Create(newDpt);
     }
 
     /// <summary>

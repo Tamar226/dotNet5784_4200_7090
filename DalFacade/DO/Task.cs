@@ -5,7 +5,7 @@ public record Task
 (
     int IdNumberTask,
     string Description,
-    string Nickname,//
+    string Nickname,//כינוי
     bool Milestone,
     string Product,//תאור התוצר
     string Notes,//הערות
