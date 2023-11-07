@@ -38,12 +38,6 @@ public static class Initialization
            // s_dalStudent!.Create(newStu);
         }
     }
-
-
-
-
- 
-
     /// <summary>
     /// creat new Dependence. a loop that create each one of the dependences own.
     /// </summary>
