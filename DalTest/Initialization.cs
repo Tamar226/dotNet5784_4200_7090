@@ -10,9 +10,9 @@ public static class Initialization
     /// <summary>
     /// Access to existing interfaces
     /// </summary>
-    private static ITask? s_daITask;
+    private static ITask? s_dalTask;
     private static IEngineer? s_dalEngineer;
-    private static IDependence? s_daIdependence;
+    private static IDependence? s_dalDependence;
 
     private static readonly Random s_rand = new();
     /// <summary>
@@ -46,13 +46,13 @@ public static class Initialization
             DateTime startDate = new DateTime(2020, 1, 1);
             int range = (DateTime.Today - startDate).Days;
             DateTime _createDateTask = startDate.AddDays(s_rand.Next(range));
-            DateTime _startDateTask = _createDateTask.AddDays(s_rand.Next(10,100));
+            DateTime _startDateTask = DateTime.Today.AddDays(s_rand.Next(10, 300));
             DateTime _foresastDateTask = _startDateTask.AddDays(s_rand.Next(10, 300));
             DateTime _LastEndDate = _foresastDateTask.AddDays(10);
 
             Task newTask = new(0, _nameOfTask, _NicknameOfTask,false, _ProductTask, _NotesTask,_level,0, _createDateTask, _startDateTask, _foresastDateTask, _LastEndDate, null);
 
-            s_daITask!.Create(newTask);
+            s_dalTask!.Create(newTask);
         }
     }
 
@@ -61,19 +61,19 @@ public static class Initialization
     /// </summary>
     private static void createDependence()
     {
-        //IDependence help = s_daIdependence;
-        List<Task> _taskList = s_daITask!.ReadAll();
-        for (int i = 1; i < 20; i++)
+        List<Task> _taskList = s_dalTask!.ReadAll();
+        for (int i = 0; i < 20; i++)
         {
             for (int j = 0; j < 20; j++)
             {
 
+                if (j != i && s_rand.Next(0,10)>5)
+                {
+                    Dependence newDependence = new(0, _taskList[i].IdNumberTask, _taskList[j].IdNumberTask);
+                    s_dalDependence!.Create(newDependence);
+                }
             }
-            int num1 = s_rand.Next(1, 20);
         }
-        Dependence newDependence = new(0,)
-        s_daIdependence!.Create(newDependence);
-
     }
 
     /// <summary>
@@ -98,4 +98,17 @@ public static class Initialization
             s_dalEngineer!.Create(newEng);
         }
     }
+    public static void Do(ITask? dalTask, IDependence? dalDependence, IEngineer? dalEngineer)
+    {
+        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        createTask();
+        createEngineer();
+        createDependence();
+        return;
+    }
 };
+
+
+
