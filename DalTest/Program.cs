@@ -4,12 +4,13 @@ using Dal;
 using DalApi;
 using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 internal class Program
 {
-    private static ITask? s_dalTask = new TaskImplementation(); //stage 1
-    private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
-    private static IDependence? s_dalDependence = new DependenceImplementation(); //stage 1
+    private static ITask? s_dalTask = new TaskImplementation(); 
+    private static IEngineer? s_dalEngineer = new EngineerImplementation(); 
+    private static IDependence? s_dalDependence = new DependenceImplementation(); 
     static void Main(string[] args)
     {
         try
@@ -22,8 +23,11 @@ internal class Program
             Console.WriteLine(ex.ToString());
         }
     }
+
     //----------------------------------------------//
-    //*********************************************//
+   /// <summary>
+   /// 
+   /// </summary>
 
     public static void chooseEntities()
     {
@@ -44,8 +48,7 @@ internal class Program
                     break;
 
                 case 3:
-
-                    DependencyEntity();
+                    DependenceEntity();
                     break;
 
                 default:
@@ -55,6 +58,9 @@ internal class Program
         } while (choiceEntity != 0);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static void TaskEntity()
     {
         int choiceAct = 0;
@@ -63,15 +69,15 @@ internal class Program
         switch (choiceAct)
         {
             case 1:
-                s_dalTask!.Create(ceateTask());
+                s_dalTask!.Create(createTask());
                      break;
             case 2:
                 printTask(s_dalTask!.Read(idToRead()));
                 break;
 
             case 3:
-                List<Task> listOfTask = s_dalTask!.ReadAll();
-                foreach (Task t in listOfTask)
+                List<DO.Task> listOfTask = s_dalTask!.ReadAll();
+                foreach (DO.Task t in listOfTask)
                 {
                     Console.WriteLine(t.Description);
                 }
@@ -79,7 +85,7 @@ internal class Program
             case 4:
                 Console.WriteLine("Enter Id Number of Task to update:");
                 int idToUpdate = int.Parse(Console.ReadLine());
-                s_dalTask!.Update(ceateTask(idToUpdate));
+                s_dalTask!.Update(createTask(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of Task to delete:");
@@ -89,7 +95,7 @@ internal class Program
                 break;
         }
     }
-    public static Task ceateTask(int idToUpdate=0)
+    public static DO.Task createTask(int idToUpdate=0)
     {
         Console.WriteLine("Enter Description:");
         string description = Console.ReadLine();
@@ -107,7 +113,7 @@ internal class Program
         string notes = Console.ReadLine();
 
         Difficulty difficulty;
-        Console.WriteLine("Enter the task's level");
+        Console.WriteLine("Enter the task's level: ( Novice, AdvancedBeginner, Competent, Proficient, Expert)");
         Difficulty.TryParse(Console.ReadLine(), out difficulty);
 
         Console.WriteLine("Enter idEngineer:");
@@ -145,7 +151,7 @@ internal class Program
             lastE = DateTime.Parse(lastEString);
         }
 
-        return (new Task(idToUpdate, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
+        return (new DO.Task(idToUpdate, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
     }
     public static int idToRead()
     {
@@ -153,7 +159,8 @@ internal class Program
         return (int.Parse(Console.ReadLine()));
         
     }
-    public static void printTask(Task task) {
+    public static void printTask(DO.Task task)
+    { 
         Console.WriteLine("The Task");
         Console.WriteLine("Id: "+ task.IdNumberTask);
         Console.WriteLine("description: " + task.Description);
@@ -168,5 +175,133 @@ internal class Program
         Console.WriteLine("forecast Date: " + task.foresastdate);
         Console.WriteLine("last End Date: " + task.LastEndDate);
         Console.WriteLine("Actual EndDate: " + task.ActualEndDate);
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public static void EngineerEntity()
+    {
+        int choiceAct = 0;
+        Console.WriteLine("please choose an option\n for Create press 1\n for Read press 2\n for Read all press 3\n for Update press 4\n for Delete press 5\n for Update exit 0\n");
+        choiceAct = (Convert.ToInt32(Console.ReadLine()));
+        switch (choiceAct)
+        {
+            case 1:
+                s_dalEngineer!.Create(createEngineer());
+                break;
+            case 2:
+                printEngineer(s_dalEngineer!.Read(idToRead()));
+                break;
+
+            case 3:
+                List<Engineer> listOfEngineers = s_dalEngineer!.ReadAll();
+                foreach (Engineer e in listOfEngineers)
+                {
+                    Console.WriteLine(e.Name);
+                }
+                break;
+            case 4:
+                Console.WriteLine("Enter Id Number of Engineer to update:");
+                int idToUpdate = int.Parse(Console.ReadLine());
+                s_dalEngineer!.Update(createEngineer(idToUpdate));
+                break;
+            case 5:
+                Console.WriteLine("Enter Id Number of engineer to delete:");
+                s_dalEngineer!.Delete(int.Parse(Console.ReadLine()));
+                break;
+            default:
+                break;
+        }
+    }
+    public static DO.Engineer createEngineer(int idEngineer = 0)
+    {
+        if (idEngineer == 0)
+        {
+        Console.WriteLine("Enter id of engineer:");
+        idEngineer = int.Parse(Console.ReadLine());
+        }
+
+        Console.WriteLine("Enter name:");
+        string nameEngineer = Console.ReadLine();
+
+        Console.WriteLine("Enter email of engineer:");
+        string emailEngineer = Console.ReadLine();
+
+        Difficulty difficulty;
+        Console.WriteLine("Enter the engineer's level:( Novice, AdvancedBeginner, Competent, Proficient, Expert");
+        Difficulty.TryParse(Console.ReadLine(), out difficulty);
+
+        Console.WriteLine("Enter cost per hour og engineer:");
+        double costPerHour = double.Parse(Console.ReadLine());
+
+        return (new Engineer(idEngineer, nameEngineer, emailEngineer, difficulty, costPerHour));
+    }
+    public static void printEngineer(Engineer engineer)
+    {
+        Console.WriteLine("The Engineer");
+        Console.WriteLine("Id: " + engineer.IdNumberEngineer);
+        Console.WriteLine("description: " + engineer.Name);
+        Console.WriteLine("nickname: " + engineer.Email);
+        Console.WriteLine("milestone: " + engineer.Level);
+        Console.WriteLine("milestone: " + engineer.Cost);  
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public static void DependenceEntity()
+    {
+        int choiceAct = 0;
+        Console.WriteLine("please choose an option\n for Create press 1\n for Read press 2\n for Read all press 3\n for Update press 4\n for Delete press 5\n for Update exit 0\n");
+        choiceAct = (Convert.ToInt32(Console.ReadLine()));
+        switch (choiceAct)
+        {
+            case 1:
+                s_dalDependence!.Create(createDependence());
+                break;
+            case 2:
+                printDependence(s_dalDependence!.Read(idToRead()));
+                break;
+            case 3:
+                List<Dependence> listOfDependence = s_dalDependence!.ReadAll();
+                foreach (Dependence d in listOfDependence)
+                {
+                    Console.WriteLine(d.IdNumberDependence);
+                }
+                break;
+            case 4:
+                Console.WriteLine("Enter Id Number of Dependent Task to update:");
+                int idToUpdate = int.Parse(Console.ReadLine());
+                s_dalDependence!.Update(createDependence(idToUpdate));
+                break;
+            case 5:
+                Console.WriteLine("Enter Id Number of Task to delete:");
+                s_dalDependence!.Delete(int.Parse(Console.ReadLine()));
+                break;
+            default:
+                break;
+        }
+    }
+    public static DO.Dependence createDependence(int idDependence = 0)
+    {
+        if (idDependence == 0)
+        {
+            Console.WriteLine("Enter id of dependence:");
+            idDependence = int.Parse(Console.ReadLine());
+        }
+
+        Console.WriteLine("Enter Dependent Task:");
+        int idDependenceTask = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter Depends On Task:");
+        int DependsOnTask = int.Parse(Console.ReadLine());
+
+        return (new Dependence(idDependence, idDependenceTask, DependsOnTask));
+    }
+    public static void printDependence(Dependence dependency)
+    {
+        Console.WriteLine("The Task Dependence");
+        Console.WriteLine("Id: " + dependency.IdNumberDependence);
+        Console.WriteLine("Dependent Task: " + dependency.DependentTask);
+        Console.WriteLine("Dependent On Task: " + dependency.DependsOnTask);
     }
 }

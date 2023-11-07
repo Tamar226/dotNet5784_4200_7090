@@ -55,10 +55,6 @@ public static class Initialization
             s_dalTask!.Create(newTask);
         }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> d9960eb4c4de86fcf7f237c7d8abf046e36ab681
     /// <summary>
     /// creat new Dependence. a loop that create each one of the dependences own.
     /// </summary>

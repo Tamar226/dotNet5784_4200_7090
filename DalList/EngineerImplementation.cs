@@ -38,7 +38,13 @@ public class EngineerImplementation : IEngineer
 
     public void Update(Engineer item)
     {
-        Delete(item.IdNumberEngineer);
-        Create(item);
+        Engineer? tempEngineer = (DataSource.Engineers.Find(element => element!.IdNumberEngineer == item.IdNumberEngineer));
+        if (tempEngineer is null)
+            throw new Exception("An object of type Engineer with such an ID does not exist");
+        else
+        {
+            DataSource.Engineers.Remove(tempEngineer);
+            DataSource.Engineers.Add(item);
+        }
     }
 }
