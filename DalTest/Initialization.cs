@@ -55,7 +55,10 @@ public static class Initialization
             s_daITask!.Create(newTask);
         }
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> d9960eb4c4de86fcf7f237c7d8abf046e36ab681
     /// <summary>
     /// creat new Dependence. a loop that create each one of the dependences own.
     /// </summary>
@@ -63,17 +66,15 @@ public static class Initialization
     {
         //IDependence help = s_daIdependence;
         List<Task> _taskList = s_daITask!.ReadAll();
+        Dependence newDependence;
         for (int i = 1; i < 20; i++)
         {
             for (int j = 0; j < 20; j++)
             {
-
+                newDependence = new Dependence(s_rand.Next(), _taskList[i].IdNumberTask, _taskList[j].IdNumberTask);
             }
-            int num1 = s_rand.Next(1, 20);
         }
-        Dependence newDependence = new(0,)
         s_daIdependence!.Create(newDependence);
-
     }
 
     /// <summary>
