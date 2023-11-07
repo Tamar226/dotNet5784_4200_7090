@@ -20,29 +20,41 @@ public static class Initialization
     /// </summary>
     private static void createTask()
     {
-        string[] TasksNames = {"Take a shower","Wash the dishes","go to walking","aet supper","doing homework","cry","be happy","be angry",""};
-        foreach (string _name in TasksNames)
+        string[] TasksNames = { "Write documentation", "Bug fixing",
+            "Unit testing", "Requirements analysis", "Version upgrades",
+            "User interface design", "Bug identification", "Writing automated tests",
+            "Potential bug detection", "Performance improvement",
+            "Identifying and fixing security dilemmas", "New feature development",
+            "Updating external dependencies", "Maintenance of existing fixes",
+            "Writing technical documentation", "Code quality testing",
+            "Safety and security infrastructure", "Issue management and enhancements",
+            "Creating API interfaces", "Configuration management" };
+        string[] notes =
         {
-            int _id;
-            do
-                _id = s_rand.Next(0, 20);
-            while (s_daITask!.Read(_id) != null);
-            DateTime start = new DateTime(1995, 1, 1);
-            int range = (DateTime.Today - start).Days;
-            DateTime _bdt = start.AddDays(s_rand.Next(range));
+            "do it soon!","Very critical","Work carefully","Not critical","You can help the head of the team","It is recommended to participate in a team meeting about the issue"
+        };
+        foreach (string _nameOfTask in TasksNames)
+        {            
+            string _NicknameOfTask= TasksNames[s_rand.Next(0, 19)];
+            
+            string _ProductTask= TasksNames[s_rand.Next(0, 19)];
+            
+            string _NotesTask = notes[s_rand.Next(0,5)];
+            
+            Difficulty _level = (Difficulty)s_rand.Next(Enum.GetValues(typeof(Difficulty)).Length);
+     
+            DateTime startDate = new DateTime(2020, 1, 1);
+            int range = (DateTime.Today - startDate).Days;
+            DateTime _createDateTask = startDate.AddDays(s_rand.Next(range));
+            DateTime _startDateTask = _createDateTask.AddDays(s_rand.Next(10,100));
+            DateTime _foresastDateTask = _startDateTask.AddDays(s_rand.Next(10, 300));
+            DateTime _LastEndDate = _foresastDateTask.AddDays(10);
 
-            string? _alias = (_id % 2) == 0 ? _name + "ALIAS" : null;
+            Task newTask = new(0, _nameOfTask, _NicknameOfTask,false, _ProductTask, _NotesTask,_level,0, _createDateTask, _startDateTask, _foresastDateTask, _LastEndDate, null);
 
-           // Student newStu = new(_id, _description, __nickname, _Product, _Notes, _ _name, _alias, false, _bdt);
-
-           // s_dalStudent!.Create(newStu);
+            s_daITask!.Create(newTask);
         }
     }
-
-
-
-
- 
 
     /// <summary>
     /// creat new Dependence. a loop that create each one of the dependences own.
@@ -51,15 +63,17 @@ public static class Initialization
     {
         //IDependence help = s_daIdependence;
         List<Task> _taskList = s_daITask!.ReadAll();
-
-        for (int i = 1; i < 40; i++)
+        for (int i = 1; i < 20; i++)
         {
+            for (int j = 0; j < 20; j++)
+            {
+
+            }
             int num1 = s_rand.Next(1, 20);
-
-
-           // Dependence newDpt = new(s_daIdependence., _taskList[num1].IdNumberTask, _taskList[i - 1].IdNumberTask);
         }
-       // s_dalEngineer!.Create(newDpt);
+        Dependence newDependence = new(0,)
+        s_daIdependence!.Create(newDependence);
+
     }
 
     /// <summary>
