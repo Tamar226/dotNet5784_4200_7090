@@ -10,14 +10,15 @@ public record Task
     string Product,//תאור התוצר
     string Notes,//הערות
     Difficulty Level,
-    DateTime? Creation_Date = null,//תאריך יצירה
-    DateTime? Start_Date = null,//תאריך התחלה
-    DateTime? EstimatedCompletionDate = null,//תאריך משוער לסיום
+    int idEngineer,
+    DateTime? CreationDate = null,//תאריך יצירה
+    DateTime? StartDate = null,//תאריך התחלה
+    DateTime? foresastdate = null,//תאריך משוער לסיום
     DateTime? LastEndDate = null,//תאריך אחרון לסיום
     DateTime? ActualEndDate = null//תאריך סיום בפועל
 
 )
-{ public Task() : this(0, "", "", false, "", "", 0, null, null, null, null, null) { } } //default ctor 
+{ public Task() : this(0, "", "", false, "", "", 0,0, null, null, null, null, null) { } } //default ctor 
 
 
 
