@@ -107,7 +107,7 @@ public static class Initialization
         createDependence();
         return;
     }
-};
+}
 
 
 
