@@ -56,7 +56,7 @@ public static class Initialization
         }
     }
     /// <summary>
-    /// creat new Dependence. a loop that create each one of the dependences own.
+    /// create new Dependence. A loop that create each one of the dependences own.
     /// </summary>
     private static void createDependence()
     {

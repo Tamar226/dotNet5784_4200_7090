@@ -18,7 +18,7 @@ public class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
-        Engineer? engineerFound = DataSource.Engineers.Find(eng => eng.IdNumberEngineer == id);
+        Engineer? engineerFound = DataSource.Engineers.FirstOrDefault(eng => eng.IdNumberEngineer == id);
         if (engineerFound == null) { throw new Exception($"Engineer with Id: {id} don't exist"); }
         DataSource.Engineers.Remove(engineerFound);
         return;
@@ -26,8 +26,8 @@ public class EngineerImplementation : IEngineer
 
     public Engineer? Read(int id)
     {
-        Engineer? engineerFound = DataSource.Engineers.Find(eng => eng.IdNumberEngineer == id);
-        if (engineerFound == null) { return null; }
+        Engineer? engineerFound = DataSource.Engineers.FirstOrDefault(eng => eng.IdNumberEngineer == id);
+        if (engineerFound == null) { return null;}
         return engineerFound;
     }
 

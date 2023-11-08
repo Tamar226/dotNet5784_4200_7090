@@ -16,14 +16,14 @@ public class DependenceImplementation : IDependence
 
     public void Delete(int id)
     {
-        Dependence? dependenceFound = DataSource.Dependences.Find(dpt => dpt.IdNumberDependence == id);
+        Dependence? dependenceFound = DataSource.Dependences.FirstOrDefault(dpt => dpt.IdNumberDependence == id);
         if (dependenceFound == null) { throw new Exception($"Dependence with Id: {id} don't exist"); }
         DataSource.Dependences.Remove(dependenceFound);
     }
 
     public Dependence? Read(int id)
     {
-        Dependence? dependenceFound = DataSource.Dependences.Find(dpt => dpt.IdNumberDependence == id);
+        Dependence? dependenceFound = DataSource.Dependences.FirstOrDefault(dpt => dpt.IdNumberDependence == id);
         if (dependenceFound == null) { return null; }
         return dependenceFound;
     }
