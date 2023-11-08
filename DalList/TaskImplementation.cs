@@ -16,7 +16,7 @@ public class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        Task? taskFound = DataSource.Tasks.Find(tsk => tsk.IdNumberTask == id);
+        Task? taskFound = DataSource.Tasks.FirstOrDefault(tsk => tsk.IdNumberTask == id);
         if (taskFound == null) { throw new Exception($"Task with Id: {id} don't exist"); }
         DataSource.Tasks.Remove(taskFound);
     }
@@ -24,7 +24,7 @@ public class TaskImplementation : ITask
 
     public Task? Read(int id)
     {
-        Task? taskFound = DataSource.Tasks.Find(tsk => tsk.IdNumberTask == id);
+        Task? taskFound = DataSource.Tasks.FirstOrDefault(tsk => tsk.IdNumberTask == id);
         if (taskFound == null) { return null; }
         return taskFound;
     }
