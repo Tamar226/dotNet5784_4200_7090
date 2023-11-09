@@ -82,18 +82,19 @@ public static class Initialization
     {
         string[] EngineersNames = { "Eli Amar", "Yair Cohen", "Ariela Levin", "Dina Klein", "Shira Israelof" };
         string[] EngineersEmails = { "@gmail.com", "@org.co.il", "@gov.il", "@outlook.com", "@net.com" };
+        
         foreach (string _name in EngineersNames)
         {
             int _id;
             do
-                _id = s_rand.Next(100000000, 999999999);
+                _id = s_rand.Next(200000000, 400000000);
+
             while (s_dalEngineer!.Read(_id) != null);
             string _emailOfEngineer = _name.Replace(" ", "") + EngineersEmails[s_rand.Next(EngineersEmails.Length)];
             string _nameOfEngineer = _name;
             Difficulty _level = (Difficulty)s_rand.Next(Enum.GetValues(typeof(Difficulty)).Length);
             double _costPerHour = s_rand.Next(150, 312);
             Engineer newEng = new(_id, _nameOfEngineer, _emailOfEngineer, _level, _costPerHour);
-
             s_dalEngineer!.Create(newEng);
         }
     }
@@ -102,8 +103,8 @@ public static class Initialization
         s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
         s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
         s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        createTask();
         createEngineer();
+        createTask();
         createDependence();
         return;
     }

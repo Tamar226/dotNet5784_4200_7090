@@ -71,7 +71,7 @@ internal class Program
     {
         //Option to choose which interface function to run on the entity
         int choiceAct = 0;
-        Console.WriteLine("please choose an option\n for Create press 1\n for Read press 2\n for Read all press 3\n for Update press 4\n for Delete press 5\n for Update exit 0\n");
+        Console.WriteLine("please choose an option\n for Create press 1\n for Read press 2\n for Read all press 3\n for Update press 4\n for Delete press 5\n for exit 0\n");
         choiceAct = (Convert.ToInt32(Console.ReadLine()));
         switch (choiceAct)
         {
@@ -86,13 +86,14 @@ internal class Program
                 List<DO.Task> listOfTask = s_dalTask!.ReadAll();
                 foreach (DO.Task t in listOfTask)
                 {
-                    Console.WriteLine(t.Description);
+                    printTask(t);
+                   
                 }
                 break;
             case 4:
                 Console.WriteLine("Enter Id Number of Task to update:");
                 int idToUpdate = int.Parse(Console.ReadLine());
-                UpdateMyTask(idToUpdate);
+                s_dalTask!.Update( UpdateMyTask(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of Task to delete:");
@@ -181,13 +182,14 @@ internal class Program
         Console.WriteLine("start Date: " + task.StartDate);
         Console.WriteLine("forecast Date: " + task.foresastdate);
         Console.WriteLine("last End Date: " + task.LastEndDate);
-        Console.WriteLine("Actual EndDate: " + task.ActualEndDate);
+        Console.WriteLine("Actual EndDate: " + task.ActualEndDate+"\n");
+        
     }
     public static DO.Task UpdateMyTask(int id)
     {
-        s_dalTask!.Update(createTask(id));
+        //s_dalTask!.Update(createTask(id));
         DO.Task myTask = s_dalTask!.Read(id);
-        Console.WriteLine(myTask);
+        printTask(myTask);
         Console.WriteLine("Please enter what do you want to update in your task:");
        
         //Request new input
@@ -271,7 +273,7 @@ internal class Program
             notes = myTask.Notes;
         }
         //create an update task
-        return (new DO.Task(0, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
+        return (new DO.Task(id, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
     }
     /// <summary>
     /// Helper functions for creating an entity of type engineer. 
@@ -297,13 +299,13 @@ internal class Program
                 List<Engineer> listOfEngineers = s_dalEngineer!.ReadAll();
                 foreach (Engineer e in listOfEngineers)
                 {
-                    Console.WriteLine(e.Name);
+                    printEngineer(e);
                 }
                 break;
             case 4:
                 Console.WriteLine("Enter Id Number of Engineer to update:");
                 int idToUpdate = int.Parse(Console.ReadLine());
-                UpdateMyEngineer(idToUpdate);
+                s_dalEngineer!.Update(UpdateMyEngineer(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of engineer to delete:");
@@ -343,15 +345,14 @@ internal class Program
         Console.WriteLine("description: " + engineer.Name);
         Console.WriteLine("nickname: " + engineer.Email);
         Console.WriteLine("milestone: " + engineer.Level);
-        Console.WriteLine("milestone: " + engineer.Cost);  
+        Console.WriteLine("milestone: " + engineer.Cost+"\n");  
     }
     public static DO.Engineer UpdateMyEngineer(int id)
     {
-        s_dalEngineer!.Update(createEngineer(id));
+        //s_dalEngineer!.Update(createEngineer(id));
         DO.Engineer myEngineer = s_dalEngineer!.Read(id);
-        Console.WriteLine(myEngineer);
         Console.WriteLine("Please enter what do you want to update in your task:");
-
+        printEngineer(myEngineer);
         //Request new input
         Console.WriteLine("Enter name:");
         string nameEngineer = Console.ReadLine();
@@ -375,12 +376,16 @@ internal class Program
         {
             emailEngineer = myEngineer.Email;
         }
+        if(difficulty!= myEngineer.Level)
+        {
+
+        }
         if (costPerHour==0)
         {
             costPerHour = myEngineer.Cost;
         }
 
-        return (new Engineer(0, nameEngineer, emailEngineer, difficulty, costPerHour));
+       return (new Engineer(id, nameEngineer, emailEngineer, difficulty, costPerHour));
 
     }
     /// <summary>
@@ -406,14 +411,13 @@ internal class Program
                 List<Dependence> listOfDependence = s_dalDependence!.ReadAll();
                 foreach (Dependence d in listOfDependence)
                 {
-                    Console.WriteLine(d.IdNumberDependence);
+                    printDependence(d);
                 }
                 break;
             case 4:
                 Console.WriteLine("Enter Id Number of Dependent Task to update:");
                 int idToUpdate = int.Parse(Console.ReadLine());
-                UpdateMyDependency(idToUpdate);
-                
+                s_dalDependence!.Update( UpdateMyDependency(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of Task to delete:");
@@ -425,32 +429,27 @@ internal class Program
     }
     public static DO.Dependence createDependence(int idDependence = 0)
     {
-        if (idDependence == 0)
-        {
-            Console.WriteLine("Enter id of dependence:");
-            idDependence = int.Parse(Console.ReadLine());
-        }
-
+ 
         Console.WriteLine("Enter Dependent Task:");
         int idDependenceTask = int.Parse(Console.ReadLine());
 
         Console.WriteLine("Enter Depends On Task:");
         int DependsOnTask = int.Parse(Console.ReadLine());
 
-        return (new Dependence(idDependence, idDependenceTask, DependsOnTask));
+        return (new Dependence(0, idDependenceTask, DependsOnTask));
     }
     public static void printDependence(Dependence dependency)
     {
         Console.WriteLine("The Task Dependence");
         Console.WriteLine("Id: " + dependency.IdNumberDependence);
         Console.WriteLine("Dependent Task: " + dependency.DependentTask);
-        Console.WriteLine("Dependent On Task: " + dependency.DependsOnTask);
+        Console.WriteLine("Dependent On Task: " + dependency.DependsOnTask + "\n");
     }
     public static DO.Dependence UpdateMyDependency(int id)
     {
-        s_dalDependence!.Update(createDependence(id));
+        //s_dalDependence!.Update(createDependence(id));
         DO.Dependence myDependency = s_dalDependence!.Read(id);
-        Console.WriteLine(myDependency);
+        printDependence(myDependency);
         Console.WriteLine("Please enter what do you want to update in your dependency:");
 
         //Request new input
@@ -469,6 +468,6 @@ internal class Program
         {
             DependsOnTask = myDependency.DependsOnTask;
         }
-        return (new Dependence(0, idDependenceTask, DependsOnTask));
+        return (new Dependence(id, idDependenceTask, DependsOnTask));
     }
 }
