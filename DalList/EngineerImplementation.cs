@@ -6,13 +6,14 @@ using System.Collections.Generic;
 public class EngineerImplementation : IEngineer
 {
     /// <summary>
-    /// 
+    /// Creates a new object.
+    ///Checks if the received identity number is in the list, and updates the new object with the received number
+    ///+ all the values created for it in INTALIZATION.
     /// </summary>
     public int Create(Engineer item)
     {
         if ((DataSource.Engineers.Find(eng => eng.IdNumberEngineer == item.IdNumberEngineer) == null)) { 
             DataSource.Engineers.Add(item); }
-        //Engineer? engineerFound = DataSource.Engineers.Find(eng => eng.IdNumberEngineer == item.IdNumberEngineer);
        else { throw new Exception($"Engineer with Id: {item.IdNumberEngineer} is already exist"); }
         return item.IdNumberEngineer;
     }

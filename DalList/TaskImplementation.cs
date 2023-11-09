@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class TaskImplementation : ITask
 {
+    //Creates a new object.
+    //Checks if the received identity number is in the list, and updates the new object with the received number
+    //+ all the values created for it in INTALIZATION.
     public int Create(Task item)
     {
 
@@ -30,7 +33,7 @@ public class TaskImplementation : ITask
         return item.IdNumberTask;
 
     }
-
+    
     public void Delete(int id)
     {
         Task? taskFound = DataSource.Tasks.FirstOrDefault(tsk => tsk.IdNumberTask == id);
