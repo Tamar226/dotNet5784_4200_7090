@@ -191,69 +191,51 @@ internal class Program
         DO.Task myTask = s_dalTask!.Read(id);
         printTask(myTask);
         Console.WriteLine("Please enter what do you want to update in your task:");
-       
+        string? inputToUpdate = null;
         //Request new input
         Console.WriteLine("Enter new description:");
-        string description = Console.ReadLine();
+        inputToUpdate = Console.ReadLine();
+        string description = string.IsNullOrEmpty(inputToUpdate) ? myTask.Description : inputToUpdate;
 
         Console.WriteLine("Enter new nickname:");
-        string nickname = Console.ReadLine();
+        inputToUpdate = Console.ReadLine();
+        string nickname = string.IsNullOrEmpty(inputToUpdate) ? myTask.Nickname : inputToUpdate;
 
         Console.WriteLine("Enter new milestone status:");
-        bool milestone = Convert.ToBoolean(Console.ReadLine());
+        inputToUpdate = Console.ReadLine();
+        bool milestone = string.IsNullOrEmpty(inputToUpdate) ? myTask.Milestone :Convert.ToBoolean(inputToUpdate);
 
         Console.WriteLine("Enter new product description:");
-        string product = Console.ReadLine();
+        inputToUpdate = Console.ReadLine();
+        string product = string.IsNullOrEmpty(inputToUpdate) ? myTask.Product : inputToUpdate;
 
         Console.WriteLine("Enter new notes:");
-        string notes = Console.ReadLine();
-
+        inputToUpdate = Console.ReadLine();
+        string notes = string.IsNullOrEmpty(inputToUpdate) ? myTask.Notes : inputToUpdate;
         Difficulty difficulty;
         Console.WriteLine("Enter new difficulty level:");
-        Difficulty.TryParse(Console.ReadLine(), out difficulty);
+        inputToUpdate = Console.ReadLine();
+        Difficulty.TryParse(inputToUpdate, out difficulty);
 
         Console.WriteLine("Enter new engineer ID:");
-        int _idEngineer = int.Parse(Console.ReadLine());
+        inputToUpdate = Console.ReadLine();
+        int _idEngineer = string.IsNullOrEmpty(inputToUpdate) ? myTask.idEngineer :Convert.ToInt32(inputToUpdate);
 
         Console.WriteLine("Enter new creation date:");
-        DateTime? creationDate = null;
-        string creationDateString = Console.ReadLine();
-        if (!string.IsNullOrEmpty(creationDateString))
-        {
-            creationDate = DateTime.Parse(creationDateString);
-        }
+        inputToUpdate = Console.ReadLine();
+        DateTime? creationDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.CreationDate :Convert.ToDateTime( inputToUpdate);
 
         Console.WriteLine("Enter new start date:");
-        DateTime? startDate = null;
-        string startDateString = Console.ReadLine();
-        if (!string.IsNullOrEmpty(startDateString))
-        {
-            startDate = DateTime.Parse(startDateString);
-        }
+        inputToUpdate = Console.ReadLine();
+        DateTime? startDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.StartDate: Convert.ToDateTime(inputToUpdate);
 
         Console.WriteLine("Enter new forecast date:");
-        DateTime? forecastDate = null;
-        string forecastDateString = Console.ReadLine();
-        if (!string.IsNullOrEmpty(forecastDateString))
-        {
-            forecastDate = DateTime.Parse(forecastDateString);
-        }
+        inputToUpdate = Console.ReadLine();
+        DateTime? forecastDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.foresastdate : Convert.ToDateTime(inputToUpdate);
 
         Console.WriteLine("Enter new last end date:");
-        DateTime? lastE = null;
-        string lastEString = Console.ReadLine();
-        if (!string.IsNullOrEmpty(lastEString))
-        {
-            lastE = DateTime.Parse(lastEString);
-        }
-
-        Console.WriteLine("Enter new actual end date:");
-        DateTime? lastactEndDate = null;
-        string lastactual = Console.ReadLine();
-        if (!string.IsNullOrEmpty(lastactual))
-        {
-            lastE = DateTime.Parse(lastactual);
-        }
+        inputToUpdate = Console.ReadLine();
+        DateTime? lastE = string.IsNullOrEmpty(inputToUpdate) ? myTask.LastEndDate : Convert.ToDateTime(inputToUpdate);
 
         //Check if input is empty
         if (string.IsNullOrEmpty(description))
@@ -329,9 +311,11 @@ internal class Program
         Console.WriteLine("Enter email of engineer:");
         string emailEngineer = Console.ReadLine();
 
-        Difficulty difficulty;
+
         Console.WriteLine("Enter the engineer's level:( Novice, AdvancedBeginner, Competent, Proficient, Expert");
-        Difficulty.TryParse(Console.ReadLine(), out difficulty);
+        Difficulty difficulty;
+         string inputToUpdate = Console.ReadLine();
+        Difficulty.TryParse(inputToUpdate, out difficulty);
 
         Console.WriteLine("Enter cost per hour og engineer:");
         double costPerHour = double.Parse(Console.ReadLine());
@@ -344,8 +328,8 @@ internal class Program
         Console.WriteLine("Id: " + engineer.IdNumberEngineer);
         Console.WriteLine("description: " + engineer.Name);
         Console.WriteLine("nickname: " + engineer.Email);
-        Console.WriteLine("milestone: " + engineer.Level);
-        Console.WriteLine("milestone: " + engineer.Cost+"\n");  
+        Console.WriteLine("level: " + engineer.Level);
+        Console.WriteLine("cost: " + engineer.Cost+"\n");  
     }
     public static DO.Engineer UpdateMyEngineer(int id)
     {
@@ -362,11 +346,11 @@ internal class Program
 
         Difficulty difficulty;
         Console.WriteLine("Enter the engineer's level:( Novice, AdvancedBeginner, Competent, Proficient, Expert");
-        Difficulty.TryParse(Console.ReadLine(), out difficulty);
+        string inputLevel = Console.ReadLine();
 
         Console.WriteLine("Enter cost per hour og engineer:");
-        double costPerHour = double.Parse(Console.ReadLine());
-
+        string inputToUpdate = Console.ReadLine();
+        double costPerHour = string.IsNullOrEmpty(inputToUpdate) ? myEngineer.Cost : Convert.ToInt32(inputToUpdate);
         //Check if input is empty
         if (string.IsNullOrEmpty(nameEngineer))
         {
@@ -376,14 +360,15 @@ internal class Program
         {
             emailEngineer = myEngineer.Email;
         }
-        if(difficulty!= myEngineer.Level)
+        if (string.IsNullOrEmpty(inputLevel))
         {
-
+            difficulty = myEngineer.Level;
         }
-        if (costPerHour==0)
+        else
         {
-            costPerHour = myEngineer.Cost;
+            Difficulty.TryParse(inputLevel, out difficulty);
         }
+      
 
        return (new Engineer(id, nameEngineer, emailEngineer, difficulty, costPerHour));
 
