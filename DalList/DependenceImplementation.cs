@@ -7,11 +7,22 @@ public class DependenceImplementation : IDependence
 {
     public int Create(Dependence item)
     {
-
-        int newId = DataSource.Config.IDNextNumberDependence;
-        Dependence newItem = new Dependence();
-        DataSource.Dependences.Add(newItem);
-        return newId;
+        int newId = 0;
+        if (item.IdNumberDependence == 0)
+        {
+            newId = DataSource.Config.IDNextNumberTask;
+        }
+        else
+        {
+            newId = item.IdNumberDependence;
+        }
+        if ((DataSource.Dependences.Find(eng => eng.IdNumberDependence == newId) == null))
+        {
+            Dependence newItemWithId = new Dependence(newId,item.DependentTask,item.DependsOnTask);
+            DataSource.Dependences.Add(newItemWithId);
+        }
+        else { throw new Exception($"Engineer with Id: {item.IdNumberDependence} is already exist"); }
+        return item.IdNumberDependence;
     }
 
     public void Delete(int id)
