@@ -10,16 +10,16 @@ public class TaskImplementation : ITask
     //+ all the values created for it in INTALIZATION.
     public int Create(Task item)
     {
-
-        int newId=0;
+        int newId = 0;
         int idEng = 0;
         if (item.idEngineer != 0)
         {
-            idEng=item.idEngineer;
+            idEng = item.idEngineer;
         }
-        if (item.IdNumberTask == 0&&item.idEngineer==0) { 
+        if (item.IdNumberTask == 0)
+        {
             newId = DataSource.Config.IDNextNumberTask;
-            }
+        }
         else
         {
             newId = item.IdNumberTask;
@@ -29,11 +29,10 @@ public class TaskImplementation : ITask
             Task newItemWithId = new Task(newId, item.Description, item.Nickname, false, item.Product, item.Notes, item.Level, idEng, item.CreationDate, item.StartDate, item.foresastdate, item.LastEndDate, null);
             DataSource.Tasks.Add(newItemWithId);
         }
-        else { throw new Exception($"Engineer with Id: {item.IdNumberTask} is already exist"); }
+        else { throw new Exception($"{item.GetType} with Id: {item.IdNumberTask} is already exist"); }
         return item.IdNumberTask;
 
     }
-    
     public void Delete(int id)
     {
         Task? taskFound = DataSource.Tasks.FirstOrDefault(tsk => tsk.IdNumberTask == id);
@@ -41,12 +40,15 @@ public class TaskImplementation : ITask
         DataSource.Tasks.Remove(taskFound);
     }
 
-
     public Task? Read(int id)
     {
-        Task? taskFound = DataSource.Tasks.FirstOrDefault(tsk => tsk.IdNumberTask == id);
-        if (taskFound == null) { return null; }
-        return taskFound;
+        if (DataSource.Tasks.Count >= 1)
+        {
+            Task? taskFound = DataSource.Tasks.FirstOrDefault((eng) => eng.IdNumberTask == id);
+            if (taskFound == null) { return null; }
+            return taskFound;
+        }
+        else { return null; };
     }
 
     public List<Task> ReadAll()
@@ -57,7 +59,14 @@ public class TaskImplementation : ITask
 
     public void Update(Task item)
     {
-        Delete(item.IdNumberTask);
-        Create(item);
+        Task? tempTask = (DataSource.Tasks.Find(element => element!.IdNumberTask == item.IdNumberTask));
+        if (tempTask is null)
+            throw new Exception("An object of type Engineer with such an ID does not exist");
+        else
+        {
+            DataSource.Tasks.Remove(tempTask);
+            DataSource.Tasks.Add(item);
+        }
     }
+  
 }

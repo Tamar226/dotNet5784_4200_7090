@@ -18,10 +18,10 @@ public class DependenceImplementation : IDependence
         }
         if ((DataSource.Dependences.Find(eng => eng.IdNumberDependence == newId) == null))
         {
-            Dependence newItemWithId = new Dependence(newId,item.DependentTask,item.DependsOnTask);
+            Dependence newItemWithId = new Dependence(newId, item.DependentTask,item.DependsOnTask);
             DataSource.Dependences.Add(newItemWithId);
         }
-        else { throw new Exception($"Engineer with Id: {item.IdNumberDependence} is already exist"); }
+        else { throw new Exception($"{item.GetType} with Id: {item.IdNumberDependence} is already exist"); }
         return item.IdNumberDependence;
     }
 
@@ -34,9 +34,13 @@ public class DependenceImplementation : IDependence
 
     public Dependence? Read(int id)
     {
-        Dependence? dependenceFound = DataSource.Dependences.FirstOrDefault(dpt => dpt.IdNumberDependence == id);
-        if (dependenceFound == null) { return null; }
-        return dependenceFound;
+        if (DataSource.Dependences.Count >= 1)
+        {
+            Dependence? dependenceFound = DataSource.Dependences.FirstOrDefault((dep) => dep.IdNumberDependence == id);
+            if (dependenceFound == null) { return null; }
+            return dependenceFound;
+        }
+        else { return null; };
     }
 
     public List<Dependence> ReadAll()
@@ -46,7 +50,14 @@ public class DependenceImplementation : IDependence
 
     public void Update(Dependence item)
     {
-        Delete(item.IdNumberDependence);
-        Create(item);
+        Dependence? tempDependence = (DataSource.Dependences.Find(element => element!.IdNumberDependence == item.IdNumberDependence));
+        if (tempDependence is null)
+            throw new Exception("An object of type Engineer with such an ID does not exist");
+        else
+        {
+            DataSource.Dependences.Remove(tempDependence);
+            DataSource.Dependences.Add(item);
+        }
     }
+  
 }

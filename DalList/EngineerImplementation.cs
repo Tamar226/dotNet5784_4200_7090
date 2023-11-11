@@ -14,13 +14,13 @@ public class EngineerImplementation : IEngineer
     {
         if ((DataSource.Engineers.Find(eng => eng.IdNumberEngineer == item.IdNumberEngineer) == null)) { 
             DataSource.Engineers.Add(item); }
-       else { throw new Exception($"Engineer with Id: {item.IdNumberEngineer} is already exist"); }
+       else { throw new Exception($"{item.GetType} with Id: {item.IdNumberEngineer} is already exist"); }
         return item.IdNumberEngineer;
     }
 
     public void Delete(int id)
     {
-        Engineer engineerFound = DataSource.Engineers.FirstOrDefault(eng => eng.IdNumberEngineer == id);
+        Engineer? engineerFound = DataSource.Engineers.FirstOrDefault(eng => eng.IdNumberEngineer == id);
         if (engineerFound == null) { throw new Exception($"Engineer with Id: {id} don't exist"); }
         DataSource.Engineers.Remove(engineerFound);
         return;
@@ -31,7 +31,7 @@ public class EngineerImplementation : IEngineer
 
         if (DataSource.Engineers.Count>=1) 
         {
-            Engineer engineerFound = DataSource.Engineers.FirstOrDefault((eng) => eng.IdNumberEngineer == id);
+            Engineer? engineerFound = DataSource.Engineers.FirstOrDefault((eng) => eng.IdNumberEngineer == id);
             if (engineerFound == null) { return null; }
             return engineerFound;
         }
@@ -55,4 +55,5 @@ public class EngineerImplementation : IEngineer
             DataSource.Engineers.Add(item);
         }
     }
+
 }
