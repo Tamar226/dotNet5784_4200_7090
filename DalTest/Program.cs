@@ -103,22 +103,25 @@ internal class Program
                 break;
         }
     }
+    /// <summary>
+    /// The createTask function prompts for task details and returns a Task object.
+    /// </summary>
     public static DO.Task createTask(int idToUpdate=0)
     {
         Console.WriteLine("Enter Description:");
-        string description = Console.ReadLine();
+        string? description = Console.ReadLine();
 
         Console.WriteLine("Enter Nickname:");
-        string nickname = Console.ReadLine();
+        string? nickname = Console.ReadLine();
 
         Console.WriteLine("Enter Milestone (true/false):");
         bool milestone = bool.Parse(Console.ReadLine());
 
         Console.WriteLine("Enter Product:");
-        string product = Console.ReadLine();
+        string? product = Console.ReadLine();
 
         Console.WriteLine("Enter Notes:");
-        string notes = Console.ReadLine();
+        string? notes = Console.ReadLine();
 
         Difficulty difficulty;
         Console.WriteLine("Enter the task's level: ( Novice, AdvancedBeginner, Competent, Proficient, Expert)");
@@ -129,7 +132,7 @@ internal class Program
 
         Console.WriteLine("Enter Creation Date (optional):");
         DateTime? creationDate = null;
-        string creationDateString = Console.ReadLine();
+        string? creationDateString = Console.ReadLine();
         if (!string.IsNullOrEmpty(creationDateString))
         {
             creationDate = DateTime.Parse(creationDateString);
@@ -137,7 +140,7 @@ internal class Program
 
         Console.WriteLine("Enter Start Date (optional):");
         DateTime? startDate = null;
-        string startDateString = Console.ReadLine();
+        string? startDateString = Console.ReadLine();
         if (!string.IsNullOrEmpty(startDateString))
         {
             startDate = DateTime.Parse(startDateString);
@@ -145,7 +148,7 @@ internal class Program
 
         Console.WriteLine("Enter Forecast Date (optional):");
         DateTime? forecastDate = null;
-        string forecastDateString = Console.ReadLine();
+        string? forecastDateString = Console.ReadLine();
         if (!string.IsNullOrEmpty(forecastDateString))
         {
             forecastDate = DateTime.Parse(forecastDateString);
@@ -153,7 +156,7 @@ internal class Program
 
         Console.WriteLine("Enter LastE (optional):");
         DateTime? lastE = null;
-        string lastEString = Console.ReadLine();
+        string? lastEString = Console.ReadLine();
         if (!string.IsNullOrEmpty(lastEString))
         {
             lastE = DateTime.Parse(lastEString);
