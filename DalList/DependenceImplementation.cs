@@ -3,7 +3,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class DependenceImplementation : IDependence
+internal class DependenceImplementation : IDependence
 {
     public int Create(Dependence item)
     {
@@ -21,14 +21,14 @@ public class DependenceImplementation : IDependence
             Dependence newItemWithId = new Dependence(newId, item.DependentTask,item.DependsOnTask);
             DataSource.Dependences.Add(newItemWithId);
         }
-        else { throw new Exception($"{item.GetType} with Id: {item.IdNumberDependence} is already exist"); }
+        else { throw new DalAlreadyExistsException($"{item.GetType} with Id: {item.IdNumberDependence} is already exist"); }
         return item.IdNumberDependence;
     }
 
     public void Delete(int id)
     {
         Dependence? dependenceFound = DataSource.Dependences.FirstOrDefault(dpt => dpt.IdNumberDependence == id);
-        if (dependenceFound == null) { throw new Exception($"Dependence with Id: {id} don't exist"); }
+        if (dependenceFound == null) { throw new DalDoesNotExistException($"Dependence with Id: {id} don't exist"); }
         DataSource.Dependences.Remove(dependenceFound);
     }
 
@@ -52,7 +52,7 @@ public class DependenceImplementation : IDependence
     {
         Dependence? tempDependence = (DataSource.Dependences.Find(element => element!.IdNumberDependence == item.IdNumberDependence));
         if (tempDependence is null)
-            throw new Exception("An object of type Engineer with such an ID does not exist");
+            throw new DalDoesNotExistException("An object of type Engineer with such an ID does not exist");
         else
         {
             DataSource.Dependences.Remove(tempDependence);

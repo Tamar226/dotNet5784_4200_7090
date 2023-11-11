@@ -11,17 +11,31 @@ using System.Threading.Tasks;
 /// </summary>
 internal class Program
 {
-    private static ITask? s_dalTask = new TaskImplementation(); 
-    private static IEngineer? s_dalEngineer = new EngineerImplementation(); 
-    private static IDependence? s_dalDependence = new DependenceImplementation(); 
+    //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
+    //private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
+    //private static IDependence? s_dalDependence = new DependenceImplementation();//stage 1
+    static readonly IDal s_dal = new DalList(); //stage 2
+ 
     static void Main(string[] args)
     {
         try
         {
-            Initialization.Do(s_dalTask, s_dalDependence, s_dalEngineer);//create the data-base by Initialization 
+            Initialization.Do(s_dal); //stage 2 //create the data-base by Initialization 
             chooseEntities();
         }
-        catch (Exception ex)//catch the exeptions who were until here...
+        catch (DalAlreadyExistsException ex)//catch the exeption from type "DalAlreadyExistsException" who were until here...
+        {
+            Console.WriteLine(ex.ToString());
+        }
+        catch (DalDeletionImpossible ex)//catch the exeption from type "DalDeletionImpossible" who were until here...
+        {
+            Console.WriteLine(ex.ToString());
+        }
+        catch (DalErrorINput ex)//catch the exeption from type "DalErrorINput" who were until here...
+        {
+            Console.WriteLine(ex.ToString());
+        }
+        catch (DalDoesNotExistException ex)//catch the exeption from type "DalDoesNotExistException" who were until here...
         {
             Console.WriteLine(ex.ToString());
         }
@@ -40,7 +54,6 @@ internal class Program
         {
             Console.WriteLine("please choose an option\n for Task press 1\n for Engineer press 2\n for Dependency press 3\n for exit press 0\n ");
             choiceEntity = (Convert.ToInt32(Console.ReadLine()));//Convert to intiger type
-
             switch (choiceEntity)
             {
                 case 1:
@@ -76,14 +89,14 @@ internal class Program
         switch (choiceAct)
         {
             case 1:
-                s_dalTask!.Create(createTask());
+                s_dal!.Task.Create(createTask());
                      break;
             case 2:
-                printTask(s_dalTask!.Read(idToRead()));
+                printTask(s_dal!.Task.Read(idToRead()));
                 break;
 
             case 3:
-                List<DO.Task> listOfTask = s_dalTask!.ReadAll();
+                List<DO.Task> listOfTask = s_dal!.Task.ReadAll();
                 foreach (DO.Task t in listOfTask)
                 {
                     printTask(t);
@@ -93,11 +106,11 @@ internal class Program
             case 4:
                 Console.WriteLine("Enter Id Number of Task to update:");
                 int idToUpdate = int.Parse(Console.ReadLine());
-                s_dalTask!.Update( UpdateMyTask(idToUpdate));
+                s_dal!.Task.Update( UpdateMyTask(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of Task to delete:");
-                s_dalTask!.Delete(int.Parse(Console.ReadLine()));
+                s_dal!.Task.Delete(int.Parse(Console.ReadLine()));
                 break;
             default:
                 break;
@@ -110,26 +123,47 @@ internal class Program
     {
         Console.WriteLine("Enter Description:");
         string? description = Console.ReadLine();
-
+        if(!(description is string))
+        {
+            throw new DalErrorINput(" You suppose to input a string"); 
+        }
         Console.WriteLine("Enter Nickname:");
         string? nickname = Console.ReadLine();
-
+        if (!(nickname is string))
+        {
+            throw new DalErrorINput(" You suppose to input a string");
+        }
         Console.WriteLine("Enter Milestone (true/false):");
         bool milestone = bool.Parse(Console.ReadLine());
-
+        if (!(milestone is bool))
+        {
+            throw new DalErrorINput(" You suppose to input a milestone");
+        }
         Console.WriteLine("Enter Product:");
         string? product = Console.ReadLine();
-
+        if (!(product is string))
+        {
+            throw new DalErrorINput(" You suppose to input a string");
+        }
         Console.WriteLine("Enter Notes:");
         string? notes = Console.ReadLine();
-
+        if (!(notes is string))
+        {
+            throw new DalErrorINput(" You suppose to input a string");
+        }
         Difficulty difficulty;
         Console.WriteLine("Enter the task's level: ( Novice, AdvancedBeginner, Competent, Proficient, Expert)");
         Difficulty.TryParse(Console.ReadLine(), out difficulty);
-
+        if (!(difficulty is Difficulty))
+        {
+            throw new DalErrorINput(" You suppose to input a level for the task");
+        }
         Console.WriteLine("Enter idEngineer:");
         int _idEngineer = int.Parse(Console.ReadLine());
-
+        if (!(_idEngineer is int))
+        {
+            throw new DalErrorINput(" You suppose to input a number");
+        }
         Console.WriteLine("Enter Creation Date (optional):");
         DateTime? creationDate = null;
         string? creationDateString = Console.ReadLine();
@@ -137,7 +171,10 @@ internal class Program
         {
             creationDate = DateTime.Parse(creationDateString);
         }
-
+        if (!(creationDate is DateTime))
+        {
+            throw new DalErrorINput(" You suppose to input a date");
+        }
         Console.WriteLine("Enter Start Date (optional):");
         DateTime? startDate = null;
         string? startDateString = Console.ReadLine();
@@ -145,7 +182,10 @@ internal class Program
         {
             startDate = DateTime.Parse(startDateString);
         }
-
+        if (!(startDate is DateTime))
+        {
+            throw new DalErrorINput(" You suppose to input a date");
+        }
         Console.WriteLine("Enter Forecast Date (optional):");
         DateTime? forecastDate = null;
         string? forecastDateString = Console.ReadLine();
@@ -153,7 +193,10 @@ internal class Program
         {
             forecastDate = DateTime.Parse(forecastDateString);
         }
-
+        if (!(forecastDate is DateTime))
+        {
+            throw new DalErrorINput(" You suppose to input a date");
+        }
         Console.WriteLine("Enter LastE (optional):");
         DateTime? lastE = null;
         string? lastEString = Console.ReadLine();
@@ -161,7 +204,10 @@ internal class Program
         {
             lastE = DateTime.Parse(lastEString);
         }
-
+        if (!(lastE is DateTime))
+        {
+            throw new DalErrorINput(" You suppose to input a date");
+        }
         return (new DO.Task(idToUpdate, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
     }
     public static int idToRead()
@@ -191,7 +237,7 @@ internal class Program
     public static DO.Task UpdateMyTask(int id)
     {
         //s_dalTask!.Update(createTask(id));
-        DO.Task myTask = s_dalTask!.Read(id);
+        DO.Task myTask = s_dal!.Task.Read(id);
         printTask(myTask);
         Console.WriteLine("Please enter what do you want to update in your task:");
         string? inputToUpdate = null;
@@ -274,14 +320,14 @@ internal class Program
         switch (choiceAct)
         {
             case 1:
-                s_dalEngineer!.Create(createEngineer());
+                s_dal!.Engineer.Create(createEngineer());
                 break;
             case 2:
-                printEngineer(s_dalEngineer!.Read(idToRead()));
+                printEngineer(s_dal!.Engineer.Read(idToRead()));
                 break;
 
             case 3:
-                List<Engineer> listOfEngineers = s_dalEngineer!.ReadAll();
+                List<Engineer> listOfEngineers = s_dal!.Engineer.ReadAll();
                 foreach (Engineer e in listOfEngineers)
                 {
                     printEngineer(e);
@@ -290,11 +336,11 @@ internal class Program
             case 4:
                 Console.WriteLine("Enter Id Number of Engineer to update:");
                 int idToUpdate = int.Parse(Console.ReadLine());
-                s_dalEngineer!.Update(UpdateMyEngineer(idToUpdate));
+                s_dal!.Engineer.Update(UpdateMyEngineer(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of engineer to delete:");
-                s_dalEngineer!.Delete(int.Parse(Console.ReadLine()));
+                s_dal!.Engineer.Delete(int.Parse(Console.ReadLine()));
                 break;
             default:
                 break;
@@ -307,22 +353,37 @@ internal class Program
         Console.WriteLine("Enter id of engineer:");
         idEngineer = int.Parse(Console.ReadLine());
         }
-
+        if (!(idEngineer is int)&&(idEngineer<100000000|| idEngineer>999999999))
+        {
+            throw new DalErrorINput(" You suppose to input a number with 9 digits");
+        }
         Console.WriteLine("Enter name:");
         string nameEngineer = Console.ReadLine();
-
+        if (!(nameEngineer is string))
+        {
+            throw new DalErrorINput(" You suppose to input a string");
+        }
         Console.WriteLine("Enter email of engineer:");
         string emailEngineer = Console.ReadLine();
-
+        if (!(emailEngineer is string))
+        {
+            throw new DalErrorINput(" You suppose to input a string");
+        }
 
         Console.WriteLine("Enter the engineer's level:( Novice, AdvancedBeginner, Competent, Proficient, Expert");
         Difficulty difficulty;
-         string inputToUpdate = Console.ReadLine();
+        string inputToUpdate = Console.ReadLine();
         Difficulty.TryParse(inputToUpdate, out difficulty);
-
+        if (!(inputToUpdate is Difficulty))
+        {
+            throw new DalErrorINput(" You suppose to input a level for the engineer");
+        }
         Console.WriteLine("Enter cost per hour og engineer:");
         double costPerHour = double.Parse(Console.ReadLine());
-
+        if (!(costPerHour is double))
+        {
+            throw new DalErrorINput(" You suppose to input a number");
+        }
         return (new Engineer(idEngineer, nameEngineer, emailEngineer, difficulty, costPerHour));
     }
     public static void printEngineer(Engineer engineer)
@@ -337,7 +398,7 @@ internal class Program
     public static DO.Engineer UpdateMyEngineer(int id)
     {
         //s_dalEngineer!.Update(createEngineer(id));
-        DO.Engineer myEngineer = s_dalEngineer!.Read(id);
+        DO.Engineer myEngineer = s_dal!.Engineer.Read(id);
         Console.WriteLine("Please enter what do you want to update in your task:");
         printEngineer(myEngineer);
         //Request new input
@@ -390,14 +451,14 @@ internal class Program
         switch (choiceAct)
         {
             case 1:
-  
-                s_dalDependence!.Create(createDependence());
+
+                s_dal!.Dependence.Create(createDependence());
                 break;
             case 2:
-                printDependence(s_dalDependence!.Read(idToRead()));
+                printDependence(s_dal!.Dependence.Read(idToRead()));
                 break;
             case 3:
-                List<Dependence> listOfDependence = s_dalDependence!.ReadAll();
+                List<Dependence> listOfDependence = s_dal!.Dependence.ReadAll();
                 foreach (Dependence d in listOfDependence)
                 {
                     printDependence(d);
@@ -406,11 +467,11 @@ internal class Program
             case 4:
                 Console.WriteLine("Enter Id Number of Dependent Task to update:");
                 int idToUpdate = int.Parse(Console.ReadLine());
-                s_dalDependence!.Update( UpdateMyDependency(idToUpdate));
+                s_dal!.Dependence.Update( UpdateMyDependency(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of Task to delete:");
-                s_dalDependence!.Delete(int.Parse(Console.ReadLine()));
+                s_dal!.Dependence.Delete(int.Parse(Console.ReadLine()));
                 break;
             default:
                 break;
@@ -421,10 +482,16 @@ internal class Program
  
         Console.WriteLine("Enter Dependent Task:");
         int idDependenceTask = int.Parse(Console.ReadLine());
-
+        if (!(idDependenceTask is int))
+        {
+            throw new DalErrorINput(" You suppose to input a number");
+        }
         Console.WriteLine("Enter Depends On Task:");
         int DependsOnTask = int.Parse(Console.ReadLine());
-
+        if (!(DependsOnTask is int))
+        {
+            throw new DalErrorINput(" You suppose to input a number");
+        }
         return (new Dependence(0, idDependenceTask, DependsOnTask));
     }
     public static void printDependence(Dependence dependency)
@@ -437,7 +504,7 @@ internal class Program
     public static DO.Dependence UpdateMyDependency(int id)
     {
         //s_dalDependence!.Update(createDependence(id));
-        DO.Dependence myDependency = s_dalDependence!.Read(id);
+        DO.Dependence myDependency = s_dal!.Dependence.Read(id);
         printDependence(myDependency);
         Console.WriteLine("Please enter what do you want to update in your dependency:");
 

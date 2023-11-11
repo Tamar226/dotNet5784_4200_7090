@@ -3,7 +3,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class TaskImplementation : ITask
+internal class TaskImplementation : ITask
 {
     //Creates a new object.
     //Checks if the received identity number is in the list, and updates the new object with the received number
@@ -29,14 +29,14 @@ public class TaskImplementation : ITask
             Task newItemWithId = new Task(newId, item.Description, item.Nickname, false, item.Product, item.Notes, item.Level, idEng, item.CreationDate, item.StartDate, item.foresastdate, item.LastEndDate, null);
             DataSource.Tasks.Add(newItemWithId);
         }
-        else { throw new Exception($"{item.GetType} with Id: {item.IdNumberTask} is already exist"); }
+        else { throw new DalAlreadyExistsException($"{item.GetType} with Id: {item.IdNumberTask} is already exist"); }
         return item.IdNumberTask;
 
     }
     public void Delete(int id)
     {
         Task? taskFound = DataSource.Tasks.FirstOrDefault(tsk => tsk.IdNumberTask == id);
-        if (taskFound == null) { throw new Exception($"Task with Id: {id} don't exist"); }
+        if (taskFound == null) { throw new DalDoesNotExistException($"Task with Id: {id} don't exist"); }
         DataSource.Tasks.Remove(taskFound);
     }
 
@@ -61,7 +61,7 @@ public class TaskImplementation : ITask
     {
         Task? tempTask = (DataSource.Tasks.Find(element => element!.IdNumberTask == item.IdNumberTask));
         if (tempTask is null)
-            throw new Exception("An object of type Engineer with such an ID does not exist");
+            throw new DalDoesNotExistException("An object of type Engineer with such an ID does not exist");
         else
         {
             DataSource.Tasks.Remove(tempTask);

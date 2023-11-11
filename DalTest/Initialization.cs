@@ -4,15 +4,16 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-
 public static class Initialization
 {
     /// <summary>
     /// Access to existing interfaces
     /// </summary>
-    private static ITask? s_dalTask;
-    private static IEngineer? s_dalEngineer;
-    private static IDependence? s_dalDependence;
+    //private static ITask? s_dalTask;//stage1
+    //private static IEngineer? s_dalEngineer;//stage1
+    //private static IDependence? s_dalDependence;//stage1
+
+    private static IDal? s_dal; //stage 2
 
     private static readonly Random s_rand = new();
     /// <summary>
@@ -52,7 +53,7 @@ public static class Initialization
 
             Task newTask = new(0, _nameOfTask, _NicknameOfTask,false, _ProductTask, _NotesTask,_level,0, _createDateTask, _startDateTask, _foresastDateTask, _LastEndDate, null);
 
-            s_dalTask!.Create(newTask);
+            s_dal!.Task.Create(newTask);
         }
     }
     /// <summary>
@@ -60,7 +61,7 @@ public static class Initialization
     /// </summary>
     private static void createDependence()
     {
-        List<Task> _taskList = s_dalTask!.ReadAll();
+        List<Task> _taskList = s_dal!.Task.ReadAll();
         for (int i = 0; i < 20; i++)
         {
             for (int j = 0; j < 20; j++)
@@ -69,7 +70,7 @@ public static class Initialization
                 if (j != i && s_rand.Next(0,10)>5)
                 {
                     Dependence newDependence = new(0, _taskList[i].IdNumberTask, _taskList[j].IdNumberTask);
-                    s_dalDependence!.Create(newDependence);
+                    s_dal!.Dependence.Create(newDependence);
                 }
             }
         }
@@ -89,20 +90,21 @@ public static class Initialization
             do
                 _id = s_rand.Next(200000000, 400000000);
 
-            while (s_dalEngineer!.Read(_id) != null);
+            while (s_dal!.Engineer.Read(_id) != null);
             string _emailOfEngineer = _name.Replace(" ", "") + EngineersEmails[s_rand.Next(EngineersEmails.Length)];
             string _nameOfEngineer = _name;
             Difficulty _level = (Difficulty)s_rand.Next(Enum.GetValues(typeof(Difficulty)).Length);
             double _costPerHour = s_rand.Next(150, 312);
             Engineer newEng = new(_id, _nameOfEngineer, _emailOfEngineer, _level, _costPerHour);
-            s_dalEngineer!.Create(newEng);
+            s_dal!.Engineer.Create(newEng);
         }
     }
-    public static void Do(ITask? dalTask, IDependence? dalDependence, IEngineer? dalEngineer)
+    public static void Do(IDal dal)//stage2
     {
-        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");//stage 1
+        //s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");//stage 1
+        //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");//stage 1
+        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         createEngineer();
         createTask();
         createDependence();
