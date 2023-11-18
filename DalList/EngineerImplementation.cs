@@ -62,5 +62,16 @@ internal class EngineerImplementation : IEngineer
             DataSource.Engineers.Add(item);
         }
     }
+    public Engineer? Read(Func<Engineer, bool> filter)//stage 2
+    {
+        if (filter != null)
+        {
+            var foundDependence = from item in DataSource.Engineers
+                                  where filter(item)
+                                  select item;
+            return foundDependence.ElementAt(0);
+        }
+        throw new DalNoFilterToQuery("no filther to query");
 
+    }
 }

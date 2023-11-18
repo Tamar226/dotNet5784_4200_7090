@@ -31,5 +31,10 @@ public class DalErrorNotValueINput : Exception
     public DalErrorNotValueINput(string? message) : base(message) { }
 
 }
+public class DalNoFilterToQuery : Exception
+{
+    public DalNoFilterToQuery(string? message) : base(message) { }
+}
+
 
 

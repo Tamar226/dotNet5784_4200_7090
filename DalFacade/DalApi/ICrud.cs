@@ -7,5 +7,7 @@ public interface ICrud<T> where T : class
     IEnumerable<T?> ReadAll(Func<T, bool>? filter = null); // stage 2, Reads all entity objects                                              
     public void Update(T item); //Updates entity object
     public void Delete(int id); //Deletes an object by its Id
+    T? Read(Func<T, bool> filter); // stage 2
+
 }
 

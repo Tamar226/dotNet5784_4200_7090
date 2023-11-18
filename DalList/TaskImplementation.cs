@@ -74,5 +74,16 @@ internal class TaskImplementation : ITask
             DataSource.Tasks.Add(item);
         }
     }
-  
+    public Task? Read(Func<Task, bool> filter)//stage 2
+    {
+        if (filter != null)
+        {
+            var foundDependence = from item in DataSource.Tasks
+                                  where filter(item)
+                                  select item;
+            return foundDependence.ElementAt(0);
+        }
+        throw new DalNoFilterToQuery("no filther to query");
+
+    }
 }

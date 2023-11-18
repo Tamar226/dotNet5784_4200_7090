@@ -34,6 +34,9 @@ internal class DependenceImplementation : IDependence
 
     public Dependence? Read(int id)
     {
+
+
+
         if (DataSource.Dependences.Count >= 1)
         {
             Dependence? dependenceFound = DataSource.Dependences.FirstOrDefault((dep) => dep.IdNumberDependence == id);
@@ -66,5 +69,16 @@ internal class DependenceImplementation : IDependence
             DataSource.Dependences.Add(item);
         }
     }
-  
+    public Dependence? Read(Func<Dependence, bool> filter)//stage 2
+    {
+        if (filter != null)
+        {
+            var foundDependence = from item in DataSource.Dependences
+                    where filter(item)
+                    select item;
+            return foundDependence.ElementAt(0);
+        }
+        throw new DalNoFilterToQuery("no filther to query");
+       
+    }
 }
