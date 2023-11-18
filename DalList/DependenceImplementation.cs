@@ -16,7 +16,7 @@ internal class DependenceImplementation : IDependence
         {
             newId = item.IdNumberDependence;
         }
-        if ((DataSource.Dependences.Find(eng => eng.IdNumberDependence == newId) == null))
+        if ((DataSource.Dependences.FirstOrDefault(eng => eng.IdNumberDependence == newId) == null))
         {
             Dependence newItemWithId = new Dependence(newId, item.DependentTask,item.DependsOnTask);
             DataSource.Dependences.Add(newItemWithId);
@@ -43,14 +43,21 @@ internal class DependenceImplementation : IDependence
         else { return null; };
     }
 
-    public List<Dependence> ReadAll()
+    public IEnumerable<Dependence> ReadAll(Func<Dependence, bool>? filter = null) //stage 2
     {
-        return new List<Dependence>(DataSource.Dependences);
+        if (filter != null)
+        {
+            return from item in DataSource.Dependences
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Dependences
+               select item;
     }
 
     public void Update(Dependence item)
     {
-        Dependence? tempDependence = (DataSource.Dependences.Find(element => element!.IdNumberDependence == item.IdNumberDependence));
+        Dependence? tempDependence = (DataSource.Dependences.First(element => element!.IdNumberDependence == item.IdNumberDependence));
         if (tempDependence is null)
             throw new DalDoesNotExistException("An object of type Engineer with such an ID does not exist");
         else

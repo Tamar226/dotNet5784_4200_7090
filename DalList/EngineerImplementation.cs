@@ -12,7 +12,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     public int Create(Engineer item)
     {
-        if ((DataSource.Engineers.Find(eng => eng.IdNumberEngineer == item.IdNumberEngineer) == null)) { 
+        if ((DataSource.Engineers.FirstOrDefault(eng => eng.IdNumberEngineer == item.IdNumberEngineer) == null)) { 
             DataSource.Engineers.Add(item); }
        else { throw new DalAlreadyExistsException($"{item.GetType} with Id: {item.IdNumberEngineer} is already exist"); }
         return item.IdNumberEngineer;
@@ -39,14 +39,21 @@ internal class EngineerImplementation : IEngineer
        
     }
 
-    public List<Engineer> ReadAll()
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null) //stage 2
     {
-        return new List<Engineer>(DataSource.Engineers);
+        if (filter != null)
+        {
+            return from item in DataSource.Engineers
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Engineers
+               select item;
     }
 
     public void Update(Engineer item)
     {
-        Engineer? tempEngineer = (DataSource.Engineers.Find(element => element!.IdNumberEngineer == item.IdNumberEngineer));
+        Engineer? tempEngineer = (DataSource.Engineers.FirstOrDefault(element => element!.IdNumberEngineer == item.IdNumberEngineer));
         if (tempEngineer is null)
             throw new DalDoesNotExistException("An object of type Engineer with such an ID does not exist");
         else

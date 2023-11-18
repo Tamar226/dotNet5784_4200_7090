@@ -24,7 +24,7 @@ internal class TaskImplementation : ITask
         {
             newId = item.IdNumberTask;
         }
-        if ((DataSource.Tasks.Find(eng => eng.IdNumberTask == newId) == null))
+        if ((DataSource.Tasks.FirstOrDefault(eng => eng.IdNumberTask == newId) == null))
         {
             Task newItemWithId = new Task(newId, item.Description, item.Nickname, false, item.Product, item.Notes, item.Level, idEng, item.CreationDate, item.StartDate, item.foresastdate, item.LastEndDate, null);
             DataSource.Tasks.Add(newItemWithId);
@@ -51,15 +51,21 @@ internal class TaskImplementation : ITask
         else { return null; };
     }
 
-    public List<Task> ReadAll()
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null) //stage 2
     {
-
-        return new List<Task>(DataSource.Tasks);
+        if (filter != null)
+        {
+            return from item in DataSource.Tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Tasks
+               select item;
     }
 
     public void Update(Task item)
     {
-        Task? tempTask = (DataSource.Tasks.Find(element => element!.IdNumberTask == item.IdNumberTask));
+        Task? tempTask = (DataSource.Tasks.FirstOrDefault(element => element!.IdNumberTask == item.IdNumberTask));
         if (tempTask is null)
             throw new DalDoesNotExistException("An object of type Engineer with such an ID does not exist");
         else

@@ -96,7 +96,7 @@ internal class Program
                 break;
 
             case 3:
-                List<DO.Task> listOfTask = s_dal!.Task.ReadAll();
+                IEnumerable<DO.Task> listOfTask = s_dal!.Task.ReadAll();
                 foreach (DO.Task t in listOfTask)
                 {
                     printTask(t);
@@ -327,7 +327,7 @@ internal class Program
                 break;
 
             case 3:
-                List<Engineer> listOfEngineers = s_dal!.Engineer.ReadAll();
+                IEnumerable<Engineer> listOfEngineers = s_dal!.Engineer.ReadAll();
                 foreach (Engineer e in listOfEngineers)
                 {
                     printEngineer(e);
@@ -374,7 +374,7 @@ internal class Program
         Difficulty difficulty;
         string inputToUpdate = Console.ReadLine();
         Difficulty.TryParse(inputToUpdate, out difficulty);
-        if (!(inputToUpdate is Difficulty))
+        if (!(inputToUpdate== "Novice")&&!(inputToUpdate == "AdvancedBeginner")&&!(inputToUpdate == "Competent")&&!(inputToUpdate == "Proficient")&&!(inputToUpdate == "Expert"))
         {
             throw new DalErrorINput(" You suppose to input a level for the engineer");
         }
@@ -458,7 +458,7 @@ internal class Program
                 printDependence(s_dal!.Dependence.Read(idToRead()));
                 break;
             case 3:
-                List<Dependence> listOfDependence = s_dal!.Dependence.ReadAll();
+                IEnumerable<Dependence> listOfDependence = s_dal!.Dependence.ReadAll();
                 foreach (Dependence d in listOfDependence)
                 {
                     printDependence(d);
