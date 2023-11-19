@@ -21,21 +21,19 @@ internal class DependenceImplementation : IDependence
             Dependence newItemWithId = new Dependence(newId, item.DependentTask,item.DependsOnTask);
             DataSource.Dependences.Add(newItemWithId);
         }
-        else { throw new DalAlreadyExistsException($"{item.GetType} with Id: {item.IdNumberDependence} is already exist"); }
+        else { throw new DalAlreadyExistsException($"Dependence with Id: {item.IdNumberDependence} is already exist"); }
         return item.IdNumberDependence;
     }
 
     public void Delete(int id)
     {
         Dependence? dependenceFound = DataSource.Dependences.FirstOrDefault(dpt => dpt.IdNumberDependence == id);
-        if (dependenceFound == null) { throw new DalDoesNotExistException($"Dependence with Id: {id} don't exist"); }
+        if (dependenceFound == null) { throw new DalDeletionImpossible($"Dependence with Id: {id} don't exist"); }
         DataSource.Dependences.Remove(dependenceFound);
     }
 
     public Dependence? Read(int id)
     {
-
-
 
         if (DataSource.Dependences.Count >= 1)
         {

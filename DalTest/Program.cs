@@ -96,8 +96,8 @@ internal class Program
                 break;
 
             case 3:
-                IEnumerable<DO.Task> listOfTask = s_dal!.Task.ReadAll();
-                foreach (DO.Task t in listOfTask)
+                IEnumerable<DO.Task?> listOfTask = s_dal!.Task.ReadAll();
+                foreach (DO.Task? t in listOfTask)
                 {
                     printTask(t);
                    
@@ -123,103 +123,115 @@ internal class Program
     {
         Console.WriteLine("Enter Description:");
         string? description = Console.ReadLine();
-        if(!(description is string))
-        {
-            throw new DalErrorINput(" You suppose to input a string"); 
-        }
         Console.WriteLine("Enter Nickname:");
         string? nickname = Console.ReadLine();
-        if (!(nickname is string))
-        {
-            throw new DalErrorINput(" You suppose to input a string");
-        }
         Console.WriteLine("Enter Milestone (true/false):");
-        bool milestone = bool.Parse(Console.ReadLine());
-        if (!(milestone is bool))
+        bool milestone = false;
+        try
         {
-            throw new DalErrorINput(" You suppose to input a milestone");
+            milestone = bool.Parse(Console.ReadLine());
         }
+        catch
+        {
+            throw new DalErrorINput(" You suppose to input a true or false");
+        }//Input integrity check
         Console.WriteLine("Enter Product:");
         string? product = Console.ReadLine();
-        if (!(product is string))
-        {
-            throw new DalErrorINput(" You suppose to input a string");
-        }
         Console.WriteLine("Enter Notes:");
         string? notes = Console.ReadLine();
-        if (!(notes is string))
-        {
-            throw new DalErrorINput(" You suppose to input a string");
-        }
-        Difficulty difficulty;
         Console.WriteLine("Enter the task's level: ( Novice, AdvancedBeginner, Competent, Proficient, Expert)");
-        Difficulty.TryParse(Console.ReadLine(), out difficulty);
-        if (!(difficulty is Difficulty))
+        string? difficultyStr = Console.ReadLine();
+        if (!(difficultyStr == "Novice") && !(difficultyStr == "AdvancedBeginner") && !(difficultyStr == "Competent") && !(difficultyStr == "Proficient") && !(difficultyStr == "Expert"))
         {
             throw new DalErrorINput(" You suppose to input a level for the task");
-        }
+        }//Input integrity check
+        Difficulty difficulty;
+        Difficulty.TryParse(difficultyStr, out difficulty);
         Console.WriteLine("Enter idEngineer:");
-        int _idEngineer = int.Parse(Console.ReadLine());
-        if (!(_idEngineer is int))
+        int _idEngineer = 0; 
+        try
+        {
+            _idEngineer = int.Parse(Console.ReadLine());
+        }
+        catch
         {
             throw new DalErrorINput(" You suppose to input a number");
-        }
+        }//Input integrity check
         Console.WriteLine("Enter Creation Date (optional):");
         DateTime? creationDate = null;
         string? creationDateString = Console.ReadLine();
         if (!string.IsNullOrEmpty(creationDateString))
         {
-            creationDate = DateTime.Parse(creationDateString);
-        }
-        if (!(creationDate is DateTime))
-        {
-            throw new DalErrorINput(" You suppose to input a date");
-        }
+            try
+            {
+                creationDate = DateTime.Parse(creationDateString);
+            }
+            catch
+            {
+                throw new DalErrorINput(" You suppose to input a date");
+            }
+        }//Input integrity check
         Console.WriteLine("Enter Start Date (optional):");
         DateTime? startDate = null;
         string? startDateString = Console.ReadLine();
         if (!string.IsNullOrEmpty(startDateString))
         {
-            startDate = DateTime.Parse(startDateString);
-        }
-        if (!(startDate is DateTime))
-        {
-            throw new DalErrorINput(" You suppose to input a date");
-        }
+            try
+            {
+                startDate = DateTime.Parse(startDateString);
+            }
+            catch
+            {
+                throw new DalErrorINput(" You suppose to input a date");
+            }
+        }//Input integrity check
         Console.WriteLine("Enter Forecast Date (optional):");
         DateTime? forecastDate = null;
         string? forecastDateString = Console.ReadLine();
         if (!string.IsNullOrEmpty(forecastDateString))
         {
-            forecastDate = DateTime.Parse(forecastDateString);
-        }
-        if (!(forecastDate is DateTime))
-        {
-            throw new DalErrorINput(" You suppose to input a date");
-        }
+            try
+            {
+                forecastDate = DateTime.Parse(forecastDateString);
+            }
+            catch
+            {
+                throw new DalErrorINput(" You suppose to input a date");
+            }
+        }//Input integrity check
         Console.WriteLine("Enter LastE (optional):");
         DateTime? lastE = null;
         string? lastEString = Console.ReadLine();
         if (!string.IsNullOrEmpty(lastEString))
         {
-            lastE = DateTime.Parse(lastEString);
-        }
-        if (!(lastE is DateTime))
-        {
-            throw new DalErrorINput(" You suppose to input a date");
-        }
+            try
+            {
+                lastE = DateTime.Parse(lastEString);
+            }
+            catch
+            {
+                throw new DalErrorINput(" You suppose to input a date");
+            }
+        }//Input integrity check
         return (new DO.Task(idToUpdate, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
     }
     public static int idToRead()
     {
         Console.WriteLine("Enter Id Number of Task to read:");
         return (int.Parse(Console.ReadLine()));
-        
     }
     public static void printTask(DO.Task task)
-    { 
+    {
+
         Console.WriteLine("The Task");
-        Console.WriteLine("Id: "+ task.IdNumberTask);
+        try
+        {
+            Console.WriteLine("Id: " + task.IdNumberTask);
+        }
+        catch
+        {
+            throw new DalDoesNotExistException("An object of type Task with such an ID does not exist");
+        }
         Console.WriteLine("description: " + task.Description);
         Console.WriteLine("nickname: " + task.Nickname);
         Console.WriteLine("milestone: " + task.Milestone);
@@ -244,11 +256,11 @@ internal class Program
         //Request new input
         Console.WriteLine("Enter new description:");
         inputToUpdate = Console.ReadLine();
-        string description = string.IsNullOrEmpty(inputToUpdate) ? myTask.Description : inputToUpdate;
+        string? description = string.IsNullOrEmpty(inputToUpdate) ? myTask.Description : inputToUpdate;
 
         Console.WriteLine("Enter new nickname:");
         inputToUpdate = Console.ReadLine();
-        string nickname = string.IsNullOrEmpty(inputToUpdate) ? myTask.Nickname : inputToUpdate;
+        string? nickname = string.IsNullOrEmpty(inputToUpdate) ? myTask.Nickname : inputToUpdate;
 
         Console.WriteLine("Enter new milestone status:");
         inputToUpdate = Console.ReadLine();
@@ -256,11 +268,11 @@ internal class Program
 
         Console.WriteLine("Enter new product description:");
         inputToUpdate = Console.ReadLine();
-        string product = string.IsNullOrEmpty(inputToUpdate) ? myTask.Product : inputToUpdate;
+        string? product = string.IsNullOrEmpty(inputToUpdate) ? myTask.Product : inputToUpdate;
 
         Console.WriteLine("Enter new notes:");
         inputToUpdate = Console.ReadLine();
-        string notes = string.IsNullOrEmpty(inputToUpdate) ? myTask.Notes : inputToUpdate;
+        string? notes = string.IsNullOrEmpty(inputToUpdate) ? myTask.Notes : inputToUpdate;
         Difficulty difficulty;
         Console.WriteLine("Enter new difficulty level:");
         inputToUpdate = Console.ReadLine();
@@ -350,46 +362,63 @@ internal class Program
     {
         if (idEngineer == 0)
         {
-        Console.WriteLine("Enter id of engineer:");
-        idEngineer = int.Parse(Console.ReadLine());
-        }
-        if (!(idEngineer is int)&&(idEngineer<100000000|| idEngineer>999999999))
-        {
-            throw new DalErrorINput(" You suppose to input a number with 9 digits");
-        }
-        Console.WriteLine("Enter name:");
-        string nameEngineer = Console.ReadLine();
-        if (!(nameEngineer is string))
-        {
-            throw new DalErrorINput(" You suppose to input a string");
-        }
-        Console.WriteLine("Enter email of engineer:");
-        string emailEngineer = Console.ReadLine();
-        if (!(emailEngineer is string))
-        {
-            throw new DalErrorINput(" You suppose to input a string");
-        }
+            Console.WriteLine("Enter id of engineer:");
+            try
+            {
+                idEngineer = int.Parse(Console.ReadLine());
+                if ((idEngineer < 100000000 || idEngineer > 999999999))
+                {
+                    throw new DalErrorINput(" You suppose to input a number with 9 digits");
+                }
+            }
+            catch
+            {
+                throw new DalErrorINput(" You suppose to input a number with 9 digits");
+            }
+        }//Checking if it is automatic creation or manual data entry
 
+        Console.WriteLine("Enter name:");
+        string? nameEngineer = Console.ReadLine();
+        Console.WriteLine("Enter email of engineer:");
+        string? emailEngineer = Console.ReadLine();
         Console.WriteLine("Enter the engineer's level:( Novice, AdvancedBeginner, Competent, Proficient, Expert");
         Difficulty difficulty;
-        string inputToUpdate = Console.ReadLine();
+        string? inputToUpdate = Console.ReadLine();
         Difficulty.TryParse(inputToUpdate, out difficulty);
         if (!(inputToUpdate== "Novice")&&!(inputToUpdate == "AdvancedBeginner")&&!(inputToUpdate == "Competent")&&!(inputToUpdate == "Proficient")&&!(inputToUpdate == "Expert"))
         {
             throw new DalErrorINput(" You suppose to input a level for the engineer");
         }
         Console.WriteLine("Enter cost per hour og engineer:");
-        double costPerHour = double.Parse(Console.ReadLine());
-        if (!(costPerHour is double))
+        double costPerHour = 0;
+        try {
+            double.Parse(Console.ReadLine());
+            if (!(costPerHour is double))
+            {
+                throw new DalErrorINput(" You suppose to input a number");
+            }//Input integrity check
+        }
+        catch
         {
             throw new DalErrorINput(" You suppose to input a number");
+
         }
+
+       
         return (new Engineer(idEngineer, nameEngineer, emailEngineer, difficulty, costPerHour));
     }
     public static void printEngineer(Engineer engineer)
     {
         Console.WriteLine("The Engineer");
-        Console.WriteLine("Id: " + engineer.IdNumberEngineer);
+        try
+        {
+            Console.WriteLine("Id: " + engineer.IdNumberEngineer);
+        }
+
+        catch
+        {
+            throw new DalDoesNotExistException("An object of type Engineer with such an ID does not exist");
+        }
         Console.WriteLine("description: " + engineer.Name);
         Console.WriteLine("nickname: " + engineer.Email);
         Console.WriteLine("level: " + engineer.Level);
@@ -403,17 +432,17 @@ internal class Program
         printEngineer(myEngineer);
         //Request new input
         Console.WriteLine("Enter name:");
-        string nameEngineer = Console.ReadLine();
+        string? nameEngineer = Console.ReadLine();
 
         Console.WriteLine("Enter email of engineer:");
-        string emailEngineer = Console.ReadLine();
+        string? emailEngineer = Console.ReadLine();
 
         Difficulty difficulty;
         Console.WriteLine("Enter the engineer's level:( Novice, AdvancedBeginner, Competent, Proficient, Expert");
-        string inputLevel = Console.ReadLine();
+        string? inputLevel = Console.ReadLine();
 
         Console.WriteLine("Enter cost per hour og engineer:");
-        string inputToUpdate = Console.ReadLine();
+        string? inputToUpdate = Console.ReadLine();
         double costPerHour = string.IsNullOrEmpty(inputToUpdate) ? myEngineer.Cost : Convert.ToInt32(inputToUpdate);
         //Check if input is empty
         if (string.IsNullOrEmpty(nameEngineer))
@@ -458,8 +487,8 @@ internal class Program
                 printDependence(s_dal!.Dependence.Read(idToRead()));
                 break;
             case 3:
-                IEnumerable<Dependence> listOfDependence = s_dal!.Dependence.ReadAll();
-                foreach (Dependence d in listOfDependence)
+                IEnumerable<Dependence?> listOfDependence = s_dal!.Dependence.ReadAll();
+                foreach (Dependence? d in listOfDependence)
                 {
                     printDependence(d);
                 }
@@ -497,7 +526,14 @@ internal class Program
     public static void printDependence(Dependence dependency)
     {
         Console.WriteLine("The Task Dependence");
-        Console.WriteLine("Id: " + dependency.IdNumberDependence);
+        try
+        {
+            Console.WriteLine("Id: " + dependency.IdNumberDependence);
+        }
+        catch
+        {
+            throw new DalDoesNotExistException("An object of type Dependence with such an ID does not exist");
+        }
         Console.WriteLine("Dependent Task: " + dependency.DependentTask);
         Console.WriteLine("Dependent On Task: " + dependency.DependsOnTask + "\n");
     }

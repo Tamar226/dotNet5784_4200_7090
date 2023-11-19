@@ -14,14 +14,14 @@ internal class EngineerImplementation : IEngineer
     {
         if ((DataSource.Engineers.FirstOrDefault(eng => eng.IdNumberEngineer == item.IdNumberEngineer) == null)) { 
             DataSource.Engineers.Add(item); }
-       else { throw new DalAlreadyExistsException($"{item.GetType} with Id: {item.IdNumberEngineer} is already exist"); }
+       else { throw new DalAlreadyExistsException($"Engineer with Id: {item.IdNumberEngineer} is already exist"); }
         return item.IdNumberEngineer;
     }
 
     public void Delete(int id)
     {
         Engineer? engineerFound = DataSource.Engineers.FirstOrDefault(eng => eng.IdNumberEngineer == id);
-        if (engineerFound == null) { throw new DalDoesNotExistException($"Engineer with Id: {id} don't exist"); }
+        if (engineerFound == null) { throw new DalDeletionImpossible($"Engineer with Id: {id} don't exist"); }
         DataSource.Engineers.Remove(engineerFound);
         return;
     }
@@ -31,7 +31,7 @@ internal class EngineerImplementation : IEngineer
 
         if (DataSource.Engineers.Count>=1) 
         {
-            Engineer? engineerFound = DataSource.Engineers.FirstOrDefault((eng) => eng.IdNumberEngineer == id);
+            Engineer? engineerFound = DataSource.Engineers.FirstOrDefault(eng => eng.IdNumberEngineer == id);
             if (engineerFound == null) { return null; }
             return engineerFound;
         }

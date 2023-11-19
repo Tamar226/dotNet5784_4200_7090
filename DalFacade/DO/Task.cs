@@ -4,11 +4,11 @@ namespace DO;
 public record Task
 (
     int IdNumberTask,
-    string Description,
-    string Nickname,//כינוי
+    string? Description,
+    string? Nickname,//כינוי
     bool Milestone,
-    string Product,//תאור התוצר
-    string Notes,//הערות
+    string? Product,//תאור התוצר
+    string? Notes,//הערות
     Difficulty Level,
     int idEngineer,
     DateTime? CreationDate = null,//תאריך יצירה

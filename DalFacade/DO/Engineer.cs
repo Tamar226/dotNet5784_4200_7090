@@ -2,8 +2,8 @@
 public record Engineer
 (
     int IdNumberEngineer,
-    string Name,
-    string Email,
+    string? Name,
+    string? Email,
     Difficulty Level,
     double Cost
 )
