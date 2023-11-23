@@ -3,36 +3,100 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Xml.Linq;
 
 internal class TaskImplementation : ITask
 {
     public int Create(Task item)
     {
-        throw new NotImplementedException();
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        int newId = 0;
+        int idEng = 0;
+        if (item.idEngineer != 0)
+        {
+            idEng = item.idEngineer;
+        }
+        if (item.IdNumberTask == 0)
+        {
+            newId = Config.NextTaskId;
+        }
+        else
+        {
+            newId = item.IdNumberTask;
+        }
+        if ((tasks.FirstOrDefault(eng => eng.IdNumberTask == newId) == null))
+        {
+            Task newItemWithId = new Task(newId, item.Description, item.Nickname, false, item.Product, item.Notes, item.Level, idEng, item.CreationDate, item.StartDate, item.foresastdate, item.LastEndDate, null);
+            tasks.Add(newItemWithId);
+        }
+        else { throw new DalAlreadyExistsException($"{item.GetType} with Id: {item.IdNumberTask} is already exist"); }
+        XMLTools.SaveListToXMLSerializer(tasks, "ArrayOfTask");
+        return item.IdNumberTask;
+
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        int newId = 0;
+        Task? taskFound=tasks.FirstOrDefault(tsk => tsk.IdNumberTask == id);
+        if (taskFound == null) { throw new DalDeletionImpossible($"Task with Id: {id} don't exist"); }
+        tasks.Remove(taskFound);
+        XMLTools.SaveListToXMLSerializer(tasks, "ArrayOfTask");
     }
 
     public Task? Read(int id)
     {
-        throw new NotImplementedException();
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        if (tasks.Count >= 1)
+        {
+            Task? taskFound = tasks.FirstOrDefault((eng) => eng.IdNumberTask == id);
+            if (taskFound == null) { return null; }
+            return taskFound;
+        }
+        else { return null; };
+            
     }
 
     public Task? Read(Func<Task, bool> filter)
     {
-        throw new NotImplementedException();
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        if (filter != null)
+        {
+            var foundDependence = from item in tasks
+                                  where filter(item)
+                                  select item;
+            return foundDependence.ElementAt(0);
+        }
+        throw new DalNoFilterToQuery("no filther to query");
     }
 
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        if (filter != null)
+        {
+            return from item in tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in tasks
+               select item;
     }
 
     public void Update(Task item)
     {
-        throw new NotImplementedException();
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        Task? tempTask = (tasks.FirstOrDefault(element => element!.IdNumberTask == item.IdNumberTask));
+        if (tempTask is null)
+            throw new DalDoesNotExistException("An object of type Task with such an ID does not exist");
+        else
+        {
+            tasks.Remove(tempTask);
+            tasks.Add(item);
+        }
+        XMLTools.SaveListToXMLSerializer(tasks, "ArrayOfTask");
     }
 }

@@ -31,9 +31,16 @@ public class DalErrorNotValueINput : Exception
     public DalErrorNotValueINput(string? message) : base(message) { }
 
 }
+[Serializable]
 public class DalNoFilterToQuery : Exception
 {
     public DalNoFilterToQuery(string? message) : base(message) { }
+}
+[Serializable]
+public class DalXMLFileLoadCreateException : Exception
+{
+    public DalXMLFileLoadCreateException(string? message) : base(message) { }
+
 }
 
 
