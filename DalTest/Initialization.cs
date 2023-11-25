@@ -64,7 +64,7 @@ public static class Initialization
         IEnumerable<Task?> _taskList = s_dal!.Task.ReadAll();
         for (int i = 0; i < 20; i++)
         {
-            for (int j = 0; j < 20; j++)
+            for (int j = 0; j < 2; j++)
             {
 
                 if (j != i && s_rand.Next(0,10)>5)
