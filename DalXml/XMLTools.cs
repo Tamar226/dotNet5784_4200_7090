@@ -26,7 +26,17 @@ static class XMLTools
 
     public static int? ToIntNullable(this XElement element, string name)=>
         int.TryParse((string?)element.Element(name), out var result) ? (int?)result : null;
-    
+    public static Dependence CreateDependenceFromXmlElement(XElement element)
+    {
+        // Create a Dependence instance from the XML element
+        // Assuming you have a constructor for Dependence that takes the necessary parameters
+        return new Dependence(
+            Convert.ToInt32(element.Attribute("Id")?.Value),
+            Convert.ToInt32(element.Attribute("DependentTask")?.Value),
+            Convert.ToInt32(element.Attribute("previousIDTask")?.Value)
+        );
+    }
+
     #endregion
 
     #region XmlConfig
