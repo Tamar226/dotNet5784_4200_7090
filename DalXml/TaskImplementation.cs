@@ -11,7 +11,7 @@ internal class TaskImplementation : ITask
 {
     public int Create(Task item)
     {
-        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
         int newId = 0;
         int idEng = 0;
         if (item.idEngineer != 0)
@@ -32,7 +32,7 @@ internal class TaskImplementation : ITask
             tasks.Add(newItemWithId);
         }
         else { throw new DalAlreadyExistsException($"{item.GetType} with Id: {item.IdNumberTask} is already exist"); }
-        XMLTools.SaveListToXMLSerializer(tasks, "ArrayOfTask");
+        XMLTools.SaveListToXMLSerializer(tasks, "tasks");
         return item.IdNumberTask;
 
     }
