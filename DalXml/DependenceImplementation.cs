@@ -39,7 +39,7 @@ internal class DependenceImplementation : IDependence
         XDocument doc = XDocument.Load("C:/Users/PC/source/Repos/dotNet5784_4200_7090/xml/dependences.xml");
         var root = doc.Descendants("ArrayOfDependence");
         XElement dependenceElement = root.Elements("Dependency")
-                                      .First(e => e.Element("Id")?.Value == id.ToString());
+                                      .FirstOrDefault(e => e.Element("Id")!.Value.Equals(Convert.ToString(id)))??throw new DalDeletionImpossible($"Dependence with Id: {id} don't exist");
         //var oneDependency = doc.Descendants("Dependency");
         //var filteredDependencies = oneDependency.Where(d => d.Element("Id")?.Value == id.ToString());
 

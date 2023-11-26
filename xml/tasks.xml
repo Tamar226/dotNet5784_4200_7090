@@ -7860,4 +7860,964 @@
     <LastEndDate>2024-11-04T00:00:00+02:00</LastEndDate>
     <ActualEndDate xsi:nil="true" />
   </Task>
+  <Task>
+    <IdNumberTask>1026</IdNumberTask>
+    <Description>Write documentation</Description>
+    <Nickname>New feature development</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Writing technical documentation</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-11-19T00:00:00</CreationDate>
+    <StartDate>2024-08-07T00:00:00+03:00</StartDate>
+    <foresastdate>2025-02-19T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-03-01T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1027</IdNumberTask>
+    <Description>Bug fixing</Description>
+    <Nickname>Write documentation</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Updating external dependencies</Product>
+    <Notes>Very critical</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-12-07T00:00:00</CreationDate>
+    <StartDate>2024-05-20T00:00:00+03:00</StartDate>
+    <foresastdate>2024-08-26T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-09-05T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1028</IdNumberTask>
+    <Description>Unit testing</Description>
+    <Nickname>Maintenance of existing fixes</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Version upgrades</Product>
+    <Notes>Very critical</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-11-01T00:00:00</CreationDate>
+    <StartDate>2024-02-01T00:00:00+02:00</StartDate>
+    <foresastdate>2024-03-10T00:00:00+02:00</foresastdate>
+    <LastEndDate>2024-03-20T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1029</IdNumberTask>
+    <Description>Requirements analysis</Description>
+    <Nickname>Safety and security infrastructure</Nickname>
+    <Milestone>false</Milestone>
+    <Product>New feature development</Product>
+    <Notes>Not critical</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-01-17T00:00:00</CreationDate>
+    <StartDate>2024-05-14T00:00:00+03:00</StartDate>
+    <foresastdate>2024-12-30T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-09T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1031</IdNumberTask>
+    <Description>Write documentation</Description>
+    <Nickname>Code quality testing</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Version upgrades</Product>
+    <Notes>Very critical</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-05-23T00:00:00</CreationDate>
+    <StartDate>2024-03-23T00:00:00+02:00</StartDate>
+    <foresastdate>2025-01-13T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-23T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1032</IdNumberTask>
+    <Description>Bug fixing</Description>
+    <Nickname>Version upgrades</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Bug fixing</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Expert</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-01-28T00:00:00</CreationDate>
+    <StartDate>2024-02-12T00:00:00+02:00</StartDate>
+    <foresastdate>2024-09-11T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-09-21T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1033</IdNumberTask>
+    <Description>Unit testing</Description>
+    <Nickname>Writing technical documentation</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Identifying and fixing security dilemmas</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-10-19T00:00:00</CreationDate>
+    <StartDate>2024-03-04T00:00:00+02:00</StartDate>
+    <foresastdate>2024-10-27T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-11-06T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1034</IdNumberTask>
+    <Description>Requirements analysis</Description>
+    <Nickname>Write documentation</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Version upgrades</Product>
+    <Notes>Not critical</Notes>
+    <Level>Expert</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-09-16T00:00:00</CreationDate>
+    <StartDate>2024-01-31T00:00:00+02:00</StartDate>
+    <foresastdate>2024-07-01T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-07-11T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1035</IdNumberTask>
+    <Description>Version upgrades</Description>
+    <Nickname>Bug identification</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Write documentation</Product>
+    <Notes>Not critical</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-04-01T00:00:00</CreationDate>
+    <StartDate>2024-05-09T00:00:00+03:00</StartDate>
+    <foresastdate>2024-07-14T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-07-24T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1036</IdNumberTask>
+    <Description>User interface design</Description>
+    <Nickname>Writing technical documentation</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Requirements analysis</Product>
+    <Notes>Very critical</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-07-21T00:00:00</CreationDate>
+    <StartDate>2024-03-15T00:00:00+02:00</StartDate>
+    <foresastdate>2024-05-12T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-05-22T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1037</IdNumberTask>
+    <Description>Bug identification</Description>
+    <Nickname>Bug identification</Nickname>
+    <Milestone>false</Milestone>
+    <Product>New feature development</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-04-18T00:00:00</CreationDate>
+    <StartDate>2024-01-18T00:00:00+02:00</StartDate>
+    <foresastdate>2024-08-13T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-08-23T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1038</IdNumberTask>
+    <Description>Writing automated tests</Description>
+    <Nickname>Potential bug detection</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Potential bug detection</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Expert</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-08-27T00:00:00</CreationDate>
+    <StartDate>2024-05-21T00:00:00+03:00</StartDate>
+    <foresastdate>2024-09-30T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-10-10T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1039</IdNumberTask>
+    <Description>Potential bug detection</Description>
+    <Nickname>Maintenance of existing fixes</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Updating external dependencies</Product>
+    <Notes>Work carefully</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-01-02T00:00:00</CreationDate>
+    <StartDate>2024-07-12T00:00:00+03:00</StartDate>
+    <foresastdate>2025-01-15T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-25T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1040</IdNumberTask>
+    <Description>Performance improvement</Description>
+    <Nickname>Creating API interfaces</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Writing technical documentation</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-07-14T00:00:00</CreationDate>
+    <StartDate>2024-06-12T00:00:00+03:00</StartDate>
+    <foresastdate>2024-06-25T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-07-05T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1041</IdNumberTask>
+    <Description>Identifying and fixing security dilemmas</Description>
+    <Nickname>Issue management and enhancements</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Identifying and fixing security dilemmas</Product>
+    <Notes>Not critical</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-04-22T00:00:00</CreationDate>
+    <StartDate>2024-03-09T00:00:00+02:00</StartDate>
+    <foresastdate>2025-01-02T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-12T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1042</IdNumberTask>
+    <Description>New feature development</Description>
+    <Nickname>Identifying and fixing security dilemmas</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Updating external dependencies</Product>
+    <Notes>Very critical</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-05-29T00:00:00</CreationDate>
+    <StartDate>2024-04-14T00:00:00+03:00</StartDate>
+    <foresastdate>2024-12-26T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-05T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1043</IdNumberTask>
+    <Description>Updating external dependencies</Description>
+    <Nickname>Performance improvement</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Writing technical documentation</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-02-14T00:00:00</CreationDate>
+    <StartDate>2024-09-11T00:00:00+03:00</StartDate>
+    <foresastdate>2025-06-13T00:00:00+03:00</foresastdate>
+    <LastEndDate>2025-06-23T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1044</IdNumberTask>
+    <Description>Maintenance of existing fixes</Description>
+    <Nickname>Creating API interfaces</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Bug identification</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-01-15T00:00:00</CreationDate>
+    <StartDate>2023-12-23T00:00:00+02:00</StartDate>
+    <foresastdate>2024-06-17T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-06-27T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1045</IdNumberTask>
+    <Description>Writing technical documentation</Description>
+    <Nickname>Identifying and fixing security dilemmas</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Maintenance of existing fixes</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-05-03T00:00:00</CreationDate>
+    <StartDate>2024-02-29T00:00:00+02:00</StartDate>
+    <foresastdate>2024-09-27T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-10-07T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1046</IdNumberTask>
+    <Description>Code quality testing</Description>
+    <Nickname>Writing automated tests</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Bug identification</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-01-11T00:00:00</CreationDate>
+    <StartDate>2024-03-17T00:00:00+02:00</StartDate>
+    <foresastdate>2024-11-28T00:00:00+02:00</foresastdate>
+    <LastEndDate>2024-12-08T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1047</IdNumberTask>
+    <Description>Safety and security infrastructure</Description>
+    <Nickname>Writing technical documentation</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Bug fixing</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Expert</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-12-25T00:00:00</CreationDate>
+    <StartDate>2024-07-07T00:00:00+03:00</StartDate>
+    <foresastdate>2025-02-09T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-02-19T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1048</IdNumberTask>
+    <Description>Issue management and enhancements</Description>
+    <Nickname>Maintenance of existing fixes</Nickname>
+    <Milestone>false</Milestone>
+    <Product>New feature development</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-04-14T00:00:00</CreationDate>
+    <StartDate>2024-03-30T00:00:00+03:00</StartDate>
+    <foresastdate>2024-05-03T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-05-13T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1049</IdNumberTask>
+    <Description>Creating API interfaces</Description>
+    <Nickname>Creating API interfaces</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Requirements analysis</Product>
+    <Notes>Very critical</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-12-25T00:00:00</CreationDate>
+    <StartDate>2024-02-04T00:00:00+02:00</StartDate>
+    <foresastdate>2024-05-07T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-05-17T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1050</IdNumberTask>
+    <Description>Configuration management</Description>
+    <Nickname>Performance improvement</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Writing automated tests</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Expert</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-08-23T00:00:00</CreationDate>
+    <StartDate>2024-08-03T00:00:00+03:00</StartDate>
+    <foresastdate>2024-12-08T00:00:00+02:00</foresastdate>
+    <LastEndDate>2024-12-18T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1051</IdNumberTask>
+    <Description>Write documentation</Description>
+    <Nickname>User interface design</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Code quality testing</Product>
+    <Notes>Very critical</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-08-03T00:00:00</CreationDate>
+    <StartDate>2024-01-28T00:00:00+02:00</StartDate>
+    <foresastdate>2024-05-27T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-06-06T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1052</IdNumberTask>
+    <Description>Bug fixing</Description>
+    <Nickname>New feature development</Nickname>
+    <Milestone>false</Milestone>
+    <Product>New feature development</Product>
+    <Notes>Not critical</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-08-26T00:00:00</CreationDate>
+    <StartDate>2024-05-22T00:00:00+03:00</StartDate>
+    <foresastdate>2025-02-16T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-02-26T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1053</IdNumberTask>
+    <Description>Unit testing</Description>
+    <Nickname>Unit testing</Nickname>
+    <Milestone>false</Milestone>
+    <Product>New feature development</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-09-29T00:00:00</CreationDate>
+    <StartDate>2024-06-09T00:00:00+03:00</StartDate>
+    <foresastdate>2024-12-16T00:00:00+02:00</foresastdate>
+    <LastEndDate>2024-12-26T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1054</IdNumberTask>
+    <Description>Requirements analysis</Description>
+    <Nickname>Write documentation</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Updating external dependencies</Product>
+    <Notes>Not critical</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-07-19T00:00:00</CreationDate>
+    <StartDate>2024-03-16T00:00:00+02:00</StartDate>
+    <foresastdate>2024-06-28T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-07-08T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1055</IdNumberTask>
+    <Description>Version upgrades</Description>
+    <Nickname>Bug fixing</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Writing automated tests</Product>
+    <Notes>do it soon!</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-06-24T00:00:00</CreationDate>
+    <StartDate>2024-07-25T00:00:00+03:00</StartDate>
+    <foresastdate>2025-03-15T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-03-25T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1056</IdNumberTask>
+    <Description>User interface design</Description>
+    <Nickname>Creating API interfaces</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Performance improvement</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-01-04T00:00:00</CreationDate>
+    <StartDate>2024-09-01T00:00:00+03:00</StartDate>
+    <foresastdate>2024-09-25T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-10-05T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1057</IdNumberTask>
+    <Description>Bug identification</Description>
+    <Nickname>Creating API interfaces</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Writing automated tests</Product>
+    <Notes>Work carefully</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-12-19T00:00:00</CreationDate>
+    <StartDate>2024-05-05T00:00:00+03:00</StartDate>
+    <foresastdate>2024-11-23T00:00:00+02:00</foresastdate>
+    <LastEndDate>2024-12-03T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1058</IdNumberTask>
+    <Description>Writing automated tests</Description>
+    <Nickname>Write documentation</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Issue management and enhancements</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-05-16T00:00:00</CreationDate>
+    <StartDate>2024-09-15T00:00:00+03:00</StartDate>
+    <foresastdate>2025-03-14T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-03-24T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1059</IdNumberTask>
+    <Description>Potential bug detection</Description>
+    <Nickname>Requirements analysis</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Performance improvement</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-04-02T00:00:00</CreationDate>
+    <StartDate>2024-07-09T00:00:00+03:00</StartDate>
+    <foresastdate>2024-10-23T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-11-02T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1060</IdNumberTask>
+    <Description>Performance improvement</Description>
+    <Nickname>Identifying and fixing security dilemmas</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Issue management and enhancements</Product>
+    <Notes>Very critical</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-02-07T00:00:00</CreationDate>
+    <StartDate>2024-01-15T00:00:00+02:00</StartDate>
+    <foresastdate>2024-10-09T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-10-19T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1061</IdNumberTask>
+    <Description>Identifying and fixing security dilemmas</Description>
+    <Nickname>Bug identification</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Performance improvement</Product>
+    <Notes>Work carefully</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-11-13T00:00:00</CreationDate>
+    <StartDate>2024-05-23T00:00:00+03:00</StartDate>
+    <foresastdate>2025-03-02T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-03-12T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1062</IdNumberTask>
+    <Description>New feature development</Description>
+    <Nickname>Performance improvement</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Safety and security infrastructure</Product>
+    <Notes>Not critical</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-11-01T00:00:00</CreationDate>
+    <StartDate>2024-02-24T00:00:00+02:00</StartDate>
+    <foresastdate>2024-06-28T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-07-08T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1063</IdNumberTask>
+    <Description>Updating external dependencies</Description>
+    <Nickname>Creating API interfaces</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Version upgrades</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-03-19T00:00:00</CreationDate>
+    <StartDate>2023-12-28T00:00:00+02:00</StartDate>
+    <foresastdate>2024-07-29T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-08-08T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1064</IdNumberTask>
+    <Description>Maintenance of existing fixes</Description>
+    <Nickname>Unit testing</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Updating external dependencies</Product>
+    <Notes>Work carefully</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-10-31T00:00:00</CreationDate>
+    <StartDate>2024-02-14T00:00:00+02:00</StartDate>
+    <foresastdate>2024-09-06T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-09-16T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1065</IdNumberTask>
+    <Description>Writing technical documentation</Description>
+    <Nickname>Code quality testing</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Performance improvement</Product>
+    <Notes>Very critical</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-09-18T00:00:00</CreationDate>
+    <StartDate>2024-03-30T00:00:00+03:00</StartDate>
+    <foresastdate>2024-12-23T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-02T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1066</IdNumberTask>
+    <Description>Code quality testing</Description>
+    <Nickname>Maintenance of existing fixes</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Unit testing</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-04-18T00:00:00</CreationDate>
+    <StartDate>2024-05-28T00:00:00+03:00</StartDate>
+    <foresastdate>2024-07-09T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-07-19T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1067</IdNumberTask>
+    <Description>Safety and security infrastructure</Description>
+    <Nickname>Write documentation</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Updating external dependencies</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-02-15T00:00:00</CreationDate>
+    <StartDate>2024-02-22T00:00:00+02:00</StartDate>
+    <foresastdate>2024-08-08T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-08-18T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1068</IdNumberTask>
+    <Description>Issue management and enhancements</Description>
+    <Nickname>Write documentation</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Writing automated tests</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-10-21T00:00:00</CreationDate>
+    <StartDate>2024-01-18T00:00:00+02:00</StartDate>
+    <foresastdate>2024-05-06T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-05-16T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1069</IdNumberTask>
+    <Description>Creating API interfaces</Description>
+    <Nickname>Writing automated tests</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Creating API interfaces</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-11-05T00:00:00</CreationDate>
+    <StartDate>2024-02-28T00:00:00+02:00</StartDate>
+    <foresastdate>2024-05-16T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-05-26T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1070</IdNumberTask>
+    <Description>Configuration management</Description>
+    <Nickname>Creating API interfaces</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Unit testing</Product>
+    <Notes>Very critical</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-08-15T00:00:00</CreationDate>
+    <StartDate>2024-03-18T00:00:00+02:00</StartDate>
+    <foresastdate>2025-01-11T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-21T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1071</IdNumberTask>
+    <Description>Write documentation</Description>
+    <Nickname>Updating external dependencies</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Performance improvement</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-05-30T00:00:00</CreationDate>
+    <StartDate>2024-02-11T00:00:00+02:00</StartDate>
+    <foresastdate>2024-09-26T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-10-06T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1072</IdNumberTask>
+    <Description>Bug fixing</Description>
+    <Nickname>Version upgrades</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Requirements analysis</Product>
+    <Notes>Not critical</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-12-10T00:00:00</CreationDate>
+    <StartDate>2024-07-28T00:00:00+03:00</StartDate>
+    <foresastdate>2024-10-18T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-10-28T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1073</IdNumberTask>
+    <Description>Unit testing</Description>
+    <Nickname>Bug fixing</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Safety and security infrastructure</Product>
+    <Notes>Not critical</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-05-04T00:00:00</CreationDate>
+    <StartDate>2024-06-18T00:00:00+03:00</StartDate>
+    <foresastdate>2025-02-11T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-02-21T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1074</IdNumberTask>
+    <Description>Requirements analysis</Description>
+    <Nickname>Bug identification</Nickname>
+    <Milestone>false</Milestone>
+    <Product>New feature development</Product>
+    <Notes>Not critical</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-09-27T00:00:00</CreationDate>
+    <StartDate>2024-09-02T00:00:00+03:00</StartDate>
+    <foresastdate>2024-11-28T00:00:00+02:00</foresastdate>
+    <LastEndDate>2024-12-08T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1075</IdNumberTask>
+    <Description>Version upgrades</Description>
+    <Nickname>Maintenance of existing fixes</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Issue management and enhancements</Product>
+    <Notes>do it soon!</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-08-06T00:00:00</CreationDate>
+    <StartDate>2024-06-23T00:00:00+03:00</StartDate>
+    <foresastdate>2025-01-12T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-22T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1076</IdNumberTask>
+    <Description>User interface design</Description>
+    <Nickname>Identifying and fixing security dilemmas</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Potential bug detection</Product>
+    <Notes>do it soon!</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-08-10T00:00:00</CreationDate>
+    <StartDate>2024-01-10T00:00:00+02:00</StartDate>
+    <foresastdate>2024-10-30T00:00:00+02:00</foresastdate>
+    <LastEndDate>2024-11-09T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1077</IdNumberTask>
+    <Description>Bug identification</Description>
+    <Nickname>Unit testing</Nickname>
+    <Milestone>false</Milestone>
+    <Product>User interface design</Product>
+    <Notes>Not critical</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-06-02T00:00:00</CreationDate>
+    <StartDate>2024-06-03T00:00:00+03:00</StartDate>
+    <foresastdate>2025-03-07T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-03-17T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1078</IdNumberTask>
+    <Description>Writing automated tests</Description>
+    <Nickname>Identifying and fixing security dilemmas</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Code quality testing</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-01-21T00:00:00</CreationDate>
+    <StartDate>2024-07-26T00:00:00+03:00</StartDate>
+    <foresastdate>2024-09-12T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-09-22T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1079</IdNumberTask>
+    <Description>Potential bug detection</Description>
+    <Nickname>Creating API interfaces</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Bug identification</Product>
+    <Notes>Not critical</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-05-04T00:00:00</CreationDate>
+    <StartDate>2024-07-22T00:00:00+03:00</StartDate>
+    <foresastdate>2024-09-13T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-09-23T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1080</IdNumberTask>
+    <Description>Performance improvement</Description>
+    <Nickname>Bug identification</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Code quality testing</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2020-12-12T00:00:00</CreationDate>
+    <StartDate>2023-12-09T00:00:00+02:00</StartDate>
+    <foresastdate>2024-04-17T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-04-27T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1081</IdNumberTask>
+    <Description>Identifying and fixing security dilemmas</Description>
+    <Nickname>Performance improvement</Nickname>
+    <Milestone>false</Milestone>
+    <Product>New feature development</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-08-17T00:00:00</CreationDate>
+    <StartDate>2024-06-18T00:00:00+03:00</StartDate>
+    <foresastdate>2024-08-12T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-08-22T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1082</IdNumberTask>
+    <Description>New feature development</Description>
+    <Nickname>Performance improvement</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Code quality testing</Product>
+    <Notes>Not critical</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-12-09T00:00:00</CreationDate>
+    <StartDate>2024-04-25T00:00:00+03:00</StartDate>
+    <foresastdate>2024-10-02T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-10-12T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1083</IdNumberTask>
+    <Description>Updating external dependencies</Description>
+    <Nickname>Bug identification</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Updating external dependencies</Product>
+    <Notes>do it soon!</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-06-11T00:00:00</CreationDate>
+    <StartDate>2024-05-16T00:00:00+03:00</StartDate>
+    <foresastdate>2024-07-03T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-07-13T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1084</IdNumberTask>
+    <Description>Maintenance of existing fixes</Description>
+    <Nickname>Potential bug detection</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Performance improvement</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-06-29T00:00:00</CreationDate>
+    <StartDate>2024-01-26T00:00:00+02:00</StartDate>
+    <foresastdate>2024-05-29T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-06-08T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1085</IdNumberTask>
+    <Description>Writing technical documentation</Description>
+    <Nickname>Maintenance of existing fixes</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Identifying and fixing security dilemmas</Product>
+    <Notes>Very critical</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-07-29T00:00:00</CreationDate>
+    <StartDate>2024-09-11T00:00:00+03:00</StartDate>
+    <foresastdate>2025-01-17T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-27T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1086</IdNumberTask>
+    <Description>Code quality testing</Description>
+    <Nickname>User interface design</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Unit testing</Product>
+    <Notes>Work carefully</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-06-17T00:00:00</CreationDate>
+    <StartDate>2024-05-27T00:00:00+03:00</StartDate>
+    <foresastdate>2024-07-14T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-07-24T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1087</IdNumberTask>
+    <Description>Safety and security infrastructure</Description>
+    <Nickname>Issue management and enhancements</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Writing technical documentation</Product>
+    <Notes>Very critical</Notes>
+    <Level>AdvancedBeginner</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2023-11-14T00:00:00</CreationDate>
+    <StartDate>2024-02-12T00:00:00+02:00</StartDate>
+    <foresastdate>2024-10-09T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-10-19T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1088</IdNumberTask>
+    <Description>Issue management and enhancements</Description>
+    <Nickname>Version upgrades</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Issue management and enhancements</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Proficient</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2022-03-07T00:00:00</CreationDate>
+    <StartDate>2024-03-16T00:00:00+02:00</StartDate>
+    <foresastdate>2024-11-24T00:00:00+02:00</foresastdate>
+    <LastEndDate>2024-12-04T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1089</IdNumberTask>
+    <Description>Creating API interfaces</Description>
+    <Nickname>Unit testing</Nickname>
+    <Milestone>false</Milestone>
+    <Product>Potential bug detection</Product>
+    <Notes>You can help the head of the team</Notes>
+    <Level>Novice</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-11-10T00:00:00</CreationDate>
+    <StartDate>2024-04-28T00:00:00+03:00</StartDate>
+    <foresastdate>2024-07-10T00:00:00+03:00</foresastdate>
+    <LastEndDate>2024-07-20T00:00:00+03:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <IdNumberTask>1090</IdNumberTask>
+    <Description>Configuration management</Description>
+    <Nickname>Updating external dependencies</Nickname>
+    <Milestone>false</Milestone>
+    <Product>User interface design</Product>
+    <Notes>Work carefully</Notes>
+    <Level>Competent</Level>
+    <idEngineer>0</idEngineer>
+    <CreationDate>2021-03-18T00:00:00</CreationDate>
+    <StartDate>2024-06-20T00:00:00+03:00</StartDate>
+    <foresastdate>2025-01-14T00:00:00+02:00</foresastdate>
+    <LastEndDate>2025-01-24T00:00:00+02:00</LastEndDate>
+    <ActualEndDate xsi:nil="true" />
+  </Task>
 </ArrayOfTask>
