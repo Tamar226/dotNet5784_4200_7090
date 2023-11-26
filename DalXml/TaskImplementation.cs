@@ -39,17 +39,17 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
         int newId = 0;
         Task? taskFound=tasks.FirstOrDefault(tsk => tsk.IdNumberTask == id);
         if (taskFound == null) { throw new DalDeletionImpossible($"Task with Id: {id} don't exist"); }
         tasks.Remove(taskFound);
-        XMLTools.SaveListToXMLSerializer(tasks, "ArrayOfTask");
+        XMLTools.SaveListToXMLSerializer(tasks, "tasks");
     }
 
     public Task? Read(int id)
     {
-        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
         if (tasks.Count >= 1)
         {
             Task? taskFound = tasks.FirstOrDefault((eng) => eng.IdNumberTask == id);
@@ -62,7 +62,7 @@ internal class TaskImplementation : ITask
 
     public Task? Read(Func<Task, bool> filter)
     {
-        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
         if (filter != null)
         {
             var foundDependence = from item in tasks
@@ -75,7 +75,7 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
-        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
         if (filter != null)
         {
             return from item in tasks
@@ -88,7 +88,7 @@ internal class TaskImplementation : ITask
 
     public void Update(Task item)
     {
-        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("ArrayOfTask");
+        List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
         Task? tempTask = (tasks.FirstOrDefault(element => element!.IdNumberTask == item.IdNumberTask));
         if (tempTask is null)
             throw new DalDoesNotExistException("An object of type Task with such an ID does not exist");
@@ -97,6 +97,6 @@ internal class TaskImplementation : ITask
             tasks.Remove(tempTask);
             tasks.Add(item);
         }
-        XMLTools.SaveListToXMLSerializer(tasks, "ArrayOfTask");
+        XMLTools.SaveListToXMLSerializer(tasks, "tasks");
     }
 }
