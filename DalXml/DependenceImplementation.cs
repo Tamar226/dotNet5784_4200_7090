@@ -11,50 +11,56 @@ using System.Security.Cryptography;
 
 internal class DependenceImplementation : IDependence
 {
-    XDocument? doc;
     public int Create(Dependence item)
     {
         int IDReplace = Config.NextDependenceId;
-        doc ??= XDocument.Load("C:/Users/PC/source/Repos/dotNet5784_4200_7090/xml/dependences.xml");
+        XDocument doc = XDocument.Load("../xml/dependences.xml");
         doc!.Element("ArrayOfDependence")
           !.Add(new XElement("Dependency",
-                 new XAttribute("Id", IDReplace),
-                 new XAttribute("DependentTask", item.DependentTask),
-                 new XAttribute("previousIDTask", item.DependsOnTask)));
-        doc.Save("C:/Users/PC/source/Repos/dotNet5784_4200_7090/xml/dependences.xml");
+                 new XElement("Id", IDReplace),
+                 new XElement("DependentTask", item.DependentTask),
+                 new XElement("previousIDTask", item.DependsOnTask)));
+        doc.Save("../xml/dependences.xml");
         return IDReplace;
     }
 
-    public void Delete(int id)
+     public void Delete(int id)
+     {
+        XDocument doc = XDocument.Load("../xml/dependences.xml");
+        var dependencyItem = doc.Descendants("Dependency").Where(p => p.Element("Id")?.Value == id.ToString())
+             .FirstOrDefault() ?? throw new DalDeletionImpossible($"Dependence with Id: {id} don't exist");
+        dependencyItem!.Remove();
+         doc.Save("../xml/dependences.xml");
+     }
+    /* public Dependence? Read(int id)//Reads dependency object by its ID
+     {
+         doc ??= XDocument.Load("../xml/dependences.xml");
+         var x =
+         var no = XMLTools.CreateDependenceFromXmlElement(x.First());
+         return no;
+     }*/
+    public Dependence? Read(int id)//Reads dependency object by its ID
     {
-        doc ??= XDocument.Load("..xml/DependenceImplementation.xml");
-        var removeDependency =
-            doc.Descendants("ArrayOfDependence")!.Elements("Dependency").Where(p => p.Element("Id")?.Value == id.ToString())
-            .FirstOrDefault() ?? throw new DalDeletionImpossible($"Dependence with Id: {id} don't exist");
-        removeDependency!.Remove();
-        doc.Save("..xml/DependenceImplementation.xml");
-    }
-    public Dependence? Read(int id)
-    {
-        XDocument doc = XDocument.Load("C:/Users/PC/source/Repos/dotNet5784_4200_7090/xml/dependences.xml");
-        var root = doc.Descendants("ArrayOfDependence");
-        XElement dependenceElement = root.Elements("Dependency")
-                                      .First(e => e.Element("Id")?.Value == id.ToString());
-        //var oneDependency = doc.Descendants("Dependency");
-        //var filteredDependencies = oneDependency.Where(d => d.Element("Id")?.Value == id.ToString());
+        XDocument doc = XDocument.Load("../xml/dependences.xml");
+        var dependencyItem = doc.Descendants("Dependency");
+        var batata= dependencyItem.
+                    FirstOrDefault(dependency => dependency.Element("Id")!.Value.Equals(Convert.ToString(id)))
+                    ?? throw new DalDoesNotExistException($"Dependency with ID={id} does Not exist");
+        Dependence dependency=XMLTools.CreateDependenceFromXmlElement(batata);
+        return dependency;
 
-        if (dependenceElement == null)
-        {
-            throw new DalDoesNotExistException($"Dependence with Id: {id} doesn't exist");
-        }
-
-        return XMLTools.CreateDependenceFromXmlElement(dependenceElement);
     }
-    public Dependence Read(Func<Dependence, bool> filter)
+        //var x = from child in d!.Descendants("Family")
+        //                    .First(f => f.Attribute("FamilyName")!.Value.Equals("Kohen"))
+        //                    .Descendants("Child")
+        //        select new { ChildName = child.Attribute("ChildName")!.Value, Age = child.Attribute("Age")?.Value ?? "אין תכונה גיל", Min = child.Attribute("Min")!.Value };
+
+
+        public Dependence Read(Func<Dependence, bool> filter)
     {
         if (filter != null)
         {
-            XDocument doc = XDocument.Load("C:/Users/PC/source/Repos/dotNet5784_4200_7090/xml/dependences.xml");
+            XDocument doc = XDocument.Load("../xml/dependences.xml");
 
             var oneDependency = doc.Descendants("Dependency");
             var filteredDependencies = oneDependency.Where(dependency => filter(XMLTools.CreateDependenceFromXmlElement(dependency)));
@@ -75,6 +81,7 @@ internal class DependenceImplementation : IDependence
     {
         if (filter != null)
         {
+            XDocument doc = XDocument.Load("../xml/dependences.xml");
             var foundDependence = doc!.Descendants("Dependency")
                                      .Where(dependency => filter(XMLTools.CreateDependenceFromXmlElement(dependency)))
                                      .Select(dependency => XMLTools.CreateDependenceFromXmlElement(dependency));
@@ -83,6 +90,7 @@ internal class DependenceImplementation : IDependence
         }
         else
         {
+            XDocument doc = XDocument.Load("../xml/dependences.xml");
             var allDependences = doc!.Descendants("Dependency")
                                     .Select(dependency => XMLTools.CreateDependenceFromXmlElement(dependency));
 
@@ -103,7 +111,7 @@ internal class DependenceImplementation : IDependence
 
     public void Update(Dependence item)
     {
-        XDocument doc = XDocument.Load("C:/Users/PC/source/Repos/dotNet5784_4200_7090/xml/dependences.xml");
+        XDocument doc = XDocument.Load("../xml/dependences.xml");
         var root=doc.Descendants("ArrayOfDependence");
         XElement dependentToUpdate = root.Elements("Dependency")
                                       .First(e => e.Element("Id")?.Value == item.IdNumberDependence.ToString());
@@ -113,7 +121,7 @@ internal class DependenceImplementation : IDependence
         new XAttribute("Id", item.IdNumberDependence),
         new XAttribute("DependentTask", item.DependentTask),
         new XAttribute("previousIDTask", item.DependsOnTask)));
-        doc.Save("..xml/DependenceImplementation.xml");
+        doc.Save("../xml/dependences.xml");
 
 
     }
