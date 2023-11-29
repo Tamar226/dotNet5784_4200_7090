@@ -43,18 +43,13 @@ internal class DependenceImplementation : IDependence
     {
         XDocument doc = XDocument.Load("../xml/dependences.xml");
         var dependencyItem = doc.Descendants("Dependency");
-        var batata= dependencyItem.
+        var oneDependency= dependencyItem.
                     FirstOrDefault(dependency => dependency.Element("Id")!.Value.Equals(Convert.ToString(id)))
                     ?? throw new DalDoesNotExistException($"Dependency with ID={id} does Not exist");
-        Dependence dependency=XMLTools.CreateDependenceFromXmlElement(batata);
+        Dependence dependency=XMLTools.CreateDependenceFromXmlElement(oneDependency);
         return dependency;
 
     }
-        //var x = from child in d!.Descendants("Family")
-        //                    .First(f => f.Attribute("FamilyName")!.Value.Equals("Kohen"))
-        //                    .Descendants("Child")
-        //        select new { ChildName = child.Attribute("ChildName")!.Value, Age = child.Attribute("Age")?.Value ?? "אין תכונה גיל", Min = child.Attribute("Min")!.Value };
-
 
         public Dependence Read(Func<Dependence, bool> filter)
     {
@@ -97,17 +92,6 @@ internal class DependenceImplementation : IDependence
             return allDependences;
         }
     }
-
-    //public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter = null)
-    //{
-    //    if (filter != null)
-    //    {
-    //        var foundDependence = ;
-    //        doc!.Descendants("ArrayOfDependence")!.Elements("Dependency").Where((p) => filter(p).ToString());
-    //        return foundDependence!;
-    //    }
-    //    throw new DalNoFilterToQuery("no filther to query");
-    //}
 
     public void Update(Dependence item)
     {

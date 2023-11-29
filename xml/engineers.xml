@@ -70,4 +70,109 @@
     <Level>AdvancedBeginner</Level>
     <Cost>298</Cost>
   </Engineer>
+  <Engineer>
+    <IdNumberEngineer>216812177</IdNumberEngineer>
+    <Name>Eli Amar</Name>
+    <Email>EliAmar@org.co.il</Email>
+    <Level>Competent</Level>
+    <Cost>199</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>389206769</IdNumberEngineer>
+    <Name>Yair Cohen</Name>
+    <Email>YairCohen@net.com</Email>
+    <Level>AdvancedBeginner</Level>
+    <Cost>193</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>296046895</IdNumberEngineer>
+    <Name>Ariela Levin</Name>
+    <Email>ArielaLevin@net.com</Email>
+    <Level>AdvancedBeginner</Level>
+    <Cost>270</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>284444079</IdNumberEngineer>
+    <Name>Dina Klein</Name>
+    <Email>DinaKlein@org.co.il</Email>
+    <Level>Novice</Level>
+    <Cost>163</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>254673743</IdNumberEngineer>
+    <Name>Shira Israelof</Name>
+    <Email>ShiraIsraelof@gov.il</Email>
+    <Level>Proficient</Level>
+    <Cost>210</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>307320310</IdNumberEngineer>
+    <Name>Eli Amar</Name>
+    <Email>EliAmar@gov.il</Email>
+    <Level>Competent</Level>
+    <Cost>175</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>367497022</IdNumberEngineer>
+    <Name>Yair Cohen</Name>
+    <Email>YairCohen@gov.il</Email>
+    <Level>Competent</Level>
+    <Cost>164</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>242645988</IdNumberEngineer>
+    <Name>Ariela Levin</Name>
+    <Email>ArielaLevin@org.co.il</Email>
+    <Level>Competent</Level>
+    <Cost>238</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>349549163</IdNumberEngineer>
+    <Name>Dina Klein</Name>
+    <Email>DinaKlein@org.co.il</Email>
+    <Level>AdvancedBeginner</Level>
+    <Cost>277</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>344091741</IdNumberEngineer>
+    <Name>Shira Israelof</Name>
+    <Email>ShiraIsraelof@gov.il</Email>
+    <Level>Proficient</Level>
+    <Cost>222</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>382677051</IdNumberEngineer>
+    <Name>Eli Amar</Name>
+    <Email>EliAmar@net.com</Email>
+    <Level>Novice</Level>
+    <Cost>211</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>250013285</IdNumberEngineer>
+    <Name>Yair Cohen</Name>
+    <Email>YairCohen@gov.il</Email>
+    <Level>Proficient</Level>
+    <Cost>150</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>387719099</IdNumberEngineer>
+    <Name>Ariela Levin</Name>
+    <Email>ArielaLevin@gov.il</Email>
+    <Level>Novice</Level>
+    <Cost>301</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>385911587</IdNumberEngineer>
+    <Name>Dina Klein</Name>
+    <Email>DinaKlein@outlook.com</Email>
+    <Level>Proficient</Level>
+    <Cost>248</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>259590403</IdNumberEngineer>
+    <Name>Shira Israelof</Name>
+    <Email>ShiraIsraelof@gov.il</Email>
+    <Level>AdvancedBeginner</Level>
+    <Cost>155</Cost>
+  </Engineer>
 </ArrayOfEngineer>
