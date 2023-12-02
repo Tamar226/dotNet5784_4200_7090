@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
-
+/// <summary>
+/// CRUD functions of Task
+/// </summary>
 internal class TaskImplementation : ITask
 {
     public int Create(Task item)
@@ -59,7 +61,6 @@ internal class TaskImplementation : ITask
         else { return null; };
             
     }
-
     public Task? Read(Func<Task, bool> filter)
     {
         List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
@@ -85,7 +86,6 @@ internal class TaskImplementation : ITask
         return from item in tasks
                select item;
     }
-
     public void Update(Task item)
     {
         List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");

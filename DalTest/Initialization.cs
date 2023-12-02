@@ -61,19 +61,10 @@ public static class Initialization
     /// </summary>
     private static void createDependence()
     {
-        IEnumerable<Task?> _taskList = s_dal!.Task.ReadAll();
-        for (int i = 0; i < 20; i++)
-        {
-            for (int j = 0; j < 2; j++)
-            {
-
-                if (j != i && s_rand.Next(0,10)>5)
-                {
-                    Dependence newDependence = new(0, _taskList.ElementAt(i).IdNumberTask, _taskList.ElementAt(i).IdNumberTask);
-                    s_dal!.Dependence.Create(newDependence);
-                }
-            }
-        }
+        IEnumerable<Task?> _taskList = s_dal!.Task.ReadAll(); 
+        for (int i = 0; i< 20; i++) 
+             s_dal!.Dependence.Create(new Dependence(0, _taskList.ElementAt((i * 2) % 20)!.IdNumberTask, _taskList.ElementAt((i * 2 + s_rand.Next(0,10)) % 20)!.IdNumberTask));
+      
     }
 
     /// <summary>

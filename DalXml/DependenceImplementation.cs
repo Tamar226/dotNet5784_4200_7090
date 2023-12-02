@@ -9,8 +9,12 @@ using System.Xml;
 using System.Linq;
 using System.Security.Cryptography;
 
+/// <summary>
+/// CRUD functions of DEpendency
+/// </summary>
 internal class DependenceImplementation : IDependence
 {
+   
     public int Create(Dependence item)
     {
         int IDReplace = Config.NextDependenceId;
@@ -32,13 +36,7 @@ internal class DependenceImplementation : IDependence
         dependencyItem!.Remove();
          doc.Save("../xml/dependences.xml");
      }
-    /* public Dependence? Read(int id)//Reads dependency object by its ID
-     {
-         doc ??= XDocument.Load("../xml/dependences.xml");
-         var x =
-         var no = XMLTools.CreateDependenceFromXmlElement(x.First());
-         return no;
-     }*/
+   
     public Dependence? Read(int id)//Reads dependency object by its ID
     {
         XDocument doc = XDocument.Load("../xml/dependences.xml");
