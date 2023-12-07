@@ -10,4 +10,3 @@ public interface ICrud<T> where T : class
     T? Read(Func<T, bool> filter); // stage 2
 
 }
-

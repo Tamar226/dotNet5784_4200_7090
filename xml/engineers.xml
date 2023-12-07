@@ -175,4 +175,74 @@
     <Level>Proficient</Level>
     <Cost>264</Cost>
   </Engineer>
+  <Engineer>
+    <IdNumberEngineer>248032781</IdNumberEngineer>
+    <Name>Eli Amar</Name>
+    <Email>EliAmar@org.co.il</Email>
+    <Level>Proficient</Level>
+    <Cost>263</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>251078464</IdNumberEngineer>
+    <Name>Yair Cohen</Name>
+    <Email>YairCohen@outlook.com</Email>
+    <Level>Novice</Level>
+    <Cost>283</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>218585010</IdNumberEngineer>
+    <Name>Ariela Levin</Name>
+    <Email>ArielaLevin@net.com</Email>
+    <Level>Expert</Level>
+    <Cost>280</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>338535052</IdNumberEngineer>
+    <Name>Dina Klein</Name>
+    <Email>DinaKlein@outlook.com</Email>
+    <Level>Competent</Level>
+    <Cost>197</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>237503960</IdNumberEngineer>
+    <Name>Shira Israelof</Name>
+    <Email>ShiraIsraelof@outlook.com</Email>
+    <Level>Expert</Level>
+    <Cost>291</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>263075896</IdNumberEngineer>
+    <Name>Eli Amar</Name>
+    <Email>EliAmar@org.co.il</Email>
+    <Level>Novice</Level>
+    <Cost>183</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>205494991</IdNumberEngineer>
+    <Name>Yair Cohen</Name>
+    <Email>YairCohen@outlook.com</Email>
+    <Level>Proficient</Level>
+    <Cost>265</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>325851235</IdNumberEngineer>
+    <Name>Ariela Levin</Name>
+    <Email>ArielaLevin@gmail.com</Email>
+    <Level>Expert</Level>
+    <Cost>168</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>371446544</IdNumberEngineer>
+    <Name>Dina Klein</Name>
+    <Email>DinaKlein@gmail.com</Email>
+    <Level>Competent</Level>
+    <Cost>278</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>389400407</IdNumberEngineer>
+    <Name>Shira Israelof</Name>
+    <Email>ShiraIsraelof@net.com</Email>
+    <Level>AdvancedBeginner</Level>
+    <Cost>248</Cost>
+  </Engineer>
 </ArrayOfEngineer>

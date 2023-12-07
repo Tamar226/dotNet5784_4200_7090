@@ -15,8 +15,8 @@ internal class Program
     //private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
     //private static IDependence? s_dalDependence = new DependenceImplementation();//stage 1
     //static readonly IDal s_dal = new DalList(); //stage 2
-    static readonly IDal s_dal = new DalXml(); //stage 3
-
+    //static readonly IDal s_dal = new DalXml(); //stage 3
+    static readonly IDal s_dal = Factory.Get; //stage 4
 
     static void Main(string[] args)
     {
