@@ -1,6 +1,6 @@
 ﻿namespace BO;
 
-internal class MilestoneInList
+public class MilestoneInList
 {
     public int Id { get; init; }
     public string? description { get; set; }

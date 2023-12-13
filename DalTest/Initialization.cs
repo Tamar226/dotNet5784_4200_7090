@@ -90,12 +90,14 @@ public static class Initialization
             s_dal!.Engineer.Create(newEng);
         }
     }
-    public static void Do(IDal dal)//stage2
+    //public static void Do(IDal dal)//stage2
+    public static void Do() //stage 4
     {
         //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");//stage 1
         //s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");//stage 1
         //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");//stage 1
-        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal =Factory.Get; //stage 4
         createEngineer();
         createTask();
         createDependence();

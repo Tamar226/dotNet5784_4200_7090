@@ -22,7 +22,11 @@ internal class Program
     {
         try
         {
-            Initialization.Do(s_dal); //stage 2 //create the data-base by Initialization 
+            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+            if (ans == "Y") //stage 3
+                //Initialization.Do(s_dal); //stage 2 //create the data-base by Initialization
+                Initialization.Do(); //stage 4 
             chooseEntities();
         }
         catch (DalAlreadyExistsException ex)//catch the exeption from type "DalAlreadyExistsException" who were until here...

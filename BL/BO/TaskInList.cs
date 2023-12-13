@@ -1,6 +1,6 @@
 ﻿namespace BO;
 
-internal class TaskInList
+public class TaskInList
 {
     public int Id { get; init; }
     public string? description { get; set; }

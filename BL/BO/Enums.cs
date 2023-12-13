@@ -1,6 +1,5 @@
 ﻿namespace BO;
 
 
-    public enum status {start,end,middle };
-
+public enum status { Unscheduled, Scheduled, OnTrack, InJeopardy };
 public enum  EngineerExperience{ Novice, AdvancedBeginner, Competent, Proficient, Expert };

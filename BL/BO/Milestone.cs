@@ -1,8 +1,8 @@
 ﻿namespace BO;
 
-internal class Milestone
+public class Milestone
 {
-    public int Id { get; init; }
+    public int IDMilestone { get; init; }
     public string? description { get; set; }
     public string? Alias { get; set; }
     public DateTime createdAtDate { get; set; }
