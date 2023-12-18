@@ -11,30 +11,31 @@ internal class EngineerImplementation : IEngineer
     /// <summary>
     /// בקשת רשימת מהנדסים
     /// </summary>
-    public IEnumerable<Engineer> ReadAll()
+    public IEnumerable<DO.Engineer> ReadAll()
     {
         return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
                 select new BO.Engineer
                 {
-                    IdEngineer =doEngineer.IdEngineer,
+                    IdEngineer = doEngineer.IdNumberEngineer,
                     Name = doEngineer.Name,
                     Email = doEngineer.Email,
-                    Level = doEngineer.Level,
+                    Level = (BO.EngineerExperience)doEngineer.Level,
                     Cost = doEngineer.Cost,
+                    Task = taskEngineer != null ? new BO.TaskInEngineer { Id = taskEngineer.IdNumberTask, Alias = taskEngineer} : null
                 });
 
     }
     /// <summary>
     /// בקשת מהנדס לפי בקשה/תכונה מסויימת
     /// </summary>
-    public IEnumerable<Engineer> GetEngineerByFilter()
+    public IEnumerable<BO.Engineer> GetEngineerByFilter()
     {
         throw new NotImplementedException();
     }
     /// <summary>
     /// בקשת פרטי מהנדס אחד
     /// </summary>
-    public Engineer? Read(int id)
+    public BO.Engineer? Read(int id)
     {
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
         if (doEngineer == null)
@@ -45,19 +46,18 @@ internal class EngineerImplementation : IEngineer
             IdEngineer = id,
             Name = doEngineer.Name,
             Email = doEngineer.Email,
-            Level = doEngineer.Level,
+            Level = (BO.EngineerExperience)doEngineer.Level,//הוא מסוג שונה
             Cost = doEngineer.Cost,
-    
         };
 
     }
     /// <summary>
     /// הוספת מהנדס
     /// </summary>
-    public int Create(Engineer item)
+    public int Create(BO.Engineer item)
     {
         DO.Engineer doEngineer = new DO.Engineer
-         (item.IdEngineer, item.Name, item.Email, item.Level, item.Cost);
+         (item.IdEngineer, item.Name, item.Email, (DO.Difficulty)item.Level, item.Cost);//סוג שונה
         try
         {
             int idEng = _dal.Engineer.Create(doEngineer);
@@ -73,14 +73,30 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     public void Delete(int id)
     {
-        _dal.Engineer.Delete(id);
+        try
+        {
+            _dal.Engineer.Delete(id);
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} doesn't exists", ex);
+        }
     }
     /// <summary>
     /// עדכון מהנדס
     /// </summary>
     public void Update(BO.Engineer item)
     {
-        _dal.Engineer.Update(item);
+
+        _dal.Engineer.Update(new DO.Engineer()
+        {
+            IdNumberEngineer = item.IdEngineer,
+            Name = item.Name,
+            Email = item.Email,
+            Level = (DO.Difficulty)item.Level,//הוא מסוג שונה
+            Cost = item.Cost
+        }
+        );
 
     }
 }
