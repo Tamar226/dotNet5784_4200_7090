@@ -1,6 +1,8 @@
 ﻿using BlApi;
 using BO;
-
+using DO;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 namespace BlImplementation;
 
 internal class MilestoneImplementation : IMilestone
@@ -10,9 +12,18 @@ internal class MilestoneImplementation : IMilestone
         throw new NotImplementedException();
     }
 
-    public Milestone CreateSchedule(Milestone Milestone)
+    public Milestone CreateSchedule()
     {
-        throw new NotImplementedException();
+        List<DO.Task> tasks =DO.Task.readAll();
+        List<DO.Dependence> dependencies = DO.Dependence.readAll();
+        var listGroup=from item in dependencies
+                      group item by item.DependsOnTask into newGroup
+                      select newGroup;
+        List<BO.TaskInList> listDependencies = new List<TaskInList>();
+        foreach (var item in listGroup)
+        {
+            new BO.Milestone()
+        }
     }
 
     public Milestone Update(int IDMilestone)

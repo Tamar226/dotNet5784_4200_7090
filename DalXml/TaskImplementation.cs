@@ -30,7 +30,7 @@ internal class TaskImplementation : ITask
         }
         if ((tasks.FirstOrDefault(eng => eng.IdNumberTask == newId) == null))
         {
-            Task newItemWithId = new Task(newId, item.Description, item.Nickname, false, item.Product, item.Notes, item.Level, idEng, item.CreationDate, item.StartDate, item.foresastdate, item.LastEndDate, null);
+            Task newItemWithId = new Task(newId, item.Description,item.RequiredEffortTime, item.Alias, false, item.Product, item.Notes, item.Level, idEng, item.CreatedAtDate, item.StartDate, item.foresastdate, item.LastEndDate, null);
             tasks.Add(newItemWithId);
         }
         else { throw new DalAlreadyExistsException($"{item.GetType} with Id: {item.IdNumberTask} is already exist"); }

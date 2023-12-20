@@ -36,14 +36,14 @@ public static class Initialization
         };
         foreach (string _nameOfTask in TasksNames)
         {            
-            string _NicknameOfTask= TasksNames[s_rand.Next(0, 19)];
+            string _AliasOfTask= TasksNames[s_rand.Next(0, 19)];
             
             string _ProductTask= TasksNames[s_rand.Next(0, 19)];
             
             string _NotesTask = notes[s_rand.Next(0,5)];
             
             Difficulty _level = (Difficulty)s_rand.Next(Enum.GetValues(typeof(Difficulty)).Length);
-     
+            TimeSpan _RequiredEffortTime= TimeSpan.FromMinutes(s_rand.Next(0,60));
             DateTime startDate = new DateTime(2020, 1, 1);
             int range = (DateTime.Today - startDate).Days;
             DateTime _createDateTask = startDate.AddDays(s_rand.Next(range));
@@ -51,7 +51,7 @@ public static class Initialization
             DateTime _foresastDateTask = _startDateTask.AddDays(s_rand.Next(10, 300));
             DateTime _LastEndDate = _foresastDateTask.AddDays(10);
 
-            Task newTask = new(0, _nameOfTask, _NicknameOfTask,false, _ProductTask, _NotesTask,_level,0, _createDateTask, _startDateTask, _foresastDateTask, _LastEndDate, null);
+            Task newTask = new(0, _nameOfTask, _RequiredEffortTime, _AliasOfTask,false, _ProductTask, _NotesTask,_level,0, _createDateTask, _startDateTask, _foresastDateTask, _LastEndDate, null);
 
             s_dal!.Task.Create(newTask);
         }

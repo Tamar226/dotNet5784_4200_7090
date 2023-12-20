@@ -129,7 +129,22 @@ internal class Program
     {
         Console.WriteLine("Enter Description:");
         string? description = Console.ReadLine();
-        Console.WriteLine("Enter Nickname:");
+        
+        Console.WriteLine("Enter Creation Time To Task:");//Input integrity check
+        TimeSpan? RequiredEffortTime = null;
+        string? RequiredEffortTimeString = Console.ReadLine();
+        if (!string.IsNullOrEmpty(RequiredEffortTimeString))
+        {
+            try
+            {
+                RequiredEffortTime = TimeSpan.Parse(RequiredEffortTimeString);
+            }
+            catch
+            {
+                throw new DalErrorINput(" You suppose to input a time");
+            }
+        }
+        Console.WriteLine("Enter Alias:");
         string? nickname = Console.ReadLine();
         Console.WriteLine("Enter Milestone (true/false):");
         bool milestone = false;
@@ -163,6 +178,7 @@ internal class Program
         {
             throw new DalErrorINput(" You suppose to input a number");
         }//Input integrity check
+       
         Console.WriteLine("Enter Creation Date (optional):");
         DateTime? creationDate = null;
         string? creationDateString = Console.ReadLine();
@@ -219,7 +235,7 @@ internal class Program
                 throw new DalErrorINput(" You suppose to input a date");
             }
         }//Input integrity check
-        return (new DO.Task(idToUpdate, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
+        return (new DO.Task(idToUpdate, description, RequiredEffortTime, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
     }
     public static int idToRead()
     {
@@ -239,13 +255,14 @@ internal class Program
             throw new DalDoesNotExistException("An object of type Task with such an ID does not exist");
         }
         Console.WriteLine("description: " + task.Description);
-        Console.WriteLine("nickname: " + task.Nickname);
+        Console.WriteLine("Required Time: " + task.RequiredEffortTime);
+        Console.WriteLine("nickname: " + task.Alias);
         Console.WriteLine("milestone: " + task.Milestone);
         Console.WriteLine("product: " + task.Product);
         Console.WriteLine("notes: " + task.Notes);
         Console.WriteLine("difficulty: " + task.Level);
         Console.WriteLine("idEngineer: " + task.idEngineer);
-        Console.WriteLine("creation Date: " + task.CreationDate);
+        Console.WriteLine("creation Date: " + task.CreatedAtDate);
         Console.WriteLine("start Date: " + task.StartDate);
         Console.WriteLine("forecast Date: " + task.foresastdate);
         Console.WriteLine("last End Date: " + task.LastEndDate);
@@ -264,9 +281,22 @@ internal class Program
         inputToUpdate = Console.ReadLine();
         string? description = string.IsNullOrEmpty(inputToUpdate) ? myTask.Description : inputToUpdate;
 
+        Console.WriteLine("Enter new time to task:");
+        inputToUpdate = Console.ReadLine();
+        TimeSpan? taskTime;
+        if (string.IsNullOrEmpty(inputToUpdate))
+            taskTime = myTask.RequiredEffortTime;
+        else
+        {
+            if (TimeSpan.TryParse(inputToUpdate, out TimeSpan parsedTime))
+                taskTime = parsedTime;
+            else
+                throw new DalErrorINput("Invalid time format. Please enter a valid time.");
+        }
+
         Console.WriteLine("Enter new nickname:");
         inputToUpdate = Console.ReadLine();
-        string? nickname = string.IsNullOrEmpty(inputToUpdate) ? myTask.Nickname : inputToUpdate;
+        string? nickname = string.IsNullOrEmpty(inputToUpdate) ? myTask.Alias : inputToUpdate;
 
         Console.WriteLine("Enter new milestone status:");
         inputToUpdate = Console.ReadLine();
@@ -290,7 +320,7 @@ internal class Program
 
         Console.WriteLine("Enter new creation date:");
         inputToUpdate = Console.ReadLine();
-        DateTime? creationDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.CreationDate :Convert.ToDateTime( inputToUpdate);
+        DateTime? creationDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.CreatedAtDate :Convert.ToDateTime( inputToUpdate);
 
         Console.WriteLine("Enter new start date:");
         inputToUpdate = Console.ReadLine();
@@ -311,7 +341,7 @@ internal class Program
         }
         if (string.IsNullOrEmpty(nickname))
         {
-            nickname = myTask.Nickname;
+            nickname = myTask.Alias;
         }
         if (string.IsNullOrEmpty(product))
         {
@@ -322,7 +352,7 @@ internal class Program
             notes = myTask.Notes;
         }
         //create an update task
-        return (new DO.Task(id, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
+        return (new DO.Task(id, description, taskTime, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
     }
     /// <summary>
     /// Helper functions for creating an entity of type engineer. 

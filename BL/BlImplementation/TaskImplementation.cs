@@ -1,5 +1,4 @@
 ﻿using BlApi;
-using BO;
 
 namespace BlImplementation;
 
@@ -9,9 +8,29 @@ internal class TaskImplementation : ITask
     /// <summary>
     /// בקשת רשימת משימות
     /// </summary>
-    public IEnumerable<TaskInList> ReadAll()
+    public IEnumerable<BO.TaskInList> ReadAll()
     {
-        throw new NotImplementedException();
+        return (from DO.Task doTask in _dal.Task.ReadAll()
+                where doTask.Milestone == false
+                select new BO.Task
+                {
+                    IdTask = doTask.IdNumberTask,
+                    Description = doTask.Description,
+                    Alias = doTask.Alias,
+                    //Milestone = doTask.Milestone is true ? new BO.MilestoneInTask() : null,
+                    CreatedAtDate = doTask.CreatedAtDate,
+                    //status
+                    //BaselineStartDate = doTask.
+                    StartDate = doTask.StartDate,
+                    //SchedualStartDate
+                    ForecastDate = doTask.foresastdate,
+                    DeadlineDate = doTask.LastEndDate,
+                    CompleteDate = doTask.ActualEndDate,
+                    Deliverables = doTask.Product,
+                    Remarks = doTask.Notes,
+                    Engineer = doTask.idEngineer is not 0 ? new BO.EngineerInTask() : NULL,
+                    CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
+                }); ;
     }
     /// <summary>
     /// בקשת פרטי משימה

@@ -116,7 +116,7 @@ internal class Program
     {
         Console.WriteLine("Enter Description:");
         string? description = Console.ReadLine();
-        Console.WriteLine("Enter Nickname:");
+        Console.WriteLine("Enter Alias:");
         string? nickname = Console.ReadLine();
         Console.WriteLine("Enter Milestone (true/false):");
         bool milestone = false;
@@ -226,13 +226,13 @@ internal class Program
             throw new DalDoesNotExistException("An object of type Task with such an ID does not exist");
         }
         Console.WriteLine("description: " + task.Description);
-        Console.WriteLine("nickname: " + task.Nickname);
+        Console.WriteLine("nickname: " + task.Alias);
         Console.WriteLine("milestone: " + task.Milestone);
         Console.WriteLine("product: " + task.Product);
         Console.WriteLine("notes: " + task.Notes);
         Console.WriteLine("difficulty: " + task.Level);
         Console.WriteLine("idEngineer: " + task.idEngineer);
-        Console.WriteLine("creation Date: " + task.CreationDate);
+        Console.WriteLine("creation Date: " + task.CreatedAtDate);
         Console.WriteLine("start Date: " + task.StartDate);
         Console.WriteLine("forecast Date: " + task.foresastdate);
         Console.WriteLine("last End Date: " + task.LastEndDate);
@@ -253,7 +253,7 @@ internal class Program
 
         Console.WriteLine("Enter new nickname:");
         inputToUpdate = Console.ReadLine();
-        string? nickname = string.IsNullOrEmpty(inputToUpdate) ? myTask.Nickname : inputToUpdate;
+        string? nickname = string.IsNullOrEmpty(inputToUpdate) ? myTask.Alias : inputToUpdate;
 
         Console.WriteLine("Enter new milestone status:");
         inputToUpdate = Console.ReadLine();
@@ -277,7 +277,7 @@ internal class Program
 
         Console.WriteLine("Enter new creation date:");
         inputToUpdate = Console.ReadLine();
-        DateTime? creationDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.CreationDate : Convert.ToDateTime(inputToUpdate);
+        DateTime? creationDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.CreatedAtDate : Convert.ToDateTime(inputToUpdate);
 
         Console.WriteLine("Enter new start date:");
         inputToUpdate = Console.ReadLine();
@@ -298,7 +298,7 @@ internal class Program
         }
         if (string.IsNullOrEmpty(nickname))
         {
-            nickname = myTask.Nickname;
+            nickname = myTask.Alias;
         }
         if (string.IsNullOrEmpty(product))
         {
