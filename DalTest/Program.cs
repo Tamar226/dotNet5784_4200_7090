@@ -255,8 +255,8 @@ internal class Program
             throw new DalDoesNotExistException("An object of type Task with such an ID does not exist");
         }
         Console.WriteLine("description: " + task.Description);
-        Console.WriteLine("Required Time: " + task.RequiredEffortTime);
-        Console.WriteLine("nickname: " + task.Alias);
+        Console.WriteLine("required Time: " + task.RequiredEffortTime);
+        Console.WriteLine("alias: " + task.Alias);
         Console.WriteLine("milestone: " + task.Milestone);
         Console.WriteLine("product: " + task.Product);
         Console.WriteLine("notes: " + task.Notes);
@@ -455,10 +455,10 @@ internal class Program
         {
             throw new DalDoesNotExistException("An object of type Engineer with such an ID does not exist");
         }
-        Console.WriteLine("description: " + engineer.Name);
-        Console.WriteLine("nickname: " + engineer.Email);
-        Console.WriteLine("level: " + engineer.Level);
-        Console.WriteLine("cost: " + engineer.Cost+"\n");  
+        Console.WriteLine("Description: " + engineer.Name);
+        Console.WriteLine("Alias: " + engineer.Email);
+        Console.WriteLine("Level: " + engineer.Level);
+        Console.WriteLine("Cost: " + engineer.Cost+"\n");  
     }
     public static DO.Engineer UpdateMyEngineer(int id)
     {
