@@ -46,8 +46,9 @@ internal class EngineerImplementation : IEngineer
             IdEngineer = id,
             Name = doEngineer.Name,
             Email = doEngineer.Email,
-            Level = (BO.EngineerExperience)doEngineer.Level,//הוא מסוג שונה
+            Level = (BO.EngineerExperience)doEngineer.Level,
             Cost = doEngineer.Cost,
+            Task=
         };
 
     }
@@ -57,7 +58,7 @@ internal class EngineerImplementation : IEngineer
     public int Create(BO.Engineer item)
     {
         DO.Engineer doEngineer = new DO.Engineer
-         (item.IdEngineer, item.Name, item.Email, (DO.Difficulty)item.Level, item.Cost);//סוג שונה
+         (item.IdEngineer, item.Name, item.Email, (DO.Difficulty)item.Level, item.Cost);//להוסיף TASK
         try
         {
             int idEng = _dal.Engineer.Create(doEngineer);
@@ -87,16 +88,14 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     public void Update(BO.Engineer item)
     {
-
         _dal.Engineer.Update(new DO.Engineer()
         {
             IdNumberEngineer = item.IdEngineer,
             Name = item.Name,
             Email = item.Email,
-            Level = (DO.Difficulty)item.Level,//הוא מסוג שונה
+            Level = (DO.Difficulty)item.Level,
             Cost = item.Cost
         }
         );
-
     }
 }

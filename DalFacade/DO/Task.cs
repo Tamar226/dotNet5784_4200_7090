@@ -14,7 +14,7 @@ public record Task
     int idEngineer,
     DateTime? CreatedAtDate = null,//תאריך יצירה
     DateTime? StartDate = null,//תאריך התחלה
-    DateTime? foresastdate = null,//תאריך משוער לסיום
+    DateTime? scheduleDate = null,//תאריך משוער לסיום
     DateTime? LastEndDate = null,//תאריך אחרון לסיום
     DateTime? ActualEndDate = null//תאריך סיום בפועל
 )

@@ -6,4 +6,6 @@ internal static class Config
     internal static int NextTaskId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextTaskId"); }
     internal static int NextEngineerId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextEngineerId"); }
     internal static int NextDependenceId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextDependenceId"); }
+    internal static int NextMilestoneId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextMilestoneId"); }
+
 }

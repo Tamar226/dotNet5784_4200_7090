@@ -19,11 +19,11 @@ internal class TaskImplementation : ITask
                     Alias = doTask.Alias,
                     //Milestone = doTask.Milestone is true ? new BO.MilestoneInTask() : null,
                     CreatedAtDate = doTask.CreatedAtDate,
-                    //status
-                    //BaselineStartDate = doTask.
+                    //status//יוכי עשתה
+                    //BaselineStartDate = doTask.//קשור למילסטון
                     StartDate = doTask.StartDate,
-                    //SchedualStartDate
-                    ForecastDate = doTask.foresastdate,
+                    SchedualStartDate=doTask.scheduleDate,
+                    ForecastDate =,
                     DeadlineDate = doTask.LastEndDate,
                     CompleteDate = doTask.ActualEndDate,
                     Deliverables = doTask.Product,
