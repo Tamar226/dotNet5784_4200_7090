@@ -9,10 +9,10 @@ public record Task
     DateTime CreatedAtDate ,//תאריך יצירה
     TimeSpan? RequiredEffortTime,
     bool Milestone,
-    string? Product,//תאור התוצר
-    string? Notes,//הערות
-    Difficulty Level,
-    int? idEngineer,
+    string? Product=null,//תאור התוצר
+    string? Notes=null,//הערות
+    Difficulty Level= Difficulty.Novice,
+    int? idEngineer=0,
     DateTime? StartDate = null,//תאריך התחלה
     DateTime? scheduleDate = null,//תאריך משוער לסיום
     DateTime? LastEndDate = null,//תאריך אחרון לסיום

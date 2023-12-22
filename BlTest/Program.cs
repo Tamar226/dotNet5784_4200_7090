@@ -234,7 +234,7 @@ internal class Program
         Console.WriteLine("idEngineer: " + task.idEngineer);
         Console.WriteLine("creation Date: " + task.CreatedAtDate);
         Console.WriteLine("start Date: " + task.StartDate);
-        Console.WriteLine("forecast Date: " + task.foresastdate);
+        Console.WriteLine("forecast Date: " + task.scheduleDate);
         Console.WriteLine("last End Date: " + task.LastEndDate);
         Console.WriteLine("Actual EndDate: " + task.ActualEndDate + "\n");
 
@@ -285,7 +285,7 @@ internal class Program
 
         Console.WriteLine("Enter new forecast date:");
         inputToUpdate = Console.ReadLine();
-        DateTime? forecastDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.foresastdate : Convert.ToDateTime(inputToUpdate);
+        DateTime? forecastDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.scheduleDate : Convert.ToDateTime(inputToUpdate);
 
         Console.WriteLine("Enter new last end date:");
         inputToUpdate = Console.ReadLine();
