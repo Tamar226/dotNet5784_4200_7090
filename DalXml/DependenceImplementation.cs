@@ -107,6 +107,9 @@ internal class DependenceImplementation : IDependence
 
 
     }
-
+    public void Reset()
+    {
+        XMLTools.ResetFile("dependences");
+    }
 }
 

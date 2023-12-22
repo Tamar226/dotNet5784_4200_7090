@@ -14,4 +14,10 @@ sealed internal class DalXml : IDal
     public IEngineer Engineer => new EngineerImplementation();
 
     public IDependence Dependence => new DependenceImplementation();
+    public void Reset()
+    {
+        XMLTools.ResetFile("engineers");
+        XMLTools.ResetFile("tasks");
+        XMLTools.ResetFile("Dependences");
+    }
 }

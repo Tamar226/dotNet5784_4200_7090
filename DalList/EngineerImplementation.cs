@@ -74,4 +74,9 @@ internal class EngineerImplementation : IEngineer
         throw new DalNoFilterToQuery("no filther to query");
 
     }
+    public void Reset()
+    {
+        DataSource.Engineers.Clear();
+    }
+
 }

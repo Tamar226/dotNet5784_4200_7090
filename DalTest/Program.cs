@@ -106,7 +106,6 @@ internal class Program
                 foreach (DO.Task? t in listOfTask)
                 {
                     printTask(t);
-                   
                 }
                 break;
             case 4:
@@ -145,7 +144,7 @@ internal class Program
             }
         }
         Console.WriteLine("Enter Alias:");
-        string? nickname = Console.ReadLine();
+        string? alias = Console.ReadLine();
         Console.WriteLine("Enter Milestone (true/false):");
         bool milestone = false;
         try
@@ -180,7 +179,7 @@ internal class Program
         }//Input integrity check
        
         Console.WriteLine("Enter Creation Date (optional):");
-        DateTime? creationDate = null;
+        DateTime creationDate=DateTime.Now;
         string? creationDateString = Console.ReadLine();
         if (!string.IsNullOrEmpty(creationDateString))
         {
@@ -235,7 +234,7 @@ internal class Program
                 throw new DalErrorINput(" You suppose to input a date");
             }
         }//Input integrity check
-        return (new DO.Task(idToUpdate, description, RequiredEffortTime, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
+        return (new DO.Task(idToUpdate, alias!, description!, creationDate, RequiredEffortTime, milestone, product, notes, difficulty, _idEngineer, startDate, forecastDate, lastE, null));
     }
     public static int idToRead()
     {
@@ -272,7 +271,7 @@ internal class Program
     public static DO.Task UpdateMyTask(int id)
     {
         //s_dalTask!.Update(createTask(id));
-        DO.Task myTask = s_dal!.Task.Read(id);
+        DO.Task? myTask = s_dal!.Task.Read(id);
         printTask(myTask);
         Console.WriteLine("Please enter what do you want to update in your task:");
         string? inputToUpdate = null;
@@ -296,7 +295,7 @@ internal class Program
 
         Console.WriteLine("Enter new nickname:");
         inputToUpdate = Console.ReadLine();
-        string? nickname = string.IsNullOrEmpty(inputToUpdate) ? myTask.Alias : inputToUpdate;
+        string? alias = string.IsNullOrEmpty(inputToUpdate) ? myTask.Alias : inputToUpdate;
 
         Console.WriteLine("Enter new milestone status:");
         inputToUpdate = Console.ReadLine();
@@ -320,7 +319,7 @@ internal class Program
 
         Console.WriteLine("Enter new creation date:");
         inputToUpdate = Console.ReadLine();
-        DateTime? creationDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.CreatedAtDate :Convert.ToDateTime( inputToUpdate);
+        DateTime creationDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.CreatedAtDate :Convert.ToDateTime( inputToUpdate);
 
         Console.WriteLine("Enter new start date:");
         inputToUpdate = Console.ReadLine();
@@ -328,7 +327,7 @@ internal class Program
 
         Console.WriteLine("Enter new forecast date:");
         inputToUpdate = Console.ReadLine();
-        DateTime? forecastDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.scheduleDate : Convert.ToDateTime(inputToUpdate);
+        DateTime? scheduleDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.scheduleDate : Convert.ToDateTime(inputToUpdate);
 
         Console.WriteLine("Enter new last end date:");
         inputToUpdate = Console.ReadLine();
@@ -339,9 +338,9 @@ internal class Program
         {
             description = myTask.Description;
         }
-        if (string.IsNullOrEmpty(nickname))
+        if (string.IsNullOrEmpty(alias))
         {
-            nickname = myTask.Alias;
+            alias = myTask.Alias;
         }
         if (string.IsNullOrEmpty(product))
         {
@@ -352,7 +351,7 @@ internal class Program
             notes = myTask.Notes;
         }
         //create an update task
-        return (new DO.Task(id, description, taskTime, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
+        return (new DO.Task(id, alias, description, creationDate, taskTime,  milestone, product, notes, difficulty, _idEngineer,  startDate, scheduleDate, lastE, null));
     }
     /// <summary>
     /// Helper functions for creating an entity of type engineer. 
@@ -582,10 +581,10 @@ internal class Program
 
         //Request new input
         Console.WriteLine("Enter Dependent Task:");
-        int idDependenceTask = int.Parse(Console.ReadLine());
+        int? idDependenceTask = int.Parse(Console.ReadLine());
 
         Console.WriteLine("Enter Depends On Task:");
-        int DependsOnTask = int.Parse(Console.ReadLine());
+        int? DependsOnTask = int.Parse(Console.ReadLine());
 
         //Check if input is empty
         if (idDependenceTask==0)

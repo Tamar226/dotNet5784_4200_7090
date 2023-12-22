@@ -79,4 +79,8 @@ internal class DependenceImplementation : IDependence
         throw new DalNoFilterToQuery("no filther to query");
        
     }
+    public void Reset()
+    {
+        DataSource.Dependences.Clear();
+    }
 }

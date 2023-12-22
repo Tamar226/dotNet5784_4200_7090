@@ -14,30 +14,35 @@ public class BlDoesNotExistException : Exception
     public BlDoesNotExistException(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+[Serializable]
 public class DalXMLFileLoadCreateException : Exception
 {
     public DalXMLFileLoadCreateException(string? message) : base(message) { }
     public DalXMLFileLoadCreateException(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+[Serializable]
 public class DalNoFilterToQuery : Exception
 {
     public DalNoFilterToQuery(string? message) : base(message) { }
     public DalNoFilterToQuery(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+[Serializable]
 public class DalErrorNotValueINput : Exception
 {
     public DalErrorNotValueINput(string? message) : base(message) { }
     public DalErrorNotValueINput(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+[Serializable]
 public class DalDeletionImpossible : Exception
 {
     public DalDeletionImpossible(string? message) : base(message) { }
     public DalDeletionImpossible(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+[Serializable]
 public class DalErrorINput : Exception
 {
     public DalErrorINput(string? message) : base(message) { }
