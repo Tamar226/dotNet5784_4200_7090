@@ -15,7 +15,7 @@ internal class TaskImplementation : ITask
     {
         List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
         int newId = 0;
-        int idEng = 0;
+        int? idEng = 0;
         if (item.idEngineer != 0)
         {
             idEng = item.idEngineer;
@@ -49,7 +49,7 @@ internal class TaskImplementation : ITask
         XMLTools.SaveListToXMLSerializer(tasks, "tasks");
     }
 
-    public Task? Read(int id)
+    public Task? Read(int? id)
     {
         List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
         if (tasks.Count >= 1)

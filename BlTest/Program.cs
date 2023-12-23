@@ -98,12 +98,12 @@ internal class Program
                 break;
             case 4:
                 Console.WriteLine("Enter Id Number of Task to update:");
-                int idToUpdate = int.Parse(Console.ReadLine());
+                int idToUpdate = int.Parse(Console.ReadLine()!);
                 s_bl!.Task.Update(UpdateMyTask(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of Task to delete:");
-                s_bl!.Task.Delete(int.Parse(Console.ReadLine()));
+                s_bl!.Task.Delete(int.Parse(Console.ReadLine()!));
                 break;
             default:
                 break;
@@ -122,7 +122,7 @@ internal class Program
         bool milestone = false;
         try
         {
-            milestone = bool.Parse(Console.ReadLine());
+            milestone = bool.Parse(Console.ReadLine()!);
         }
         catch
         {
@@ -144,7 +144,7 @@ internal class Program
         int _idEngineer = 0;
         try
         {
-            _idEngineer = int.Parse(Console.ReadLine());
+            _idEngineer = int.Parse(Console.ReadLine()!);
         }
         catch
         {

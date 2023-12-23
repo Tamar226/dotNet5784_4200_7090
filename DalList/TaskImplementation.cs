@@ -11,7 +11,7 @@ internal class TaskImplementation : ITask
     public int Create(Task item)
     {
         int newId = 0;
-        int idEng = 0;
+        int? idEng = 0;
         if (item.idEngineer != 0)
         {
             idEng = item.idEngineer;
@@ -40,7 +40,7 @@ internal class TaskImplementation : ITask
         DataSource.Tasks.Remove(taskFound);
     }
 
-    public Task? Read(int id)
+    public Task? Read(int? id)
     {
         if (DataSource.Tasks.Count >= 1)
         {
