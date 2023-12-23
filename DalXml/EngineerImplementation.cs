@@ -35,7 +35,7 @@ internal class EngineerImplementation : IEngineer
         XMLTools.SaveListToXMLSerializer(engineers!, "engineers");
     }
 
-    public Engineer? Read(int id)
+    public Engineer? Read(int? id)
     {
         List<Engineer>? engineers = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
         return (engineers!.Find(element => element!.IdNumberEngineer == id));

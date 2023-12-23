@@ -2,37 +2,35 @@
 using BO;
 using DalApi;
 using DO;
+using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 
 namespace BlImplementation;
 
-internal class EngineerImplementation : IEngineer
+internal class EngineerImplementation : BlApi.IEngineer
 {
     private DalApi.IDal _dal = Factory.Get;
     /// <summary>
+    /// הוספת מהנדס
+    /// </summary>
+    public int Create(BO.Engineer item)
+    {
+        DO.Engineer doEngineer = new DO.Engineer
+         (item.IdEngineer, item.Name, item.Email, (DO.Difficulty)item.Level, item.Cost);//להוסיף TASK
+        try
+        {
+            int idEng = _dal.Engineer.Create(doEngineer);
+            return idEng;
+        }
+        catch (DO.DalAlreadyExistsException ex)
+        {
+            throw new BO.BlAlreadyExistsException($"Student with ID={item.IdEngineer} already exists", ex);
+        }
+    }
+    /// <summary>
     /// בקשת רשימת מהנדסים
     /// </summary>
-    public IEnumerable<DO.Engineer> ReadAll()
-    {
-        return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-                select new BO.Engineer
-                {
-                    IdEngineer = doEngineer.IdNumberEngineer,
-                    Name = doEngineer.Name,
-                    Email = doEngineer.Email,
-                    Level = (BO.EngineerExperience)doEngineer.Level,
-                    Cost = doEngineer.Cost,
-                    Task = taskEngineer != null ? new BO.TaskInEngineer { Id = taskEngineer.IdNumberTask, Alias = taskEngineer} : null
-                });
-
-    }
-    /// <summary>
-    /// בקשת מהנדס לפי בקשה/תכונה מסויימת
-    /// </summary>
-    public IEnumerable<BO.Engineer> GetEngineerByFilter()
-    {
-        throw new NotImplementedException();
-    }
-    /// <summary>
+    ///    /// <summary>
     /// בקשת פרטי מהנדס אחד
     /// </summary>
     public BO.Engineer? Read(int id)
@@ -52,23 +50,32 @@ internal class EngineerImplementation : IEngineer
         };
 
     }
-    /// <summary>
-    /// הוספת מהנדס
-    /// </summary>
-    public int Create(BO.Engineer item)
+
+    public IEnumerable<BO.Engineer> ReadAll()
     {
-        DO.Engineer doEngineer = new DO.Engineer
-         (item.IdEngineer, item.Name, item.Email, (DO.Difficulty)item.Level, item.Cost);//להוסיף TASK
-        try
-        {
-            int idEng = _dal.Engineer.Create(doEngineer);
-            return idEng;
-        }
-        catch (DO.DalAlreadyExistsException ex)
-        {
-            throw new BO.BlAlreadyExistsException($"Student with ID={item.IdEngineer} already exists",ex);
-        }
+        List<BO.Task> tasks = new List<BO.Task>();
+ 
+        return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+                select new BO.Engineer
+                {
+                    IdEngineer = doEngineer.IdNumberEngineer,
+                    Name = doEngineer.Name,
+                    Email = doEngineer.Email,
+                    Level = (BO.EngineerExperience)doEngineer.Level,
+                    Cost = doEngineer.Cost,
+                    Task = new BO.TaskInEngineer(from task in tasks
+                            where task.Engineer!.Id == doEngineer.IdNumberEngineer && task.Status== (BO.status)3
+                                                 select task.IdTask
+                            , Convert.ToString( from task2 in tasks
+                              where task2.Engineer!.Id == doEngineer.IdNumberEngineer && task2.Status == (BO.status)3
+                                                select task2.Alias)!),
+                }) ;
+
     }
+    /// <summary>
+    /// בקשת מהנדס לפי בקשה/תכונה מסויימת
+    /// </summary>
+ 
     /// <summary>
     /// מחיקת מהנדס
     /// </summary>

@@ -32,7 +32,7 @@ internal class DependenceImplementation : IDependence
         DataSource.Dependences.Remove(dependenceFound);
     }
 
-    public Dependence? Read(int id)
+    public Dependence? Read(int? id)
     {
 
         if (DataSource.Dependences.Count >= 1)

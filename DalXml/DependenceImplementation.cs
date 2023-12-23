@@ -37,7 +37,7 @@ internal class DependenceImplementation : IDependence
          doc.Save("../xml/dependences.xml");
      }
    
-    public Dependence? Read(int id)//Reads dependency object by its ID
+    public Dependence? Read(int? id)//Reads dependency object by its ID
     {
         XDocument doc = XDocument.Load("../xml/dependences.xml");
         var dependencyItem = doc.Descendants("Dependency");
@@ -101,8 +101,8 @@ internal class DependenceImplementation : IDependence
         doc.Element("ArrayOfDependence")
        !.Add(new XElement("Dependency",
         new XAttribute("Id", item.IdNumberDependence),
-        new XAttribute("DependentTask", item.DependentTask),
-        new XAttribute("previousIDTask", item.DependsOnTask)));
+        new XAttribute("DependentTask", item!.DependentTask!),
+        new XAttribute("previousIDTask", item.DependsOnTask!)));
         doc.Save("../xml/dependences.xml");
 
 

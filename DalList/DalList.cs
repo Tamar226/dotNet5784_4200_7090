@@ -10,5 +10,6 @@ sealed internal class DalList : IDal
     public IEngineer Engineer =>  new EngineerImplementation();
 
     public IDependence Dependence =>  new DependenceImplementation();
-    
+    public DateTime? StartDateToProject { get; set; }
+    public DateTime? EndDateToProject { get; set; }
 }

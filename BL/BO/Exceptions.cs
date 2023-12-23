@@ -15,45 +15,51 @@ public class BlDoesNotExistException : Exception
                 : base(message, innerException) { }
 }
 [Serializable]
-public class DalXMLFileLoadCreateException : Exception
+public class BlXMLFileLoadCreateException : Exception
 {
-    public DalXMLFileLoadCreateException(string? message) : base(message) { }
-    public DalXMLFileLoadCreateException(string message, Exception innerException)
+    public BlXMLFileLoadCreateException(string? message) : base(message) { }
+    public BlXMLFileLoadCreateException(string message, Exception innerException)
                 : base(message, innerException) { }
 }
 [Serializable]
-public class DalNoFilterToQuery : Exception
+public class BlNoFilterToQuery : Exception
 {
-    public DalNoFilterToQuery(string? message) : base(message) { }
-    public DalNoFilterToQuery(string message, Exception innerException)
+    public BlNoFilterToQuery(string? message) : base(message) { }
+    public BlNoFilterToQuery(string message, Exception innerException)
                 : base(message, innerException) { }
 }
 [Serializable]
-public class DalErrorNotValueINput : Exception
+public class BlErrorNotValueINput : Exception
 {
-    public DalErrorNotValueINput(string? message) : base(message) { }
-    public DalErrorNotValueINput(string message, Exception innerException)
+    public BlErrorNotValueINput(string? message) : base(message) { }
+    public BlErrorNotValueINput(string message, Exception innerException)
                 : base(message, innerException) { }
 }
 [Serializable]
-public class DalDeletionImpossible : Exception
+public class BlDeletionImpossible : Exception
 {
-    public DalDeletionImpossible(string? message) : base(message) { }
-    public DalDeletionImpossible(string message, Exception innerException)
+    public BlDeletionImpossible(string? message) : base(message) { }
+    public BlDeletionImpossible(string message, Exception innerException)
                 : base(message, innerException) { }
 }
 [Serializable]
-public class DalErrorINput : Exception
+public class BlErrorINput : Exception
 {
-    public DalErrorINput(string? message) : base(message) { }
-    public DalErrorINput(string message, Exception innerException)
+    public BlErrorINput(string? message) : base(message) { }
+    public BlErrorINput(string message, Exception innerException)
                 : base(message, innerException) { }
 }
 [Serializable]
 public class BlNullPropertyException : Exception
 {
     public BlNullPropertyException(string? message) : base(message) { }
+    public BlNullPropertyException(string message, Exception innerException)
+                : base(message, innerException) { }
 }
-
-
-
+[Serializable]
+public class BlPlanningOfProjectTimesException : Exception
+{
+    public BlPlanningOfProjectTimesException(string? message) : base(message) { }
+    public BlPlanningOfProjectTimesException(string message, Exception innerException)
+                : base(message, innerException) { }
+}

@@ -1,34 +1,41 @@
-﻿using DalApi;
-using DO;
+﻿using BO;
 
-namespace BlTest;
+
+/// <summary>
+/// The main program. Creating the database of all entities, as well as adding entities by the user according to his personal desire.
+/// </summary>
 internal class Program
 {
+    //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
+    //private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
+    //private static IDependence? s_dalDependence = new DependenceImplementation();//stage 1
+    //static readonly IDal s_dal = new DalList(); //stage 2
+    //static readonly IDal s_dal = new DalXml(); //stage 3
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
     static void Main(string[] args)
     {
         try
         {
-            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
-            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
-            if (ans == "Y") //stage 3
-                //Initialization.Do(s_dal); //stage 2 //create the data-base by Initialization
-                DalTest.Initialization.Do(); //stage 4 
+            Console.Write("Would you like to create Initial data? (Y/N)");
+            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
+            if (ans == "Y")
+                DalTest.Initialization.Do();
             chooseEntities();
         }
-        catch (DalAlreadyExistsException ex)//catch the exeption from type "DalAlreadyExistsException" who were until here...
+        catch (BlAlreadyExistsException ex)//catch the exeption from type "DalAlreadyExistsException" who were until here...
         {
             Console.WriteLine(ex.ToString());
         }
-        catch (DalDeletionImpossible ex)//catch the exeption from type "DalDeletionImpossible" who were until here...
+        catch (BlDeletionImpossible ex)//catch the exeption from type "DalDeletionImpossible" who were until here...
         {
             Console.WriteLine(ex.ToString());
         }
-        catch (DalErrorINput ex)//catch the exeption from type "DalErrorINput" who were until here...
+        catch (BlErrorINput ex)//catch the exeption from type "DalErrorINput" who were until here...
         {
             Console.WriteLine(ex.ToString());
         }
-        catch (DalDoesNotExistException ex)//catch the exeption from type "DalDoesNotExistException" who were until here...
+        catch (BlDoesNotExistException ex)//catch the exeption from type "DalDoesNotExistException" who were until here...
         {
             Console.WriteLine(ex.ToString());
         }
@@ -85,15 +92,14 @@ internal class Program
                 s_bl!.Task.Create(createTask());
                 break;
             case 2:
-                printTask(s_bl!.Task.Read(idToRead()));
+                printTask(s_bl!.Task.Read(idToRead())!);
                 break;
 
             case 3:
-                IEnumerable<DO.Task?> listOfTask = s_bl!.Task.ReadAll();
-                foreach (DO.Task? t in listOfTask)
+                IEnumerable<BO.Task?> listOfTask = s_bl!.Task.ReadAll();
+                foreach (BO.Task? t in listOfTask)
                 {
-                    printTask(t);
-
+                    printTask(t!);
                 }
                 break;
             case 4:
@@ -112,12 +118,27 @@ internal class Program
     /// <summary>
     /// The createTask function prompts for task details and returns a Task object.
     /// </summary>
-    public static DO.Task createTask(int idToUpdate = 0)
+    public static BO.Task createTask(int idToUpdate = 0)//יש פה שגיאה
     {
         Console.WriteLine("Enter Description:");
         string? description = Console.ReadLine();
+
+        Console.WriteLine("Enter Creation Time To Task:");//Input integrity check
+        TimeSpan? RequiredEffortTime = null;
+        string? RequiredEffortTimeString = Console.ReadLine();
+        if (!string.IsNullOrEmpty(RequiredEffortTimeString))
+        {
+            try
+            {
+                RequiredEffortTime = TimeSpan.Parse(RequiredEffortTimeString);
+            }
+            catch
+            {
+                throw new BlErrorINput(" You suppose to input a time");
+            }
+        }
         Console.WriteLine("Enter Alias:");
-        string? nickname = Console.ReadLine();
+        string? alias = Console.ReadLine();
         Console.WriteLine("Enter Milestone (true/false):");
         bool milestone = false;
         try
@@ -126,7 +147,7 @@ internal class Program
         }
         catch
         {
-            throw new DalErrorINput(" You suppose to input a true or false");
+            throw new BlErrorINput(" You suppose to input a true or false");
         }//Input integrity check
         Console.WriteLine("Enter Product:");
         string? product = Console.ReadLine();
@@ -136,10 +157,10 @@ internal class Program
         string? difficultyStr = Console.ReadLine();
         if (!(difficultyStr == "Novice") && !(difficultyStr == "AdvancedBeginner") && !(difficultyStr == "Competent") && !(difficultyStr == "Proficient") && !(difficultyStr == "Expert"))
         {
-            throw new DalErrorINput(" You suppose to input a level for the task");
+            throw new BlErrorINput(" You suppose to input a level for the task");
         }//Input integrity check
-        Difficulty difficulty;
-        Difficulty.TryParse(difficultyStr, out difficulty);
+        EngineerExperience difficulty;
+        EngineerExperience.TryParse(difficultyStr, out difficulty);
         Console.WriteLine("Enter idEngineer:");
         int _idEngineer = 0;
         try
@@ -148,10 +169,11 @@ internal class Program
         }
         catch
         {
-            throw new DalErrorINput(" You suppose to input a number");
+            throw new BlErrorINput(" You suppose to input a number");
         }//Input integrity check
+
         Console.WriteLine("Enter Creation Date (optional):");
-        DateTime? creationDate = null;
+        DateTime creationDate = DateTime.Now;
         string? creationDateString = Console.ReadLine();
         if (!string.IsNullOrEmpty(creationDateString))
         {
@@ -161,7 +183,7 @@ internal class Program
             }
             catch
             {
-                throw new DalErrorINput(" You suppose to input a date");
+                throw new BlErrorINput(" You suppose to input a date");
             }
         }//Input integrity check
         Console.WriteLine("Enter Start Date (optional):");
@@ -175,7 +197,7 @@ internal class Program
             }
             catch
             {
-                throw new DalErrorINput(" You suppose to input a date");
+                throw new BlErrorINput(" You suppose to input a date");
             }
         }//Input integrity check
         Console.WriteLine("Enter Forecast Date (optional):");
@@ -189,7 +211,7 @@ internal class Program
             }
             catch
             {
-                throw new DalErrorINput(" You suppose to input a date");
+                throw new BlErrorINput(" You suppose to input a date");
             }
         }//Input integrity check
         Console.WriteLine("Enter LastE (optional):");
@@ -203,69 +225,83 @@ internal class Program
             }
             catch
             {
-                throw new DalErrorINput(" You suppose to input a date");
+                throw new BlErrorINput(" You suppose to input a date");
             }
         }//Input integrity check
-        return (new DO.Task(idToUpdate, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
+        return (new BO.Task ( idToUpdate, description, alias!, milestone is false ? null : null, creationDate, (BO.status)0, null, startDate, null, forecastDate, null, null, product, notes, 0, null );
     }
     public static int idToRead()
     {
         Console.WriteLine("Enter Id Number of Task to read:");
-        return (int.Parse(Console.ReadLine()));
+        return (int.Parse(Console.ReadLine()!));
     }
-    public static void printTask(DO.Task task)
+    public static void printTask(BO.Task task)
     {
 
         Console.WriteLine("The Task");
         try
         {
-            Console.WriteLine("Id: " + task.IdNumberTask);
+            Console.WriteLine("Id: " + task.IdTask);
         }
         catch
         {
-            throw new DalDoesNotExistException("An object of type Task with such an ID does not exist");
+            throw new BlDoesNotExistException("An object of type Task with such an ID does not exist");
         }
         Console.WriteLine("description: " + task.Description);
-        Console.WriteLine("nickname: " + task.Alias);
+        Console.WriteLine("alias: " + task.Alias);
         Console.WriteLine("milestone: " + task.Milestone);
-        Console.WriteLine("product: " + task.Product);
-        Console.WriteLine("notes: " + task.Notes);
-        Console.WriteLine("difficulty: " + task.Level);
-        Console.WriteLine("idEngineer: " + task.idEngineer);
         Console.WriteLine("creation Date: " + task.CreatedAtDate);
+        Console.WriteLine("Status: " + task.Status);
         Console.WriteLine("start Date: " + task.StartDate);
-        Console.WriteLine("forecast Date: " + task.scheduleDate);
-        Console.WriteLine("last End Date: " + task.LastEndDate);
-        Console.WriteLine("Actual EndDate: " + task.ActualEndDate + "\n");
+        Console.WriteLine("Schedual Date: " + task.SchedualStartDate);
+        Console.WriteLine("last End Date: " + task.DeadlineDate);
+        Console.WriteLine("Complete Date: " + task.CompleteDate);
+        Console.WriteLine("product: " + task.Deliverables);
+        Console.WriteLine("Remarks: " + task.Remarks);
+        Console.WriteLine("Engineer: " + task.Engineer);
+        Console.WriteLine("CopmlexityLevel: " + task.CopmlexityLevel);
 
     }
-    public static DO.Task UpdateMyTask(int id)
+    public static BO.Task UpdateMyTask(int id)//מלאן שגיאותת
     {
         //s_dalTask!.Update(createTask(id));
-        DO.Task myTask = s_bl!.Task.Read(id);
-        printTask(myTask);
+        BO.Task? myTask = s_bl!.Task.Read(id);
+        printTask(myTask!);
         Console.WriteLine("Please enter what do you want to update in your task:");
         string? inputToUpdate = null;
         //Request new input
         Console.WriteLine("Enter new description:");
         inputToUpdate = Console.ReadLine();
-        string? description = string.IsNullOrEmpty(inputToUpdate) ? myTask.Description : inputToUpdate;
+        string? description = string.IsNullOrEmpty(inputToUpdate) ? myTask!.Description : inputToUpdate;
+
+        Console.WriteLine("Enter new time to task:");
+        inputToUpdate = Console.ReadLine();
+        TimeSpan? taskTime;
+        if (string.IsNullOrEmpty(inputToUpdate))
+            taskTime = myTask!.RequiredEffortTime;
+        else
+        {
+            if (TimeSpan.TryParse(inputToUpdate, out TimeSpan parsedTime))
+                taskTime = parsedTime;
+            else
+                throw new BlErrorINput("Invalid time format. Please enter a valid time.");
+        }
 
         Console.WriteLine("Enter new nickname:");
         inputToUpdate = Console.ReadLine();
-        string? nickname = string.IsNullOrEmpty(inputToUpdate) ? myTask.Alias : inputToUpdate;
+        string? alias = string.IsNullOrEmpty(inputToUpdate) ? myTask!.Alias : inputToUpdate;
 
         Console.WriteLine("Enter new milestone status:");
         inputToUpdate = Console.ReadLine();
-        bool milestone = string.IsNullOrEmpty(inputToUpdate) ? myTask.Milestone : Convert.ToBoolean(inputToUpdate);
+        bool milestone = string.IsNullOrEmpty(inputToUpdate) ? myTask!.Milestone : Convert.ToBoolean(inputToUpdate);
 
         Console.WriteLine("Enter new product description:");
         inputToUpdate = Console.ReadLine();
-        string? product = string.IsNullOrEmpty(inputToUpdate) ? myTask.Product : inputToUpdate;
+        string? product = string.IsNullOrEmpty(inputToUpdate) ? myTask!.Product : inputToUpdate;
 
         Console.WriteLine("Enter new notes:");
         inputToUpdate = Console.ReadLine();
-        string? notes = string.IsNullOrEmpty(inputToUpdate) ? myTask.Notes : inputToUpdate;
+        string? notes = string.IsNullOrEmpty(inputToUpdate) ? myTask!.Notes : inputToUpdate;
         Difficulty difficulty;
         Console.WriteLine("Enter new difficulty level:");
         inputToUpdate = Console.ReadLine();
@@ -273,43 +309,43 @@ internal class Program
 
         Console.WriteLine("Enter new engineer ID:");
         inputToUpdate = Console.ReadLine();
-        int _idEngineer = string.IsNullOrEmpty(inputToUpdate) ? myTask.idEngineer : Convert.ToInt32(inputToUpdate);
+        int? _idEngineer = string.IsNullOrEmpty(inputToUpdate) ? myTask!.idEngineer : Convert.ToInt32(inputToUpdate);
 
         Console.WriteLine("Enter new creation date:");
         inputToUpdate = Console.ReadLine();
-        DateTime? creationDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.CreatedAtDate : Convert.ToDateTime(inputToUpdate);
+        DateTime creationDate = string.IsNullOrEmpty(inputToUpdate) ? myTask!.CreatedAtDate : Convert.ToDateTime(inputToUpdate);
 
         Console.WriteLine("Enter new start date:");
         inputToUpdate = Console.ReadLine();
-        DateTime? startDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.StartDate : Convert.ToDateTime(inputToUpdate);
+        DateTime? startDate = string.IsNullOrEmpty(inputToUpdate) ? myTask!.StartDate : Convert.ToDateTime(inputToUpdate);
 
         Console.WriteLine("Enter new forecast date:");
         inputToUpdate = Console.ReadLine();
-        DateTime? forecastDate = string.IsNullOrEmpty(inputToUpdate) ? myTask.scheduleDate : Convert.ToDateTime(inputToUpdate);
+        DateTime? scheduleDate = string.IsNullOrEmpty(inputToUpdate) ? myTask!.scheduleDate : Convert.ToDateTime(inputToUpdate);
 
         Console.WriteLine("Enter new last end date:");
         inputToUpdate = Console.ReadLine();
-        DateTime? lastE = string.IsNullOrEmpty(inputToUpdate) ? myTask.LastEndDate : Convert.ToDateTime(inputToUpdate);
+        DateTime? lastE = string.IsNullOrEmpty(inputToUpdate) ? myTask!.LastEndDate : Convert.ToDateTime(inputToUpdate);
 
         //Check if input is empty
         if (string.IsNullOrEmpty(description))
         {
-            description = myTask.Description;
+            description = myTask!.Description;
         }
-        if (string.IsNullOrEmpty(nickname))
+        if (string.IsNullOrEmpty(alias))
         {
-            nickname = myTask.Alias;
+            alias = myTask!.Alias;
         }
         if (string.IsNullOrEmpty(product))
         {
-            product = myTask.Product;
+            product = myTask!.Product;
         }
         if (string.IsNullOrEmpty(notes))
         {
-            notes = myTask.Notes;
+            notes = myTask!.Notes;
         }
         //create an update task
-        return (new DO.Task(id, description, nickname, milestone, product, notes, difficulty, _idEngineer, creationDate, startDate, forecastDate, lastE, null));
+        return (new DO.Task(id, alias, description, creationDate, taskTime, milestone, product, notes, difficulty, _idEngineer, startDate, scheduleDate, lastE, null));
     }
     /// <summary>
     /// Helper functions for creating an entity of type engineer. 
@@ -328,11 +364,11 @@ internal class Program
                 s_bl!.Engineer.Create(createEngineer());
                 break;
             case 2:
-                printEngineer(s_bl!.Engineer.Read(idToRead()));
+                printEngineer(s_bl!.Engineer.Read(idToRead())!);
                 break;
 
             case 3:
-                IEnumerable<Engineer> listOfEngineers = s_bl!.Engineer.ReadAll();
+                IEnumerable<Engineer> listOfEngineers = s_bl!.Engineer.ReadAll()!;
                 foreach (Engineer e in listOfEngineers)
                 {
                     printEngineer(e);
@@ -340,33 +376,33 @@ internal class Program
                 break;
             case 4:
                 Console.WriteLine("Enter Id Number of Engineer to update:");
-                int idToUpdate = int.Parse(Console.ReadLine());
+                int idToUpdate = int.Parse(Console.ReadLine()!);
                 s_bl!.Engineer.Update(UpdateMyEngineer(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of engineer to delete:");
-                s_bl!.Engineer.Delete(int.Parse(Console.ReadLine()));
+                s_bl!.Engineer.Delete(int.Parse(Console.ReadLine()!));
                 break;
             default:
                 break;
         }
     }
-    public static DO.Engineer createEngineer(int idEngineer = 0)
+    public static BO.Engineer createEngineer(int idEngineer = 0)
     {
         if (idEngineer == 0)
         {
             Console.WriteLine("Enter id of engineer:");
             try
             {
-                idEngineer = int.Parse(Console.ReadLine());
+                idEngineer = int.Parse(Console.ReadLine()!);
                 if ((idEngineer < 100000000 || idEngineer > 999999999))
                 {
-                    throw new DalErrorINput(" You suppose to input a number with 9 digits");
+                    throw new BlErrorINput(" You suppose to input a number with 9 digits");
                 }
             }
             catch
             {
-                throw new DalErrorINput(" You suppose to input a number with 9 digits");
+                throw new BlErrorINput(" You suppose to input a number with 9 digits");
             }
         }//Checking if it is automatic creation or manual data entry
 
@@ -375,18 +411,18 @@ internal class Program
         Console.WriteLine("Enter email of engineer:");
         string? emailEngineer = Console.ReadLine();
         Console.WriteLine("Enter the engineer's level:( Novice, AdvancedBeginner, Competent, Proficient, Expert");
-        Difficulty difficulty;
+        EngineerExperience difficulty;
         string? inputToUpdate = Console.ReadLine();
-        Difficulty.TryParse(inputToUpdate, out difficulty);
+        EngineerExperience.TryParse(inputToUpdate, out difficulty);
         if (!(inputToUpdate == "Novice") && !(inputToUpdate == "AdvancedBeginner") && !(inputToUpdate == "Competent") && !(inputToUpdate == "Proficient") && !(inputToUpdate == "Expert"))
         {
-            throw new DalErrorINput(" You suppose to input a level for the engineer");
+            throw new BlErrorINput(" You suppose to input a level for the engineer");
         }
         Console.WriteLine("Enter cost per hour og engineer:");
         double costPerHour = 0;
         try
         {
-            double.Parse(Console.ReadLine());
+            double.Parse(Console.ReadLine()!);
             if (!(costPerHour is double))
             {
                 throw new DalErrorINput(" You suppose to input a number");
@@ -406,22 +442,22 @@ internal class Program
         Console.WriteLine("The Engineer");
         try
         {
-            Console.WriteLine("Id: " + engineer.IdNumberEngineer);
+            Console.WriteLine("Id: " + engineer.IdEngineer);
         }
 
         catch
         {
-            throw new DalDoesNotExistException("An object of type Engineer with such an ID does not exist");
+            throw new BlDoesNotExistException("An object of type Engineer with such an ID does not exist");
         }
-        Console.WriteLine("description: " + engineer.Name);
-        Console.WriteLine("nickname: " + engineer.Email);
-        Console.WriteLine("level: " + engineer.Level);
-        Console.WriteLine("cost: " + engineer.Cost + "\n");
+        Console.WriteLine("Description: " + engineer.Name);
+        Console.WriteLine("Alias: " + engineer.Email);
+        Console.WriteLine("Level: " + engineer.Level);
+        Console.WriteLine("Cost: " + engineer.Cost + "\n");
     }
-    public static DO.Engineer UpdateMyEngineer(int id)
+    public static BO.Engineer UpdateMyEngineer(int id)//כאן יש שגיאה
     {
         //s_dalEngineer!.Update(createEngineer(id));
-        DO.Engineer myEngineer = s_bl!.Engineer.Read(id);
+        BO.Engineer myEngineer = s_bl!.Engineer.Read(id)!;
         Console.WriteLine("Please enter what do you want to update in your task:");
         printEngineer(myEngineer);
         //Request new input
@@ -431,7 +467,7 @@ internal class Program
         Console.WriteLine("Enter email of engineer:");
         string? emailEngineer = Console.ReadLine();
 
-        Difficulty difficulty;
+        EngineerExperience difficulty;
         Console.WriteLine("Enter the engineer's level:( Novice, AdvancedBeginner, Competent, Proficient, Expert");
         string? inputLevel = Console.ReadLine();
 
@@ -453,11 +489,11 @@ internal class Program
         }
         else
         {
-            Difficulty.TryParse(inputLevel, out difficulty);
+            EngineerExperience.TryParse(inputLevel, out difficulty);
         }
 
 
-        return (new Engineer(id, nameEngineer, emailEngineer, difficulty, costPerHour));
+        return (new Engineer(id, nameEngineer, emailEngineer, difficulty, costPerHour,null));
 
     }
     /// <summary>
@@ -475,26 +511,26 @@ internal class Program
         {
             case 1:
 
-                s_bl!.Dependence.Create(createDependence());
+                s_dal!.Dependence.Create(createDependence());
                 break;
             case 2:
-                printDependence(s_bl!.Dependence.Read(idToRead()));
+                printDependence(s_dal!.Dependence.Read(idToRead())!);
                 break;
             case 3:
-                IEnumerable<Dependence?> listOfDependence = s_bl!.Dependence.ReadAll();
+                IEnumerable<Dependence?> listOfDependence = s_dal!.Dependence.ReadAll();
                 foreach (Dependence? d in listOfDependence)
                 {
-                    printDependence(d);
+                    printDependence(d!);
                 }
                 break;
             case 4:
                 Console.WriteLine("Enter Id Number of Dependent Task to update:");
-                int idToUpdate = int.Parse(Console.ReadLine());
-                s_bl!.Dependence.Update(UpdateMyDependency(idToUpdate));
+                int idToUpdate = int.Parse(Console.ReadLine()!);
+                s_dal!.Dependence.Update(UpdateMyDependency(idToUpdate));
                 break;
             case 5:
                 Console.WriteLine("Enter Id Number of Task to delete:");
-                s_bl!.Dependence.Delete(int.Parse(Console.ReadLine()));
+                s_dal!.Dependence.Delete(int.Parse(Console.ReadLine()!));
                 break;
             default:
                 break;
@@ -504,16 +540,16 @@ internal class Program
     {
 
         Console.WriteLine("Enter Dependent Task:");
-        int idDependenceTask = int.Parse(Console.ReadLine());
+        int idDependenceTask = int.Parse(Console.ReadLine()!);
         if (!(idDependenceTask is int))
         {
-            throw new DalErrorINput(" You suppose to input a number");
+            throw new BlErrorINput(" You suppose to input a number");
         }
         Console.WriteLine("Enter Depends On Task:");
-        int DependsOnTask = int.Parse(Console.ReadLine());
+        int DependsOnTask = int.Parse(Console.ReadLine()!);
         if (!(DependsOnTask is int))
         {
-            throw new DalErrorINput(" You suppose to input a number");
+            throw new BlErrorINput(" You suppose to input a number");
         }
         return (new Dependence(0, idDependenceTask, DependsOnTask));
     }
@@ -526,7 +562,7 @@ internal class Program
         }
         catch
         {
-            throw new DalDoesNotExistException("An object of type Dependence with such an ID does not exist");
+            throw new BlDoesNotExistException("An object of type Dependence with such an ID does not exist");
         }
         Console.WriteLine("Dependent Task: " + dependency.DependentTask);
         Console.WriteLine("Dependent On Task: " + dependency.DependsOnTask + "\n");
@@ -534,16 +570,16 @@ internal class Program
     public static DO.Dependence UpdateMyDependency(int id)
     {
         //s_dalDependence!.Update(createDependence(id));
-        DO.Dependence myDependency = s_bl!.Dependence.Read(id);
+        DO.Dependence myDependency = s_dal!.Dependence.Read(id)!;
         printDependence(myDependency);
         Console.WriteLine("Please enter what do you want to update in your dependency:");
 
         //Request new input
         Console.WriteLine("Enter Dependent Task:");
-        int idDependenceTask = int.Parse(Console.ReadLine());
+        int? idDependenceTask = int.Parse(Console.ReadLine()!);
 
         Console.WriteLine("Enter Depends On Task:");
-        int DependsOnTask = int.Parse(Console.ReadLine());
+        int? DependsOnTask = int.Parse(Console.ReadLine()!);
 
         //Check if input is empty
         if (idDependenceTask == 0)

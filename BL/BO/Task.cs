@@ -7,12 +7,12 @@ public class Task
     public string? Alias { get; init; }
     public MilestoneInTask? Milestone { get; set; }
     public DateTime CreatedAtDate { get; init; }
-    public BO.status Status { get; init; }
-    public DateTime? BaselineStartDate { get; init; }
-    public DateTime? StartDate { get; init; }
+    public BO.status Status { get; set; }
+    public DateTime? BaselineStartDate { get; set; }
+    public DateTime? StartDate { get; set; }
     public DateTime? SchedualStartDate { get; set; }
-    public DateTime? ForecastDate { get; init; }
-    public DateTime? DeadlineDate { get; init; }
+    public DateTime? ForecastDate { get; set; }
+    public DateTime? DeadlineDate { get; set; }
     public DateTime? CompleteDate { get; set; }
     public string? Deliverables { get; set; }
     public string? Remarks { get; set; }

@@ -42,18 +42,12 @@ internal class TaskImplementation : ITask
     /// </summary>
     public IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? filter)//לתקן שגיאה אחת
     {
-        var taskList=(from DO.Task doTask in _dal.Task.ReadAll()
-                where doTask.Milestone == false
-                select new BO.TaskInList
-                {
-                    Id = doTask.IdNumberTask,
-                    Description = doTask.Description,
-                    Alias = doTask.Alias,
-                    Status = (BO.status)(doTask.scheduleDate is null ? 0
-                                               : doTask.StartDate is null ? 1
-                                               : doTask.ActualEndDate is null ? 2
-                                               : 3)
-                });
+        var taskList = (from DO.Task doTask in _dal.Task.ReadAll()
+                        where doTask.Milestone == false
+                        select (new BO.TaskInList(doTask.IdNumberTask, doTask.Description, doTask.Alias, (BO.status)(doTask.scheduleDate is null ? 0
+                                                       : doTask.StartDate is null ? 1
+                                                       : doTask.ActualEndDate is null ? 2
+                                                       : 3))));
         if(filter != null)
         {
             var taskListWhithFilter = (from item in taskList
@@ -76,7 +70,7 @@ internal class TaskImplementation : ITask
             DO.Task? doTask = _dal.Task.Read(idTask);
             return new BO.Task
             {
-                IdTask = doTask.IdNumberTask,
+                IdTask = doTask!.IdNumberTask,
                 Description = doTask.Description,
                 Alias = doTask.Alias,
                 //Initialize the milestone utility
@@ -85,13 +79,13 @@ internal class TaskImplementation : ITask
                     Id = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
                     {
                         _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
-                        return dep.DependsOnTask == task.IdNumberTask;
+                        return dep.DependsOnTask == doTask.IdNumberTask;
                     })!.DependentTask)!.IdNumberTask,
 
                     Alias = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
                     {
                         _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
-                        return dep.DependsOnTask == task.IdNumberTask;
+                        return dep.DependsOnTask == doTask.IdNumberTask;
                     })!.DependentTask)?.Alias
                 },
                 CreatedAtDate = doTask.CreatedAtDate,
@@ -110,10 +104,10 @@ internal class TaskImplementation : ITask
                 Remarks = doTask.Notes,
 
                 //Initialize the engineer utility entity
-                Engineer = new EngineerInTask()
+                Engineer = new EngineerInTask
                 {
                     Id = doTask.idEngineer!,
-                    Name = _dal.Engineer.Read((int)doTask.idEngineer).Name
+                    Name = _dal.Engineer?.Read((int)doTask.idEngineer!)!.Name!
                 },
                 CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
             };
