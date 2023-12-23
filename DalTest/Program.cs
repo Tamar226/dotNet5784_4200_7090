@@ -315,7 +315,7 @@ internal class Program
 
         Console.WriteLine("Enter new engineer ID:");
         inputToUpdate = Console.ReadLine();
-        int _idEngineer = string.IsNullOrEmpty(inputToUpdate) ? myTask.idEngineer :Convert.ToInt32(inputToUpdate);
+        int? _idEngineer = string.IsNullOrEmpty(inputToUpdate) ? myTask.idEngineer :Convert.ToInt32(inputToUpdate);
 
         Console.WriteLine("Enter new creation date:");
         inputToUpdate = Console.ReadLine();

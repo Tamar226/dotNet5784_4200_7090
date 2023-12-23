@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using DalApi;
 using DO;
 using System.Collections.Generic;
 using System.Runtime.Intrinsics.Arm;
@@ -27,31 +28,35 @@ internal class MilestoneImplementation : IMilestone
                                      select dep.Value).Distinct();
 
         List<DO.Dependence> newDepList = new List<DO.Dependence>();
+        _dal.Dependence.Reset();
         foreach (IOrderedEnumerable<int> depTasks in listWithoutDuplicetes)
         {
             int milestoneId = _dal.Task.Create(new DO.Task(0, " $M1", "description", DateTime.Now, TimeSpan.Zero, true));
             foreach (var dep in listOfGroupDependencies)
             {
                 if (dep.Value == depTasks)
+                    _dal.Dependence.Create(new DO.Dependence(config, dep.KeyDep, milestoneId));
                     newDepList.Add(new DO.Dependence(config, dep.KeyDep, milestoneId));
             }
             foreach (var task in depTasks)
             {
+                _dal.Dependence.Create(new DO.Dependence(config, milestoneId, task));
                 newDepList.Add(new DO.Dependence(config, milestoneId, task));
             }
             int idOfFirstMilestone = _dal.Task.Create(new DO.Task(0, "start", "description", DateTime.Now, TimeSpan.Zero, true));
 
-            IEnumerable<Dependence> depDalList = _dal.Dependence.ReadAll()!;
-            foreach (var dep in depDalList)
+            foreach (var dep in dependencies)
             {
                 if (dep.DependsOnTask is null)
+                    _dal.Dependence.Create(new DO.Dependence(dep.IdNumberDependence, dep.DependentTask, idOfFirstMilestone));
                     newDepList.Add(new DO.Dependence ( dep.IdNumberDependence, dep.DependentTask, idOfFirstMilestone)); }
             int idOfLastMilestone = _dal.Task.Create(new DO.Task(0, "end", "description", DateTime.Now, TimeSpan.Zero, true));
 
-            foreach (var dep in depDalList)
+            foreach (var dep in dependencies)
             {
                 if (dep.DependentTask is null)
-                    newDepList.Add(new DO.Dependence(dep.IdNumberDependence, idOfLastMilestone, dep.DependentTask)); }
+                    _dal.Dependence.Create(new DO.Dependence(dep.IdNumberDependence, idOfLastMilestone, dep.DependentTask));
+                   newDepList.Add(new DO.Dependence(dep.IdNumberDependence, idOfLastMilestone, dep.DependentTask)); }
         }
     }
     public BO.Milestone Read(int idMilestone)

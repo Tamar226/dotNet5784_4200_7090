@@ -2,9 +2,9 @@
 
 public interface IBl
 {
-    public ITask Student { get; }
-    public IEngineer Course { get; }
-    public IMilestone GradeSheet { get; }
+    public ITask Task { get; }
+    public IEngineer Engineer { get; }
+    public IMilestone Milestone { get; }
 }
 
 
