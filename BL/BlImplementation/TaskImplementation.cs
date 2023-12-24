@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using System.Collections.Generic;
 
 namespace BlImplementation;
 
@@ -40,30 +41,66 @@ internal class TaskImplementation : ITask
     /// <summary>
     /// Get all tasks in the data
     /// </summary>
-    public IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? filter)//לתקן שגיאה אחת
+    public IEnumerable<BO.Task> ReadAll()
     {
         var taskList = (from DO.Task doTask in _dal.Task.ReadAll()
                         where doTask.Milestone == false
-                        select (new BO.TaskInList(doTask.IdNumberTask, doTask.Description, doTask.Alias, (BO.status)(doTask.scheduleDate is null ? 0
-                                                       : doTask.StartDate is null ? 1
-                                                       : doTask.ActualEndDate is null ? 2
-                                                       : 3))));
-        if(filter != null)
+                        select new BO.Task
+                        {
+                            IdTask = doTask!.IdNumberTask,
+                            Description = doTask.Description,
+                            Alias = doTask.Alias,
+                            //Initialize the milestone utility
+                            Milestone = new BO.MilestoneInTask()
+                            {
+                                Id = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
+                                {
+                                    _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
+                                    return dep.DependsOnTask == doTask.IdNumberTask;
+                                })!.DependentTask)!.IdNumberTask,
+
+                                Alias = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
+                                {
+                                    _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
+                                    return dep.DependsOnTask == doTask.IdNumberTask;
+                                })!.DependentTask)?.Alias
+                            },
+                            CreatedAtDate = doTask.CreatedAtDate,
+                            Status = (BO.status)(doTask.scheduleDate is null ? 0
+                                               : doTask.StartDate is null ? 1
+                                               : doTask.ActualEndDate is null ? 2
+                                               : 3),
+
+                            //BaselineStartDate = doTask.//קשור למילסטון
+                            StartDate = doTask.StartDate,
+                            SchedualStartDate = doTask.scheduleDate,
+                            ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
+                            DeadlineDate = doTask.LastEndDate,
+                            CompleteDate = doTask.ActualEndDate,
+                            Deliverables = doTask.Product,
+                            Remarks = doTask.Notes,
+
+                            //Initialize the engineer utility entity
+                            Engineer = new EngineerInTask
+                            {
+                                Id = doTask.idEngineer!,
+                                Name = _dal.Engineer?.Read((int)doTask.idEngineer!)!.Name!
+                            },
+                            CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
+                        });
+
+        List < BO.Task> boList= new List<BO.Task>();
+        foreach (var task in taskList)
         {
-            var taskListWhithFilter = (from item in taskList
-                                       where filter(item)
-                                       select item);
-            return taskListWhithFilter!;
+
         }
-        else
-        {
+   
             return taskList!;
-        }
     }
     /// <summary>
     /// Read spesipic task by id
     /// </summary>
-    public BO.Task Read(int idTask)//לתקן 2 שגיאות
+    public BO.Task Read(int idTask)
     {
         try
         {

@@ -11,7 +11,7 @@ internal class EngineerImplementation : BlApi.IEngineer
 {
     private DalApi.IDal _dal = Factory.Get;
     /// <summary>
-    /// הוספת מהנדס
+    /// Add new Engineer
     /// </summary>
     public int Create(BO.Engineer item)
     {
@@ -27,17 +27,16 @@ internal class EngineerImplementation : BlApi.IEngineer
             throw new BO.BlAlreadyExistsException($"Student with ID={item.IdEngineer} already exists", ex);
         }
     }
-    /// <summary>
-    /// בקשת רשימת מהנדסים
-    /// </summary>
-    ///    /// <summary>
-    /// בקשת פרטי מהנדס אחד
+   
+    ///<summary>
+    ///get one engineer
     /// </summary>
     public BO.Engineer? Read(int id)
     {
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
         if (doEngineer == null)
-            throw new BO.BlDoesNotExistException($"Student with ID={id} does Not exist");
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
+        var tasks = _dal.Task.ReadAll();
 
         return new BO.Engineer()
         {
@@ -46,14 +45,20 @@ internal class EngineerImplementation : BlApi.IEngineer
             Email = doEngineer.Email,
             Level = (BO.EngineerExperience)doEngineer.Level,
             Cost = doEngineer.Cost,
-            //להוסיף את TASK 
+            Task = new BO.TaskInEngineer(from task in tasks
+                                         where task.idEngineer == doEngineer.IdNumberEngineer && task.StartDate != null && task.ActualEndDate == null
+                                         select task.IdNumberTask
+                            , Convert.ToString(from task2 in tasks
+                                               where task2.idEngineer == doEngineer.IdNumberEngineer && task2.StartDate != null && task2.ActualEndDate == null
+                                               select task2.Alias)!),
         };
-
     }
-
+    /// <summary>
+    /// Get all engineers
+    /// </summary>
     public IEnumerable<BO.Engineer> ReadAll()
     {
-        List<BO.Task> tasks = new List<BO.Task>();
+        var tasks =_dal.Task.ReadAll() ;
  
         return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
                 select new BO.Engineer
@@ -64,20 +69,16 @@ internal class EngineerImplementation : BlApi.IEngineer
                     Level = (BO.EngineerExperience)doEngineer.Level,
                     Cost = doEngineer.Cost,
                     Task = new BO.TaskInEngineer(from task in tasks
-                            where task.Engineer!.Id == doEngineer.IdNumberEngineer && task.Status== (BO.status)3
-                                                 select task.IdTask
+                            where task.idEngineer == doEngineer.IdNumberEngineer && task.StartDate!=null && task.ActualEndDate==null
+                                                 select task.IdNumberTask
                             , Convert.ToString( from task2 in tasks
-                              where task2.Engineer!.Id == doEngineer.IdNumberEngineer && task2.Status == (BO.status)3
+                              where task2.idEngineer == doEngineer.IdNumberEngineer && task2.StartDate != null && task2.ActualEndDate == null
                                                 select task2.Alias)!),
                 }) ;
 
     }
     /// <summary>
-    /// בקשת מהנדס לפי בקשה/תכונה מסויימת
-    /// </summary>
- 
-    /// <summary>
-    /// מחיקת מהנדס
+    /// Delete engineer
     /// </summary>
     public void Delete(int id)
     {
@@ -91,7 +92,7 @@ internal class EngineerImplementation : BlApi.IEngineer
         }
     }
     /// <summary>
-    /// עדכון מהנדס
+    /// update engineer
     /// </summary>
     public void Update(BO.Engineer item)
     {

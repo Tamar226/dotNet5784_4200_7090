@@ -22,20 +22,24 @@ internal class MilestoneImplementation : IMilestone
 
         DO.Task firstMilestone = _dal.Task.Read(tasks.Where(task => task!.Alias == "Start").Select(task => task!.IdNumberTask).First())!;
         DO.Task lastMilestone = _dal.Task.Read(tasks.Where(task => task!.Alias == "End").Select(task => task!.IdNumberTask).First())!;
-
+        int runningNameForMilestone=0;
         foreach (IOrderedEnumerable<int> depTasks in listWithoutDuplicetes)
         {
-            int milestoneId = _dal.Task.Create(new DO.Task(0, " $M1", "description", DateTime.Now, TimeSpan.Zero, true));
+            
+            int milestoneId = _dal.Task.Create(new DO.Task(0, "M"+runningNameForMilestone, "description", DateTime.Now, TimeSpan.Zero, true));
             foreach (var dep in listOfGroupDependencies)
             {
                 if (dep.Value == depTasks)
-                    _dal.Dependence.Create(new DO.Dependence(config, dep.KeyDep, milestoneId));
-                    newDepList.Add(new DO.Dependence(config, dep.KeyDep, milestoneId));
+                {
+                    int id = _dal.Dependence.Create(new DO.Dependence(0, dep.KeyDep, milestoneId));
+                    newDepList.Add(_dal.Dependence.Read(id)!);
+                }
+                    
             }
             foreach (var task in depTasks)
             {
-                _dal.Dependence.Create(new DO.Dependence(config, milestoneId, task));
-                newDepList.Add(new DO.Dependence(config, milestoneId, task));
+                int id=_dal.Dependence.Create(new DO.Dependence(0, milestoneId, task));
+                newDepList.Add(_dal.Dependence.Read(id)!);
             }
 
             foreach (var dep in dependencies)
@@ -51,10 +55,10 @@ internal class MilestoneImplementation : IMilestone
                     _dal.Dependence.Create(new DO.Dependence(dep.IdNumberDependence, lastMilestone.IdNumberTask, dep.DependentTask));
                    newDepList.Add(new DO.Dependence(dep.IdNumberDependence, lastMilestone.IdNumberTask, dep.DependentTask));
             }
+            runningNameForMilestone++;
         }
-
-        SetDeadLineDateForTask(lastMilestone.IdNumberTask, firstMilestone.IdNumberTask, dependencies!);
-        SetDeadScheduleForTask(firstMilestone.IdNumberTask, lastMilestone.IdNumberTask, dependencies!);
+        SetDeadLineDateForTask(lastMilestone.IdNumberTask, firstMilestone.IdNumberTask, newDepList!);
+        SetDeadScheduleForTask(firstMilestone.IdNumberTask, lastMilestone.IdNumberTask, newDepList!);
 
     }
     private void SetDeadLineDateForTask(int? idOfTask, int idOfStartMilestone, List<DO.Dependence?> dependenciesList)

@@ -2,6 +2,7 @@
 
 public class Task
 {
+   
     public int IdTask { get; init; }
     public string? Description { get; set; }
     public string? Alias { get; init; }
