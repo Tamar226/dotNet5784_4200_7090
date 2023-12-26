@@ -30,7 +30,7 @@ internal class TaskImplementation : ITask
         }
         if ((tasks.FirstOrDefault(eng => eng.IdNumberTask == newId) == null))
         {
-            Task newItemWithId = new Task(newId, item.Alias, item.Description, item.CreatedAtDate, item.RequiredEffortTime, false, item.Product, item.Notes, item.Level, idEng,  item.StartDate, item.scheduleDate, item.LastEndDate, null);
+            Task newItemWithId = new Task(newId, item.Description, item.Alias, item.CreatedAtDate, item.RequiredEffortTime, false, item.Product, item.Notes, item.Level, idEng,  item.StartDate, item.scheduleDate, item.LastEndDate, null);
             tasks.Add(newItemWithId);
         }
         else { throw new DalAlreadyExistsException($"{item.GetType} with Id: {item.IdNumberTask} is already exist"); }
@@ -83,8 +83,8 @@ internal class TaskImplementation : ITask
                    where filter(item)
                    select item;
         }
-        return from item in tasks
-               select item;
+        return (from item in tasks
+               select item).ToList();
     }
     public void Update(Task item)
     {

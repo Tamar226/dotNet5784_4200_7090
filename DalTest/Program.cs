@@ -234,7 +234,7 @@ internal class Program
                 throw new DalErrorINput(" You suppose to input a date");
             }
         }//Input integrity check
-        return (new DO.Task(idToUpdate, alias!, description!, creationDate, RequiredEffortTime, milestone, product, notes, difficulty, _idEngineer, startDate, forecastDate, lastE, null));
+        return (new DO.Task(idToUpdate, description!, alias!, creationDate, RequiredEffortTime, milestone, product, notes, difficulty, _idEngineer, startDate, forecastDate, lastE, null));
     }
     public static int idToRead()
     {
@@ -293,7 +293,7 @@ internal class Program
                 throw new DalErrorINput("Invalid time format. Please enter a valid time.");
         }
 
-        Console.WriteLine("Enter new nickname:");
+        Console.WriteLine("Enter alias:");
         inputToUpdate = Console.ReadLine();
         string? alias = string.IsNullOrEmpty(inputToUpdate) ? myTask!.Alias : inputToUpdate;
 
@@ -351,7 +351,7 @@ internal class Program
             notes = myTask!.Notes;
         }
         //create an update task
-        return (new DO.Task(id, alias, description, creationDate, taskTime,  milestone, product, notes, difficulty, _idEngineer,  startDate, scheduleDate, lastE, null));
+        return (new DO.Task(id,description, alias, creationDate, taskTime,  milestone, product, notes, difficulty, _idEngineer,  startDate, scheduleDate, lastE, null));
     }
     /// <summary>
     /// Helper functions for creating an entity of type engineer. 

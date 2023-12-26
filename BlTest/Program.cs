@@ -21,9 +21,13 @@ internal class Program
         {
             Console.Write("Would you like to create Initial data? (Y/N)");
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-            if (ans == "Y")
+            if (ans == "Y" || ans == "y")
                 DalTest.Initialization.Do();
-            chooseEntities();
+            else {
+                if (ans != "n" && ans != "N")
+                    throw new FormatException("Wrong input");
+            }
+                chooseEntities();
         }
         catch (BlAlreadyExistsException ex)//catch the exeption from type "DalAlreadyExistsException" who were until here...
         {
@@ -54,7 +58,7 @@ internal class Program
         int choiceEntity = 0;
         do
         {
-            Console.WriteLine("please choose an option\n for Task press 1\n for Engineer press 2\n for Dependency press 3\n for exit press 0\n ");
+            Console.WriteLine("please choose an option\n for Task press 1\n for Engineer press 2\n for Milestone press 3\n for exit press 0\n ");
             choiceEntity = (Convert.ToInt32(Console.ReadLine()));//Convert to intiger type
             switch (choiceEntity)
             {
@@ -94,7 +98,7 @@ internal class Program
                 s_bl!.Task.Create(createTask());
                 break;
             case 2:
-                printTask(s_bl!.Task.Read(idToRead())!);
+                printTask(s_bl!.Task.Read(idToRead()));
                 break;
             case 3:
                 IEnumerable<BO.Task?> listOfTask = s_bl!.Task.ReadAll();
@@ -165,16 +169,7 @@ internal class Program
         }//Input integrity check
         EngineerExperience difficulty;
         EngineerExperience.TryParse(difficultyStr, out difficulty);
-        Console.WriteLine("Enter idEngineer:");
-        int idEngineer = 0;
-        try
-        {
-            idEngineer = int.Parse(Console.ReadLine()!);
-        }
-        catch
-        {
-            throw new BlErrorINput(" You suppose to input a number");
-        }//Input integrity check
+        
         return (new BO.Task { IdTask = 0, Description = description, Alias = alias, CreatedAtDate = DateTime.Now, Status = (BO.status)0, Milestone = null!, BaselineStartDate = null!, StartDate = startDate, SchedualStartDate = null!, ForecastDate = startDate + taskDuring, DeadlineDate = null!, CompleteDate = null!, Deliverables = deliverables, Remarks = remarks, Engineer = null, CopmlexityLevel = difficulty });
     }
     public static int idToRead()
@@ -211,7 +206,7 @@ internal class Program
         Console.WriteLine("CopmlexityLevel: " + task.CopmlexityLevel+"\n");
 
     }
-    public static BO.Task UpdateMyTask(int id)//מלאן שגיאותת
+    public static BO.Task UpdateMyTask(int id)
     {
         //s_dalTask!.Update(createTask(id));
         BO.Task? myTask = s_bl!.Task.Read(id);
@@ -407,14 +402,18 @@ internal class Program
     {
         //Option to choose which interface function to run on the entity
         int choiceAct = 0;
-        Console.WriteLine("please choose an option\n for Read press 1\n for Update press 2\n for Read all press 3\n for Update press 4\n for Delete press 5\n for Update exit 0\n");
+        Console.WriteLine("please choose an option\n for Create Project Schedule press 1\n for Read press 2\n for Update all press 3\n for Update exit 0\n");
         choiceAct = (Convert.ToInt32(Console.ReadLine()));
         switch (choiceAct)
         {
             case 1:
-                printMilestone(s_bl!.Milestone.Read(idToRead())!);
+                s_bl!.Milestone.CreateProjectSchedule();
                 break;
             case 2:
+                printMilestone(s_bl!.Milestone.Read(idToRead())!);
+               
+                break;
+            case 3:
                 Console.WriteLine("Enter Id Number of Dependent Task to update:");
                 int idToUpdate = int.Parse(Console.ReadLine()!);
                 s_bl!.Milestone.Update(UpdateMyDependency(idToUpdate));

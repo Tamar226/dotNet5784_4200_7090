@@ -4,8 +4,8 @@ namespace DO;
 public record Task
 (
     int IdNumberTask,
+        string Description,
     string Alias,//כינוי
-    string Description,
     DateTime CreatedAtDate ,//תאריך יצירה
     TimeSpan? RequiredEffortTime,
     bool Milestone,

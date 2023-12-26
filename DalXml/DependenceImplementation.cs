@@ -51,6 +51,7 @@ internal class DependenceImplementation : IDependence
 
         public Dependence Read(Func<Dependence, bool> filter)
     {
+
         if (filter != null)
         {
             XDocument doc = XDocument.Load("../xml/dependences.xml");
@@ -87,7 +88,7 @@ internal class DependenceImplementation : IDependence
             var allDependences = doc!.Descendants("Dependency")
                                     .Select(dependency => XMLTools.CreateDependenceFromXmlElement(dependency));
 
-            return allDependences;
+            return allDependences.ToList();
         }
     }
 

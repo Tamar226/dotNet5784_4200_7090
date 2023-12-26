@@ -5,17 +5,19 @@ namespace BlImplementation;
 internal class MilestoneImplementation : IMilestone
 {
     private DalApi.IDal _dal = Factory.Get;
-    public void CreateProjectSchedule(List<DO.Task> tasks, List<DO.Dependence> dependencies)
+    public void CreateProjectSchedule()
     {
+        var tasks = _dal.Task.ReadAll();
+        var dependencies = _dal.Dependence.ReadAll();
         DateTime dateTimeProject = DateTime.Now;
         var listOfGroupDependencies = from dep in dependencies
                                       where dep.DependentTask is not null && dep.DependsOnTask is not null
                                       group dep by dep.DependentTask into newGroup
                                       let depList = (from dep in newGroup
-                                                     select dep.DependsOnTask).Order()
+                                                     select dep.DependsOnTask).Order().ToList()
                                       select new { KeyDep = newGroup.Key, Value = depList };
         var listWithoutDuplicetes = (from dep in listOfGroupDependencies
-                                     select dep.Value).Distinct();
+                                     select dep.Value).Distinct().ToList();
 
         List<DO.Dependence> newDepList = new List<DO.Dependence>();
         _dal.Dependence.Reset();
@@ -44,14 +46,14 @@ internal class MilestoneImplementation : IMilestone
 
             foreach (var dep in dependencies)
             {
-                if (dep.DependsOnTask is null)
+                if (dep!.DependsOnTask is null)
                     _dal.Dependence.Create(new DO.Dependence(dep.IdNumberDependence, dep.DependentTask, firstMilestone.IdNumberTask));
                     newDepList.Add(new DO.Dependence ( dep.IdNumberDependence, dep.DependentTask, firstMilestone.IdNumberTask)); 
             }
 
             foreach (var dep in dependencies)
             {
-                if (dep.DependentTask is null)
+                if (dep!.DependentTask is null)
                     _dal.Dependence.Create(new DO.Dependence(dep.IdNumberDependence, lastMilestone.IdNumberTask, dep.DependentTask));
                    newDepList.Add(new DO.Dependence(dep.IdNumberDependence, lastMilestone.IdNumberTask, dep.DependentTask));
             }

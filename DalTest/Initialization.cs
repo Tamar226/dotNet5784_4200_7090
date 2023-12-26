@@ -43,7 +43,7 @@ public static class Initialization
             string _NotesTask = notes[s_rand.Next(0,5)];
             
             Difficulty _level = (Difficulty)s_rand.Next(Enum.GetValues(typeof(Difficulty)).Length);
-            TimeSpan _RequiredEffortTime= TimeSpan.FromMinutes(s_rand.Next(0,60));
+            TimeSpan _RequiredEffortTime= TimeSpan.FromMinutes(30);
             DateTime startDate = new DateTime(2020, 1, 1);
             int range = (DateTime.Today - startDate).Days;
             DateTime _createDateTask = startDate.AddDays(s_rand.Next(range));
@@ -51,7 +51,7 @@ public static class Initialization
             DateTime _scheduleDateTask = _startDateTask.AddDays(s_rand.Next(10, 300));
             DateTime _LastEndDate = _scheduleDateTask.AddDays(10);
 
-            Task newTask = new(0, _AliasOfTask, _nameOfTask, _createDateTask, _RequiredEffortTime,false, _ProductTask, _NotesTask,_level,0, _startDateTask, _scheduleDateTask, _LastEndDate, null);
+            Task newTask = new(0, _AliasOfTask, _nameOfTask, _createDateTask, _RequiredEffortTime, false, _ProductTask, _NotesTask,_level,0, _startDateTask, _scheduleDateTask, _LastEndDate, null);
 
             s_dal!.Task.Create(newTask);
         }
