@@ -46,20 +46,21 @@ internal class TaskImplementation : ITask
                             Description = doTask.Description,
                             Alias = doTask.Alias,
                             //Initialize the milestone utility
-                            Milestone = new BO.MilestoneInTask()
-                            {
-                                Id = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
-                                {
-                                    _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
-                                    return dep.DependsOnTask == doTask.IdNumberTask;
-                                })!.DependentTask)!.IdNumberTask,
+                            Milestone=null,
+                            //Milestone = new BO.MilestoneInTask()
+                            //  {
+                            //  Id = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
+                            // {
+                            // _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
+                            //        return dep.DependsOnTask == doTask.IdNumberTask;
+                            //  })!.DependentTask)!.IdNumberTask,
 
-                                Alias = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
-                                {
-                                    _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
-                                    return dep.DependsOnTask == doTask.IdNumberTask;
-                                })!.DependentTask)?.Alias
-                            },
+                            //  Alias = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
+                            //  {
+                            //  _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
+                            //        return dep.DependsOnTask == doTask.IdNumberTask;
+                            //  })!.DependentTask)?.Alias
+                            // },
                             CreatedAtDate = doTask.CreatedAtDate,
                             Status = (BO.status)(doTask.scheduleDate is null ? 0
                                                : doTask.StartDate is null ? 1
@@ -74,13 +75,13 @@ internal class TaskImplementation : ITask
                             CompleteDate = doTask.ActualEndDate,
                             Deliverables = doTask.Product,
                             Remarks = doTask.Notes,
-
+                            Engineer=null,
                             //Initialize the engineer utility entity
-                            Engineer = new EngineerInTask
-                            {
-                                Id = doTask.idEngineer!,
-                                Name = _dal.Engineer?.Read((int)doTask.idEngineer!)!.Name!
-                            },
+                         //   Engineer = new EngineerInTask
+                         //   {
+                           //     Id = doTask.idEngineer!,
+                             //   Name = _dal.Engineer?.Read((int)doTask.idEngineer!)!.Name!
+                            //},
                             CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
                         });
 

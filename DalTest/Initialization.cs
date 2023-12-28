@@ -48,8 +48,8 @@ public static class Initialization
             int range = (DateTime.Today - startDate).Days;
             DateTime _createDateTask = startDate.AddDays(s_rand.Next(range));
             DateTime _startDateTask = DateTime.Today.AddDays(s_rand.Next(10, 300));
-            DateTime _scheduleDateTask = _startDateTask.AddDays(s_rand.Next(10, 300));
-            DateTime _LastEndDate = _scheduleDateTask.AddDays(10);
+            DateTime? _scheduleDateTask = null;
+            DateTime? _LastEndDate = null;
 
             Task newTask = new(0, _AliasOfTask, _nameOfTask, _createDateTask, _RequiredEffortTime, false, _ProductTask, _NotesTask,_level,0, _startDateTask, _scheduleDateTask, _LastEndDate, null);
 

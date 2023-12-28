@@ -21,7 +21,6 @@ internal class MilestoneImplementation : IMilestone
 
         List<DO.Dependence> newDepList = new List<DO.Dependence>();
         _dal.Dependence.Reset();
-
         DO.Task firstMilestone = _dal.Task.Read(tasks.Where(task => task!.Alias == "Start").Select(task => task!.IdNumberTask).First())!;
         DO.Task lastMilestone = _dal.Task.Read(tasks.Where(task => task!.Alias == "End").Select(task => task!.IdNumberTask).First())!;
         int runningNameForMilestone=0;

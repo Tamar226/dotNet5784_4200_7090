@@ -264,7 +264,7 @@ internal class Program
     {
         //Option to choose which interface function to run on the entity
         int choiceAct = 0;
-        Console.WriteLine("please choose an option\n for Create press 1\n for Read press 2\n for Read all press 3\n for Update press 4\n for Delete press 5\n for Update exit 0\n");
+        Console.WriteLine("please choose an option\n for Create press 1\n for Read press 2\n for Read all press 3\n for Update press 4\n for Delete press 5\n for exit 0\n");
         choiceAct = (Convert.ToInt32(Console.ReadLine()));
         switch (choiceAct)
         {
@@ -348,7 +348,7 @@ internal class Program
         {
             throw new BlDoesNotExistException("An object of type Engineer with such an ID does not exist");
         }
-        Console.WriteLine("Description: " + engineer.Name);
+        Console.WriteLine("Name: " + engineer.Name);
         Console.WriteLine("Alias: " + engineer.Email);
         Console.WriteLine("Level: " + engineer.Level);
         Console.WriteLine("Cost: " + engineer.Cost );
