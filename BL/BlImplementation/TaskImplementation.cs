@@ -45,29 +45,12 @@ internal class TaskImplementation : ITask
                             IdTask = doTask!.IdNumberTask,
                             Description = doTask.Description,
                             Alias = doTask.Alias,
-                            //Initialize the milestone utility
-                            Milestone=null,
-                            //Milestone = new BO.MilestoneInTask()
-                            //  {
-                            //  Id = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
-                            // {
-                            // _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
-                            //        return dep.DependsOnTask == doTask.IdNumberTask;
-                            //  })!.DependentTask)!.IdNumberTask,
-
-                            //  Alias = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
-                            //  {
-                            //  _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
-                            //        return dep.DependsOnTask == doTask.IdNumberTask;
-                            //  })!.DependentTask)?.Alias
-                            // },
+                            Milestone=findMilestoneForTask(doTask.IdNumberTask),
                             CreatedAtDate = doTask.CreatedAtDate,
                             Status = (BO.status)(doTask.scheduleDate is null ? 0
                                                : doTask.StartDate is null ? 1
                                                : doTask.ActualEndDate is null ? 2
                                                : 3),
-
-                            //BaselineStartDate = doTask.//קשור למילסטון
                             StartDate = doTask.StartDate,
                             SchedualStartDate = doTask.scheduleDate,
                             ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
@@ -75,13 +58,7 @@ internal class TaskImplementation : ITask
                             CompleteDate = doTask.ActualEndDate,
                             Deliverables = doTask.Product,
                             Remarks = doTask.Notes,
-                            Engineer=null,
-                            //Initialize the engineer utility entity
-                         //   Engineer = new EngineerInTask
-                         //   {
-                           //     Id = doTask.idEngineer!,
-                             //   Name = _dal.Engineer?.Read((int)doTask.idEngineer!)!.Name!
-                            //},
+                            Engineer= findEngineerForTask(doTask.IdNumberTask),
                             CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
                         });
 
@@ -90,7 +67,6 @@ internal class TaskImplementation : ITask
         {
 
         }
-   
             return taskList!;
     }
     /// <summary>
@@ -100,36 +76,18 @@ internal class TaskImplementation : ITask
     {
         try
         {
-            
            DO.Task? doTask = _dal.Task.Read(idTask);
             return new BO.Task
             {
                 IdTask = doTask!.IdNumberTask,
                 Description = doTask.Description,
                 Alias = doTask.Alias,
-                Milestone=null,
-                //Initialize the milestone utility
-                //Milestone = new BO.MilestoneInTask()
-                //{
-                  //  Id = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
-                    //{
-                      //  _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
-                        //return dep.DependsOnTask == doTask.IdNumberTask;
-                    //})!.DependentTask)!.IdNumberTask,
-
-                    //Alias = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
-                    //{
-                       // _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
-                       // return dep.DependsOnTask == doTask.IdNumberTask;
-                    //})!.DependentTask)?.Alias
-                //},
-                //CreatedAtDate = doTask.CreatedAtDate,
-                //Status = (BO.status)(doTask.scheduleDate is null ? 0
-                                  //             : doTask.StartDate is null ? 1
-                                    //           : doTask.ActualEndDate is null ? 2
-                                      //         : 3),
-
-                //BaselineStartDate = doTask.//קשור למילסטון
+                Milestone= findMilestoneForTask(doTask.IdNumberTask),
+                CreatedAtDate = doTask.CreatedAtDate,
+                Status = (BO.status)(doTask.scheduleDate is null ? 0
+                                               : doTask.StartDate is null ? 1
+                                               : doTask.ActualEndDate is null ? 2
+                                               : 3),
                 StartDate = doTask.StartDate,
                 SchedualStartDate = doTask.scheduleDate,
                 ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
@@ -137,13 +95,7 @@ internal class TaskImplementation : ITask
                 CompleteDate = doTask.ActualEndDate,
                 Deliverables = doTask.Product,
                 Remarks = doTask.Notes,
-                Engineer=null,
-                //Initialize the engineer utility entity
-                //Engineer = new EngineerInTask
-                //{
-                //    Id = doTask.idEngineer!,
-                  //  Name = _dal.Engineer?.Read((int)doTask.idEngineer!)!.Name!
-                //},
+                Engineer= findEngineerForTask(doTask.IdNumberTask),
                 CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
             };
         }
@@ -152,7 +104,40 @@ internal class TaskImplementation : ITask
             throw new BO.BlDoesNotExistException($"Task with ID={idTask} does Not exist", ex);
         }
     }
-    
+    private MilestoneInTask findMilestoneForTask(int id)
+    {
+        try
+        {
+            return new BO.MilestoneInTask()
+            {
+                Id = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
+                {
+                    _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
+                    return dep.DependsOnTask == id;
+                })!.DependentTask)!.IdNumberTask,
+
+                Alias = _dal.Task!.Read(_dal.Dependence!.Read(dep =>
+                {
+                    _dal.Task!.Read(task => task.Milestone && task.IdNumberTask == dep.DependentTask);
+                    return dep.DependsOnTask == id;
+                })!.DependentTask)?.Alias
+            };
+
+        }
+        catch { return null!; }
+    }
+    private EngineerInTask findEngineerForTask(int id)
+    {
+        try
+        {
+            return new EngineerInTask
+            {
+                Id = id!,
+                Name = _dal.Engineer?.Read((int)id!)!.Name!
+            };
+        }
+        catch { return null; };
+    }
     /// <summary>
     /// Delete task
     /// </summary>

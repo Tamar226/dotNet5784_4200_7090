@@ -1,6 +1,7 @@
 ﻿using BO;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
 
 
 /// <summary>
@@ -23,11 +24,12 @@ internal class Program
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
             if (ans == "Y" || ans == "y")
                 DalTest.Initialization.Do();
-            else {
+            else
+            {
                 if (ans != "n" && ans != "N")
                     throw new FormatException("Wrong input");
             }
-                chooseEntities();
+            chooseEntities();
         }
         catch (BlAlreadyExistsException ex)//catch the exeption from type "DalAlreadyExistsException" who were until here...
         {
@@ -60,6 +62,7 @@ internal class Program
         {
             Console.WriteLine("please choose an option\n for Task press 1\n for Engineer press 2\n for Milestone press 3\n for exit press 0\n ");
             choiceEntity = (Convert.ToInt32(Console.ReadLine()));//Convert to intiger type
+            //DeterminingProjectTimes();
             switch (choiceEntity)
             {
                 case 1:
@@ -169,7 +172,7 @@ internal class Program
         }//Input integrity check
         EngineerExperience difficulty;
         EngineerExperience.TryParse(difficultyStr, out difficulty);
-        
+
         return (new BO.Task { IdTask = 0, Description = description, Alias = alias, CreatedAtDate = DateTime.Now, Status = (BO.status)0, Milestone = null!, BaselineStartDate = null!, StartDate = startDate, SchedualStartDate = null!, ForecastDate = startDate + taskDuring, DeadlineDate = null!, CompleteDate = null!, Deliverables = deliverables, Remarks = remarks, Engineer = null, CopmlexityLevel = difficulty });
     }
     public static int idToRead()
@@ -193,7 +196,7 @@ internal class Program
         Console.WriteLine("alias: " + task.Alias);
         Console.WriteLine("creation Date: " + task.CreatedAtDate);
         Console.WriteLine("Status: " + task.Status);
-        if(task.Milestone is not null) Console.WriteLine("milestone: \n" + "Id: " +task.Milestone!.Id+"\n"+"Alias: "+task.Milestone.Alias+"\n");
+        if (task.Milestone is not null) { Console.WriteLine("milestone: \n" + "Id: " + task.Milestone!.Id + "\n" + "Alias: " + task.Milestone.Alias + "\n"); };
         Console.WriteLine("start Date: " + task.BaselineStartDate);
         Console.WriteLine("start Date: " + task.StartDate);
         Console.WriteLine("Schedual Date: " + task.SchedualStartDate);
@@ -202,8 +205,8 @@ internal class Program
         Console.WriteLine("Complete Date: " + task.CompleteDate);
         Console.WriteLine("product: " + task.Deliverables);
         Console.WriteLine("Remarks: " + task.Remarks);
-        if (task.Engineer is not null) Console.WriteLine("Engineer:  \n" + task.Engineer+ "Id: " + task.Engineer!.Id + "\n" + "Name: " + task.Engineer.Name + "\n");
-        Console.WriteLine("CopmlexityLevel: " + task.CopmlexityLevel+"\n");
+        if (task.Engineer is not null) { Console.WriteLine("Engineer:  \n" + task.Engineer + "Id: " + task.Engineer!.Id + "\n" + "Name: " + task.Engineer.Name + "\n"); };
+        Console.WriteLine("CopmlexityLevel: " + task.CopmlexityLevel + "\n");
 
     }
     public static BO.Task UpdateMyTask(int id)
@@ -327,7 +330,8 @@ internal class Program
         }
         Console.WriteLine("Enter cost per hour og engineer:");
         double costPerHour = 0;
-        try {
+        try
+        {
             double.Parse(Console.ReadLine()!);
         }
         catch
@@ -338,12 +342,11 @@ internal class Program
     }
     public static void printEngineer(BO.Engineer engineer)
     {
-        Console.WriteLine("The Engineer: \n ");
+        Console.WriteLine("The Engineer: ");
         try
         {
             Console.WriteLine("Id: " + engineer.IdEngineer);
         }
-
         catch
         {
             throw new BlDoesNotExistException("An object of type Engineer with such an ID does not exist");
@@ -351,8 +354,8 @@ internal class Program
         Console.WriteLine("Name: " + engineer.Name);
         Console.WriteLine("Alias: " + engineer.Email);
         Console.WriteLine("Level: " + engineer.Level);
-        Console.WriteLine("Cost: " + engineer.Cost );
-        Console.WriteLine("Task:" + engineer.Task!.ToString() + "\n");
+        Console.WriteLine("Cost: " + engineer.Cost);
+        Console.WriteLine("Task: " + engineer.Task ?? "No Task \n");
     }
     public static BO.Engineer UpdateMyEngineer(int id)
     {
@@ -391,7 +394,7 @@ internal class Program
         {
             EngineerExperience.TryParse(inputLevel, out difficulty);
         }
-        return (new BO.Engineer { IdEngineer = id, Name = nameEngineer, Email = emailEngineer, Level = difficulty, Cost = costPerHour,Task=myEngineer.Task });
+        return (new BO.Engineer { IdEngineer = id, Name = nameEngineer, Email = emailEngineer, Level = difficulty, Cost = costPerHour, Task = myEngineer.Task });
     }
     /// <summary>
     /// Helper functions for creating an entity of type dependency.
@@ -411,12 +414,12 @@ internal class Program
                 break;
             case 2:
                 printMilestone(s_bl!.Milestone.Read(idToRead())!);
-               
+
                 break;
             case 3:
                 Console.WriteLine("Enter Id Number of Dependent Task to update:");
                 int idToUpdate = int.Parse(Console.ReadLine()!);
-                s_bl!.Milestone.Update(UpdateMyDependency(idToUpdate));
+                s_bl!.Milestone.Update(UpdateMyMilestone(idToUpdate));
                 break;
             default:
                 break;
@@ -424,7 +427,7 @@ internal class Program
     }
     public static void printMilestone(BO.Milestone milestone)
     {
-        Console.WriteLine("The Milestone");
+        Console.WriteLine("The Milestone:");
         try
         {
             Console.WriteLine("Id: " + milestone.IDMilestone);
@@ -433,7 +436,7 @@ internal class Program
         {
             throw new BlDoesNotExistException("An object of type Dependence with such an ID does not exist");
         }
-        Console.WriteLine("Id: " + milestone.IDMilestone+"\n");
+        Console.WriteLine("Id: " + milestone.IDMilestone + "\n");
         Console.WriteLine("Description: " + milestone.Description + "\n");
         Console.WriteLine("Alias: " + milestone.Alias + "\n");
         Console.WriteLine("create at date: " + milestone.CreatedAtDate + "\n");
@@ -443,16 +446,14 @@ internal class Program
         Console.WriteLine("Complete date: " + milestone.CompleteDate + "\n");
         Console.WriteLine("Completion percentage" + milestone.CompletionPercentage + "\n");
         Console.WriteLine("Remarks" + milestone.Remarks + "\n");
-        Console.WriteLine("Dependencies:"+"\n");
-        foreach (var oneDep in milestone.Dependencies!) {
-            Console.WriteLine("Dep: "+"Id: "+oneDep.Id+"Alias:"+ oneDep.Alias+"\n");
+        Console.WriteLine("Dependencies:" + "\n");
+        foreach (var oneDep in milestone.Dependencies!)
+        {
+            Console.WriteLine("Dep: " + "Id: " + oneDep.Id + "Alias:" + oneDep.Alias + "\n");
         }
-
-
     }
-    public static BO.Milestone UpdateMyDependency(int id)
+    public static BO.Milestone UpdateMyMilestone(int id)
     {
-        //s_dalDependence!.Update(createDependence(id));
         BO.Milestone myMilestone = s_bl!.Milestone.Read(id)!;
         printMilestone(myMilestone);
         Console.WriteLine("Please enter what do you want to update in your milestone:");
@@ -465,7 +466,7 @@ internal class Program
         string? alias = Console.ReadLine()!;
 
         Console.WriteLine("Enter remaks milestone:");
-        string? remaks =Console.ReadLine()!;
+        string? remaks = Console.ReadLine()!;
 
         //Check if input is empty
         if (string.IsNullOrEmpty(description))
@@ -480,21 +481,25 @@ internal class Program
         {
             remaks = myMilestone.Remarks;
         }
-
         return (new Milestone
         {
-            IDMilestone= id,
-            Description= description,
-            Alias= alias,
-            CreatedAtDate= myMilestone.CreatedAtDate,
-            Status= myMilestone.Status,
-            ForecastDate= myMilestone.ForecastDate, 
-            DeadlineDate= myMilestone.DeadlineDate, 
-            CompleteDate= myMilestone.CompleteDate,
-            CompletionPercentage= myMilestone.CompletionPercentage,
-            Remarks= remaks,
-            Dependencies= myMilestone.Dependencies,
+            IDMilestone = id,
+            Description = description,
+            Alias = alias,
+            CreatedAtDate = myMilestone.CreatedAtDate,
+            Status = myMilestone.Status,
+            ForecastDate = myMilestone.ForecastDate,
+            DeadlineDate = myMilestone.DeadlineDate,
+            CompleteDate = myMilestone.CompleteDate,
+            CompletionPercentage = myMilestone.CompletionPercentage,
+            Remarks = remaks,
+            Dependencies = myMilestone.Dependencies,
 
         });
     }
 }
+//private DateTime DeterminingProjectTimes()
+//{
+//    s_bal.EndDateToProject=;
+//    s_bal.StartDateToProject;
+//}

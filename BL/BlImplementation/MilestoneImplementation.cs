@@ -1,4 +1,7 @@
 ﻿using BlApi;
+using BO;
+using DalApi;
+using DO;
 
 namespace BlImplementation;
 
@@ -7,6 +10,38 @@ internal class MilestoneImplementation : IMilestone
     private DalApi.IDal _dal = Factory.Get;
     public void CreateProjectSchedule()
     {
+      
+        Console.WriteLine("Enter date for start your schedule for tasks:");
+        DateTime? startDate = null;
+        string? startDateString = Console.ReadLine();
+        if (!string.IsNullOrEmpty(startDateString))
+        {
+            try
+            {
+                startDate = DateTime.Parse(startDateString);
+            }
+            catch
+            {
+                throw new BlErrorINput(" You suppose to input a date");
+            }
+        }
+        Console.WriteLine("Enter date for end your schedule for tasks:");
+        DateTime? endDate = null;
+        string? endDateString = Console.ReadLine();
+        if (!string.IsNullOrEmpty(startDateString))
+        {
+            try
+            {
+                startDate = DateTime.Parse(startDateString);
+            }
+            catch
+            {
+                throw new BlErrorINput(" You suppose to input a date");
+            }
+        }
+        Console.ReadLine();
+
+
         var tasks = _dal.Task.ReadAll();
         var dependencies = _dal.Dependence.ReadAll();
         DateTime dateTimeProject = DateTime.Now;
@@ -21,6 +56,10 @@ internal class MilestoneImplementation : IMilestone
 
         List<DO.Dependence> newDepList = new List<DO.Dependence>();
         _dal.Dependence.Reset();
+
+        _dal.Task.Create(new BO.Task {IdTask= 0, Description="",Alias="", CreatedAtDate = DateTime.Now, Status = 0, Milestone = null, BaselineStartDate =null, StartDate = startDate, SchedualStartDate =null, ForecastDate = null, DeadlineDate = endDate, CompleteDate = null, Deliverables = "", Remarks = "", Engineer =null,CopmlexityLevel=(BO.EngineerExperience)});
+
+        
         DO.Task firstMilestone = _dal.Task.Read(tasks.Where(task => task!.Alias == "Start").Select(task => task!.IdNumberTask).First())!;
         DO.Task lastMilestone = _dal.Task.Read(tasks.Where(task => task!.Alias == "End").Select(task => task!.IdNumberTask).First())!;
         int runningNameForMilestone=0;
@@ -92,7 +131,6 @@ internal class MilestoneImplementation : IMilestone
 
             SetDeadLineDateForTask(taskId, idOfStartMilestone, dependenciesList);
         }
-
     }
     private void SetDeadScheduleForTask(int? idOfTask, int idOfEndMilestone, List<DO.Dependence?> dependenciesList)
     {
@@ -115,8 +153,6 @@ internal class MilestoneImplementation : IMilestone
             if (dependentTask?.LastEndDate + currentTask.RequiredEffortTime > currentTask.LastEndDate)
                 throw new BO.BlPlanningOfProjectTimesException($"According to the date restrictions, the task {taskId} does not have time to be completed in its entirety");
             _dal.Task.Update(new DO.Task(currentTask.IdNumberTask, currentTask.Alias, currentTask.Description, currentTask.CreatedAtDate, currentTask.RequiredEffortTime, currentTask.Milestone, currentTask.Product, currentTask.Notes, currentTask.Level, currentTask.idEngineer, currentTask.StartDate, dependentTask?.LastEndDate, currentTask.LastEndDate, null));
-
-
             SetDeadScheduleForTask(taskId, idOfEndMilestone, dependenciesList);
         }
     }
