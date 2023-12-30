@@ -131,7 +131,7 @@ internal class MilestoneImplementation : IMilestone
         {
             DO.Task? currentTask = _dal.Task.Read(taskId ?? throw new BO.BlNullPropertyException("id Of Task can't be null"));
             DateTime? ScheduleTime=dependentTask.scheduleDate+dependentTask.RequiredEffortTime;
-            if(currentTask.Milestone && (currentTask.scheduleDate is null ||currentTask.scheduleDate>ScheduleTime))
+            if(currentTask.Milestone && (currentTask.scheduleDate is null ||currentTask.scheduleDate<ScheduleTime))
                 _dal.Task.Update(new DO.Task(currentTask.IdNumberTask, currentTask.Alias, currentTask.Description, currentTask.CreatedAtDate, currentTask.RequiredEffortTime, currentTask.Milestone, currentTask.Product, currentTask.Notes, currentTask.Level, currentTask.idEngineer, currentTask.StartDate, ScheduleTime, currentTask.LastEndDate, null));
             else
                 _dal.Task.Update(new DO.Task(currentTask.IdNumberTask, currentTask.Alias, currentTask.Description, currentTask.CreatedAtDate, currentTask.RequiredEffortTime, currentTask.Milestone, currentTask.Product, currentTask.Notes, currentTask.Level, currentTask.idEngineer, currentTask.StartDate, ScheduleTime, currentTask.LastEndDate, null));
