@@ -545,21 +545,33 @@ internal class Program
     {
  
         Console.WriteLine("Enter Dependent Task:");
-        int idDependenceTask;
+        int? idDependenceTask=null;
+       
         try
         {
             idDependenceTask = int.Parse(Console.ReadLine()!);
         }
         catch 
         {
-            throw new DalErrorINput(" You suppose to input a number");
+            if (idDependenceTask != null)
+            {
+                throw new DalErrorINput(" You suppose to input a number");
+            }
         }
         
         Console.WriteLine("Enter Depends On Task:");
-        int DependsOnTask = int.Parse(Console.ReadLine()!);
-        if (!(DependsOnTask is int))
+        int? DependsOnTask = null;
+
+        try
         {
-            throw new DalErrorINput(" You suppose to input a number");
+            DependsOnTask = int.Parse(Console.ReadLine()!);
+        }
+        catch
+        {
+            if (DependsOnTask != null)
+            {
+                throw new DalErrorINput(" You suppose to input a number");
+            }
         }
         return (new Dependence(0, idDependenceTask, DependsOnTask));
     }

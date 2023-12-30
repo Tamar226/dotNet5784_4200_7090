@@ -58,7 +58,7 @@ internal class TaskImplementation : ITask
                             CompleteDate = doTask.ActualEndDate,
                             Deliverables = doTask.Product,
                             Remarks = doTask.Notes,
-                            Engineer= findEngineerForTask(doTask.IdNumberTask),
+                            Engineer= findEngineerForTask(doTask.IdNumberTask)??null,
                             CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
                         });
 
@@ -95,7 +95,7 @@ internal class TaskImplementation : ITask
                 CompleteDate = doTask.ActualEndDate,
                 Deliverables = doTask.Product,
                 Remarks = doTask.Notes,
-                Engineer= findEngineerForTask(doTask.IdNumberTask),
+                Engineer= findEngineerForTask(doTask.IdNumberTask)??null,
                 CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
             };
         }
@@ -130,11 +130,14 @@ internal class TaskImplementation : ITask
     {
         try
         {
-            return new EngineerInTask
-            {
-                Id = id!,
-                Name = _dal.Engineer?.Read((int)id!)!.Name!
-            };
+            return null;
+            //BO.EngineerInTask eng = new BO.EngineerInTask
+            //{
+            //    Id = id!,
+            //    Name = _dal.Engineer?.Read(id!)!.Name!
+            //};
+            //return  eng;
+            ;
         }
         catch { return null; };
     }

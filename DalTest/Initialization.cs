@@ -43,7 +43,7 @@ public static class Initialization
             string _NotesTask = notes[s_rand.Next(0,5)];
             
             Difficulty _level = (Difficulty)s_rand.Next(Enum.GetValues(typeof(Difficulty)).Length);
-            TimeSpan _RequiredEffortTime= TimeSpan.FromMinutes(30);
+            TimeSpan _RequiredEffortTime= TimeSpan.FromDays(5);
             DateTime startDate = new DateTime(2020, 1, 1);
             int range = (DateTime.Today - startDate).Days;
             DateTime _createDateTask = startDate.AddDays(s_rand.Next(range));
@@ -100,7 +100,7 @@ public static class Initialization
         s_dal =Factory.Get; //stage 4
         createEngineer();
         createTask();
-        createDependence();
+        //createDependence();
         return;
     }
 }

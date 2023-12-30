@@ -1,203 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDependence>
+
   <Dependency>
-    <Id>2780</Id>
-    <DependentTask>3150</DependentTask>
-    <previousIDTask>3151</previousIDTask>
+    <Id>3132</Id>
+    <DependentTask>3341</DependentTask>
+    <previousIDTask />
   </Dependency>
   <Dependency>
-    <Id>2781</Id>
-    <DependentTask>3152</DependentTask>
-    <previousIDTask>3159</previousIDTask>
+    <Id>3133</Id>
+    <DependentTask>3342</DependentTask>
+    <previousIDTask />
   </Dependency>
   <Dependency>
-    <Id>2782</Id>
-    <DependentTask>3154</DependentTask>
-    <previousIDTask>3158</previousIDTask>
+    <Id>3134</Id>
+    <DependentTask>3343</DependentTask>
+    <previousIDTask>3341</previousIDTask>
   </Dependency>
   <Dependency>
-    <Id>2783</Id>
-    <DependentTask>3156</DependentTask>
-    <previousIDTask>3156</previousIDTask>
+    <Id>3135</Id>
+    <DependentTask>3343</DependentTask>
+    <previousIDTask>3342</previousIDTask>
   </Dependency>
   <Dependency>
-    <Id>2784</Id>
-    <DependentTask>3158</DependentTask>
-    <previousIDTask>3163</previousIDTask>
+    <Id>3136</Id>
+    <DependentTask>3344</DependentTask>
+    <previousIDTask>3343</previousIDTask>
   </Dependency>
   <Dependency>
-    <Id>2785</Id>
-    <DependentTask>3160</DependentTask>
-    <previousIDTask>3164</previousIDTask>
+    <Id>3137</Id>
+    <DependentTask>3345</DependentTask>
+    <previousIDTask>3343</previousIDTask>
   </Dependency>
   <Dependency>
-    <Id>2786</Id>
-    <DependentTask>3162</DependentTask>
-    <previousIDTask>3151</previousIDTask>
+    <Id>3138</Id>
+    <DependentTask />
+    <previousIDTask>3344</previousIDTask>
   </Dependency>
   <Dependency>
-    <Id>2787</Id>
-    <DependentTask>3164</DependentTask>
-    <previousIDTask>3153</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2788</Id>
-    <DependentTask>3166</DependentTask>
-    <previousIDTask>3166</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2789</Id>
-    <DependentTask>3168</DependentTask>
-    <previousIDTask>3154</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2790</Id>
-    <DependentTask>3150</DependentTask>
-    <previousIDTask>3158</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2791</Id>
-    <DependentTask>3152</DependentTask>
-    <previousIDTask>3161</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2792</Id>
-    <DependentTask>3154</DependentTask>
-    <previousIDTask>3154</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2793</Id>
-    <DependentTask>3156</DependentTask>
-    <previousIDTask>3159</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2794</Id>
-    <DependentTask>3158</DependentTask>
-    <previousIDTask>3165</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2795</Id>
-    <DependentTask>3160</DependentTask>
-    <previousIDTask>3161</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2796</Id>
-    <DependentTask>3162</DependentTask>
-    <previousIDTask>3167</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2797</Id>
-    <DependentTask>3164</DependentTask>
-    <previousIDTask>3164</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2798</Id>
-    <DependentTask>3166</DependentTask>
-    <previousIDTask>3154</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2799</Id>
-    <DependentTask>3168</DependentTask>
-    <previousIDTask>3169</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2800</Id>
-    <DependentTask>3150</DependentTask>
-    <previousIDTask>3158</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2801</Id>
-    <DependentTask>3152</DependentTask>
-    <previousIDTask>3161</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2802</Id>
-    <DependentTask>3154</DependentTask>
-    <previousIDTask>3157</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2803</Id>
-    <DependentTask>3156</DependentTask>
-    <previousIDTask>3160</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2804</Id>
-    <DependentTask>3158</DependentTask>
-    <previousIDTask>3166</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2805</Id>
-    <DependentTask>3160</DependentTask>
-    <previousIDTask>3165</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2806</Id>
-    <DependentTask>3162</DependentTask>
-    <previousIDTask>3165</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2807</Id>
-    <DependentTask>3164</DependentTask>
-    <previousIDTask>3165</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2808</Id>
-    <DependentTask>3166</DependentTask>
-    <previousIDTask>3154</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2809</Id>
-    <DependentTask>3168</DependentTask>
-    <previousIDTask>3150</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2810</Id>
-    <DependentTask>3150</DependentTask>
-    <previousIDTask>3154</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2811</Id>
-    <DependentTask>3152</DependentTask>
-    <previousIDTask>3158</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2812</Id>
-    <DependentTask>3154</DependentTask>
-    <previousIDTask>3157</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2813</Id>
-    <DependentTask>3156</DependentTask>
-    <previousIDTask>3157</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2814</Id>
-    <DependentTask>3158</DependentTask>
-    <previousIDTask>3163</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2815</Id>
-    <DependentTask>3160</DependentTask>
-    <previousIDTask>3167</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2816</Id>
-    <DependentTask>3162</DependentTask>
-    <previousIDTask>3163</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2817</Id>
-    <DependentTask>3164</DependentTask>
-    <previousIDTask>3166</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2818</Id>
-    <DependentTask>3166</DependentTask>
-    <previousIDTask>3166</previousIDTask>
-  </Dependency>
-  <Dependency>
-    <Id>2819</Id>
-    <DependentTask>3168</DependentTask>
-    <previousIDTask>3156</previousIDTask>
+    <Id>3139</Id>
+    <DependentTask />
+    <previousIDTask>3345</previousIDTask>
   </Dependency>
 </ArrayOfDependence>

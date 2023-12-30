@@ -30,10 +30,30 @@ static class XMLTools
     {
         // Create a Dependence instance from the XML element
         // Assuming you have a constructor for Dependence that takes the necessary parameters
+        int? dept;
+        int? depOn;
+        try
+        {
+            dept = Convert.ToInt32(element.Element("DependentTask")?.Value);
+
+        }
+        catch
+        {
+            dept = null;
+        }
+        try
+        {
+            depOn = Convert.ToInt32(element.Element("previousIDTask")?.Value);
+
+        }
+        catch
+        {
+            depOn = null;
+        }
         return new Dependence(
             Convert.ToInt32(element.Element("Id")?.Value),
-            Convert.ToInt32(element.Element("DependentTask")?.Value),
-            Convert.ToInt32(element.Element("previousIDTask")?.Value)
+            dept,
+            depOn
         );
     }
 
