@@ -5,9 +5,11 @@ using System.Collections.Generic;
 
 internal class TaskImplementation : ITask
 {
-    //Creates a new object.
-    //Checks if the received identity number is in the list, and updates the new object with the received number
-    //+ all the values created for it in INTALIZATION.
+    /// <summary>
+    /// Creates a new object.
+    ///Checks if the received identity number is in the list, and updates the new object with the received number
+    ///+ all the values created for it in INTALIZATION.
+    /// </summary>
     public int Create(Task item)
     {
         int newId = 0;
@@ -33,13 +35,18 @@ internal class TaskImplementation : ITask
         return item.IdNumberTask;
 
     }
+    /// <summary>
+    /// Deleting a task selected by the user by ID number in the XML file
+    /// </summary>
     public void Delete(int id)
     {
         Task? taskFound = DataSource.Tasks.FirstOrDefault(tsk => tsk.IdNumberTask == id);
         if (taskFound == null) { throw new DalDeletionImpossible($"Task with Id: {id} don't exist"); }
         DataSource.Tasks.Remove(taskFound);
     }
-
+    /// <summary>
+    /// Finding the task selected by the user in the XML file and returning it by ID number (by queries) 
+    /// </summary>
     public Task? Read(int? id)
     {
         if (DataSource.Tasks.Count >= 1)
@@ -50,7 +57,9 @@ internal class TaskImplementation : ITask
         }
         else { return null; };
     }
-
+    /// <summary>
+    /// Finding all tasks in the XML file and returning them (by queries) 
+    /// </summary>
     public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null) //stage 2
     {
         if (filter != null)
@@ -62,7 +71,9 @@ internal class TaskImplementation : ITask
         return from item in DataSource.Tasks
                select item;
     }
-
+    /// <summary>
+    ///  Updating a task selected by the user by ID number and updating the required attributes in the XML file
+    /// </summary>
     public void Update(Task item)
     {
         Task? tempTask = (DataSource.Tasks.FirstOrDefault(element => element!.IdNumberTask == item.IdNumberTask));
@@ -74,6 +85,9 @@ internal class TaskImplementation : ITask
             DataSource.Tasks.Add(item);
         }
     }
+    /// <summary>
+    /// Finding the task selected by the user in the XML file and returning it by ID number (by queries and filter) 
+    /// </summary>
     public Task? Read(Func<Task, bool> filter)//stage 2
     {
         if (filter != null)
@@ -86,6 +100,9 @@ internal class TaskImplementation : ITask
         throw new DalNoFilterToQuery("no filther to query");
 
     }
+    /// <summary>
+    /// Clear the tasks list in XML file
+    /// </summary>
     public void Reset()
     {
         DataSource.Tasks.Clear();

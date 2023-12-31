@@ -196,7 +196,7 @@ internal class Program
         Console.WriteLine("alias: " + task.Alias);
         Console.WriteLine("creation Date: " + task.CreatedAtDate);
         Console.WriteLine("Status: " + task.Status);
-        if (task.Milestone is not null) { Console.WriteLine("milestone: \n" + "Id: " + task.Milestone!.Id + "\n" + "Alias: " + task.Milestone.Alias + "\n"); };
+        if (task.Milestone is not null) { Console.WriteLine("milestone: \n" + "Id: " + task.Milestone!.Id + "\n" + "Alias: " + task.Milestone.Alias + "\n"); };//check if there is a milestone for the task
         Console.WriteLine("start Date: " + task.BaselineStartDate);
         Console.WriteLine("start Date: " + task.StartDate);
         Console.WriteLine("Schedual Date: " + task.SchedualStartDate);
@@ -205,7 +205,7 @@ internal class Program
         Console.WriteLine("Complete Date: " + task.CompleteDate);
         Console.WriteLine("product: " + task.Deliverables);
         Console.WriteLine("Remarks: " + task.Remarks);
-        if (task.Engineer is not null) { Console.WriteLine("Engineer:  \n" + task.Engineer + "Id: " + task.Engineer!.Id + "\n" + "Name: " + task.Engineer.Name + "\n"); };
+        if (task.Engineer is not null) { Console.WriteLine("Engineer:  \n" + task.Engineer + "Id: " + task.Engineer!.Id + "\n" + "Name: " + task.Engineer.Name + "\n"); };//check if there is a engineer for the task
         Console.WriteLine("CopmlexityLevel: " + task.CopmlexityLevel + "\n");
 
     }

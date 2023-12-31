@@ -11,6 +11,7 @@ using System.Xml.Linq;
 /// </summary>
 internal class TaskImplementation : ITask
 {
+
     public int Create(Task item)
     {
         List<Task>? tasks = XMLTools.LoadListFromXMLSerializer<Task>("tasks");

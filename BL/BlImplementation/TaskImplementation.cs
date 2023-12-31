@@ -105,7 +105,7 @@ internal class TaskImplementation : ITask
         }
     }
     /// <summary>
-    /// 
+    /// Finding one milestone for a task
     /// </summary>
     private MilestoneInTask findMilestoneForTask(int id)
     {
@@ -130,13 +130,13 @@ internal class TaskImplementation : ITask
         catch { return null!; }
     }
     /// <summary>
-    /// 
+    /// Finding one engineer for a task
     /// </summary>
     private EngineerInTask findEngineerForTask(int id)
     {
         try
         {
-            return null;
+            return null!;
             //BO.EngineerInTask eng = new BO.EngineerInTask
             //{
             //    Id = id!,
@@ -145,7 +145,7 @@ internal class TaskImplementation : ITask
             //return  eng;
             ;
         }
-        catch { return null; };
+        catch { return null!; };
     }
     /// <summary>
     /// Delete task
