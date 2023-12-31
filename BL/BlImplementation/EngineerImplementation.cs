@@ -17,10 +17,8 @@ internal class EngineerImplementation : BlApi.IEngineer
     {
         DO.Engineer doEngineer = new DO.Engineer
          (item.IdEngineer, item.Name, item.Email, (DO.Difficulty)item.Level, item.Cost);
-        //להוסיף TASK
         try
         {
-            
             int idEng = _dal.Engineer.Create(doEngineer);
             return idEng;
         }
@@ -48,6 +46,9 @@ internal class EngineerImplementation : BlApi.IEngineer
             Task = findTaskInEngineer(doEngineer.IdNumberEngineer),
         };
     }
+    /// <summary>
+    /// When I need to create an engineer's task, he receives his ID number from the DO layer and accordingly he updates the dates for his task
+    /// </summary>
     private TaskInEngineer findTaskInEngineer(int id)
     {
         var tasks = _dal.Task.ReadAll();

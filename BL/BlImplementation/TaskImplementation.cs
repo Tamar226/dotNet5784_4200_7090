@@ -17,7 +17,7 @@ internal class TaskImplementation : ITask
           item.Description!,
           item.Alias!,
           DateTime.Now,
-         TimeSpan.Zero,//לחשב
+          TimeSpan.Zero,//לחשב
           item.Milestone is null ? false : true,
           item.Deliverables,
           item.Remarks,
@@ -104,6 +104,9 @@ internal class TaskImplementation : ITask
             throw new BO.BlDoesNotExistException($"Task with ID={idTask} does Not exist", ex);
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
     private MilestoneInTask findMilestoneForTask(int id)
     {
         try
@@ -126,6 +129,9 @@ internal class TaskImplementation : ITask
         }
         catch { return null!; }
     }
+    /// <summary>
+    /// 
+    /// </summary>
     private EngineerInTask findEngineerForTask(int id)
     {
         try
@@ -163,7 +169,7 @@ internal class TaskImplementation : ITask
           item.Description!,
           item.Alias!,
           DateTime.Now,
-         TimeSpan.Zero,//לחשב
+          TimeSpan.Zero,
           item.Milestone is null ? false : true,
           item.Deliverables,
           item.Remarks,

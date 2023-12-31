@@ -17,7 +17,9 @@ sealed internal class DalXml : IDal
 
     public DateTime? StartDateToProject { get; set; }
     public DateTime? EndDateToProject { get; set; }
-
+    /// <summary>
+    /// Reference to the XMLTOOLS file to delete all the lists in the databases
+    /// </summary>
     public void Reset()
     {
         XMLTools.ResetFile("engineers");

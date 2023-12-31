@@ -14,7 +14,9 @@ using System.Security.Cryptography;
 /// </summary>
 internal class DependenceImplementation : IDependence
 {
-   
+    /// <summary>
+    /// Creating a new dependency in an XML file - for each task an element tag is created and all the attributes are inserted into it
+    /// </summary>
     public int Create(Dependence item)
     {
         int IDReplace = Config.NextDependenceId;
@@ -27,8 +29,10 @@ internal class DependenceImplementation : IDependence
         doc.Save("../xml/dependences.xml");
         return IDReplace;
     }
-
-     public void Delete(int id)
+    /// <summary>
+    /// Deleting one dependent from the file by ID number (deleting its entire element)
+    /// </summary>
+    public void Delete(int id)
      {
         XDocument doc = XDocument.Load("../xml/dependences.xml");
         var dependencyItem = doc.Descendants("Dependency").Where(p => p.Element("Id")?.Value == id.ToString())
@@ -36,8 +40,11 @@ internal class DependenceImplementation : IDependence
         dependencyItem!.Remove();
          doc.Save("../xml/dependences.xml");
      }
-   
-    public Dependence? Read(int? id)//Reads dependency object by its ID
+    /// <summary>
+    /// Reading and returning each task depends on the XML file (performed by a query - checks if the ID numbers are equal)
+    /// - according to the user's request
+    /// </summary>
+    public Dependence? Read(int? id)
     {
         XDocument doc = XDocument.Load("../xml/dependences.xml");
         var dependencyItem = doc.Descendants("Dependency");
@@ -48,29 +55,31 @@ internal class DependenceImplementation : IDependence
         return dependency;
 
     }
-
-        public Dependence Read(Func<Dependence, bool> filter)
+    /// <summary>
+    /// Reading and returning each task depends on the XML file by filter (performed by a query - checks if the ID numbers are equal)
+    /// - according to the user's request
+    /// </summary>
+    public Dependence Read(Func<Dependence, bool> filter)
+{
+    if (filter != null)
     {
+        XDocument doc = XDocument.Load("../xml/dependences.xml");
 
-        if (filter != null)
+        var oneDependency = doc.Descendants("Dependency");
+        var filteredDependencies = oneDependency.Where(dependency => filter(XMLTools.CreateDependenceFromXmlElement(dependency)));
+
+        if (filteredDependencies==null)
         {
-            XDocument doc = XDocument.Load("../xml/dependences.xml");
-
-            var oneDependency = doc.Descendants("Dependency");
-            var filteredDependencies = oneDependency.Where(dependency => filter(XMLTools.CreateDependenceFromXmlElement(dependency)));
-
-            if (filteredDependencies==null)
-            {
-                // Assuming you want to return the first matched dependence
-                return XMLTools.CreateDependenceFromXmlElement(filteredDependencies!.First());
-            }
-
-            throw new DalNoFilterToQuery("No filter matched any dependencies.");
+            // Assuming you want to return the first matched dependence
+            return XMLTools.CreateDependenceFromXmlElement(filteredDependencies!.First());
         }
-
-        throw new DalNoFilterToQuery("No filter provided to query.");
+        throw new DalNoFilterToQuery("No filter matched any dependencies.");
     }
-
+    throw new DalNoFilterToQuery("No filter provided to query.");
+}
+    /// <summary>
+    /// Reading and returning the entire list of dependencies in an XML file (performed by a query)
+    /// </summary>
     public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter = null)
     {
         if (filter != null)
@@ -79,7 +88,6 @@ internal class DependenceImplementation : IDependence
             var foundDependence = doc!.Descendants("Dependency")
                                      .Where(dependency => filter(XMLTools.CreateDependenceFromXmlElement(dependency)))
                                      .Select(dependency => XMLTools.CreateDependenceFromXmlElement(dependency));
-
             return foundDependence;
         }
         else
@@ -91,7 +99,8 @@ internal class DependenceImplementation : IDependence
             return allDependences.ToList();
         }
     }
-
+    /// <summary>
+    /// Update dependencies by entering their element in the XML file and creating a new attribute wherever there is a change
     public void Update(Dependence item)
     {
         XDocument doc = XDocument.Load("../xml/dependences.xml");
@@ -105,9 +114,8 @@ internal class DependenceImplementation : IDependence
         new XAttribute("DependentTask", item!.DependentTask!),
         new XAttribute("previousIDTask", item.DependsOnTask!)));
         doc.Save("../xml/dependences.xml");
-
-
     }
+    //clear the xml list of dependencies
     public void Reset()
     {
         XMLTools.ResetFile("dependences");

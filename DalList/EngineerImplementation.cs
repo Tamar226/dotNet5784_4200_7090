@@ -17,7 +17,9 @@ internal class EngineerImplementation : IEngineer
        else { throw new DalAlreadyExistsException($"Engineer with Id: {item.IdNumberEngineer} is already exist"); }
         return item.IdNumberEngineer;
     }
-
+    /// <summary>
+    /// Deleting an engineer from the list after they found him by ID
+    /// </summary>
     public void Delete(int id)
     {
         Engineer? engineerFound = DataSource.Engineers.FirstOrDefault(eng => eng.IdNumberEngineer == id);
@@ -25,7 +27,9 @@ internal class EngineerImplementation : IEngineer
         DataSource.Engineers.Remove(engineerFound);
         return;
     }
-
+    /// <summary>
+    /// Read 1 engineer bh his ID
+    /// </summary>
     public Engineer? Read(int? id)
     {
 
@@ -38,7 +42,9 @@ internal class EngineerImplementation : IEngineer
         else { return null; };
        
     }
-
+    /// <summary>
+    /// Returning the entire list of engineers
+    /// </summary>
     public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null) //stage 2
     {
         if (filter != null)
@@ -50,7 +56,9 @@ internal class EngineerImplementation : IEngineer
         return from item in DataSource.Engineers
                select item;
     }
-
+    /// <summary>
+    /// Updating details of an engineer after finding him in the list - by ID number
+    /// </summary>
     public void Update(Engineer item)
     {
         Engineer? tempEngineer = (DataSource.Engineers.FirstOrDefault(element => element!.IdNumberEngineer == item.IdNumberEngineer));
@@ -62,6 +70,9 @@ internal class EngineerImplementation : IEngineer
             DataSource.Engineers.Add(item);
         }
     }
+    /// <summary>
+    /// Read 1 engineer bh his ID+filter
+    /// </summary>
     public Engineer? Read(Func<Engineer, bool> filter)//stage 2
     {
         if (filter != null)
@@ -72,8 +83,10 @@ internal class EngineerImplementation : IEngineer
             return foundDependence.ElementAt(0);
         }
         throw new DalNoFilterToQuery("no filther to query");
-
     }
+    /// <summary>
+    /// Clear the enguneers's list from the data
+    /// </summary>
     public void Reset()
     {
         DataSource.Engineers.Clear();

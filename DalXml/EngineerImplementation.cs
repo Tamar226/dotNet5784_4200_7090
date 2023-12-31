@@ -69,6 +69,9 @@ internal class EngineerImplementation : IEngineer
             XMLTools.SaveListToXMLSerializer(engineers!, "engineers");
         }
     }
+    /// <summary>
+    /// Clear the enguneers's list from the data
+    /// </summary>
     public void Reset()
     {
         XMLTools.ResetFile("engineers");

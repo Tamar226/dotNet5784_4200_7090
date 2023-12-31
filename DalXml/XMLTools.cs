@@ -141,8 +141,6 @@ static class XMLTools
         }
     }
     #endregion
-
-
     public static void ResetFile(string entity)
     {
         string filePath = $"{s_xml_dir + entity}.xml";

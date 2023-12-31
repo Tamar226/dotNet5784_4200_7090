@@ -15,7 +15,4 @@ public class TaskInList
     public string Alias { get; set; }
     public BO.status Status { get; set; }
     public int IdNumberTask { get; }
-
-    //public override string ToString() => this.ToStringProperty();
-
 }
