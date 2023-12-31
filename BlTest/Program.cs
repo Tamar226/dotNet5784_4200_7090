@@ -197,11 +197,11 @@ internal class Program
         Console.WriteLine("creation Date: " + task.CreatedAtDate);
         Console.WriteLine("Status: " + task.Status);
         if (task.Milestone is not null) { Console.WriteLine("milestone: \n" + "Id: " + task.Milestone!.Id + "\n" + "Alias: " + task.Milestone.Alias + "\n"); };//check if there is a milestone for the task
-        Console.WriteLine("start Date: " + task.BaselineStartDate);
+        //Console.WriteLine("start Date: " + task.BaselineStartDate);
         Console.WriteLine("start Date: " + task.StartDate);
         Console.WriteLine("Schedual Date: " + task.SchedualStartDate);
-        Console.WriteLine("start Date: " + task.ForecastDate);
-        Console.WriteLine("last End Date: " + task.DeadlineDate);
+        Console.WriteLine("Forecast Date: " + task.ForecastDate);
+        Console.WriteLine("Deadline Date: " + task.DeadlineDate);
         Console.WriteLine("Complete Date: " + task.CompleteDate);
         Console.WriteLine("product: " + task.Deliverables);
         Console.WriteLine("Remarks: " + task.Remarks);
@@ -405,12 +405,40 @@ internal class Program
     {
         //Option to choose which interface function to run on the entity
         int choiceAct = 0;
-        Console.WriteLine("please choose an option\n for Create Project Schedule press 1\n for Read press 2\n for Update all press 3\n for Update exit 0\n");
+        Console.WriteLine("please choose an option\n for Create Project Schedule press 1\n for Read press 2\n for Update  press 3\n for exit 0\n");
         choiceAct = (Convert.ToInt32(Console.ReadLine()));
         switch (choiceAct)
         {
             case 1:
-                s_bl!.Milestone.CreateProjectSchedule();
+                Console.WriteLine("Enter a start date for the project \n");
+                DateTime? startDate = null;
+                string? startDateString = Console.ReadLine();
+                if (!string.IsNullOrEmpty(startDateString))
+                {
+                    try
+                    {
+                        startDate = DateTime.Parse(startDateString);
+                    }
+                    catch
+                    {
+                        throw new BlErrorINput(" You suppose to input a date");
+                    }
+                }
+                Console.WriteLine("Enter an end date for the project \n");
+                DateTime? endDate = null;
+                string? endDateString = Console.ReadLine();
+                if (!string.IsNullOrEmpty(endDateString))
+                {
+                    try
+                    {
+                        endDate = DateTime.Parse(endDateString);
+                    }
+                    catch
+                    {
+                        throw new BlErrorINput(" You suppose to input a date");
+                    }
+                }
+                s_bl!.Milestone.CreateProjectSchedule(startDate,endDate);
                 break;
             case 2:
                 printMilestone(s_bl!.Milestone.Read(idToRead())!);
@@ -419,6 +447,7 @@ internal class Program
             case 3:
                 Console.WriteLine("Enter Id Number of Dependent Task to update:");
                 int idToUpdate = int.Parse(Console.ReadLine()!);
+                printMilestone(s_bl!.Milestone.Read(idToUpdate)!);
                 s_bl!.Milestone.Update(UpdateMyMilestone(idToUpdate));
                 break;
             default:
@@ -436,20 +465,19 @@ internal class Program
         {
             throw new BlDoesNotExistException("An object of type Dependence with such an ID does not exist");
         }
-        Console.WriteLine("Id: " + milestone.IDMilestone + "\n");
-        Console.WriteLine("Description: " + milestone.Description + "\n");
-        Console.WriteLine("Alias: " + milestone.Alias + "\n");
-        Console.WriteLine("create at date: " + milestone.CreatedAtDate + "\n");
-        Console.WriteLine("Status: " + milestone.Status + "\n");
-        Console.WriteLine("forecast date: " + milestone.ForecastDate + "\n");
-        Console.WriteLine("Deadline date: " + milestone.DeadlineDate + "\n");
-        Console.WriteLine("Complete date: " + milestone.CompleteDate + "\n");
-        Console.WriteLine("Completion percentage" + milestone.CompletionPercentage + "\n");
-        Console.WriteLine("Remarks" + milestone.Remarks + "\n");
-        Console.WriteLine("Dependencies:" + "\n");
+        Console.WriteLine("Description: " + milestone.Description);
+        Console.WriteLine("Alias: " + milestone.Alias);
+        Console.WriteLine("create at date: " + milestone.CreatedAtDate);
+        Console.WriteLine("Status: " + milestone.Status);
+        Console.WriteLine("forecast date: " + milestone.ForecastDate);
+        Console.WriteLine("Deadline date: " + milestone.DeadlineDate);
+        Console.WriteLine("Complete date: " + milestone.CompleteDate);
+        Console.WriteLine("Completion percentage" + milestone.CompletionPercentage);
+        Console.WriteLine("Remarks:" + milestone.Remarks);
+        Console.WriteLine("Dependencies:");
         foreach (var oneDep in milestone.Dependencies!)
         {
-            Console.WriteLine("Dep: " + "Id: " + oneDep.Id + "Alias:" + oneDep.Alias + "\n");
+            Console.WriteLine("Dep: \n" + "Id: " + oneDep.IdNumberTask + "  Alias:" + oneDep.Alias + "\n");
         }
     }
     public static BO.Milestone UpdateMyMilestone(int id)
@@ -460,7 +488,10 @@ internal class Program
 
         Console.WriteLine("Enter description Task:");
         string? description = Console.ReadLine()!;
-
+        if (string.IsNullOrEmpty(description))
+        {
+            description = myMilestone.Description;
+        }
         //Request new input
         Console.WriteLine("Enter alias Task:");
         string? alias = Console.ReadLine()!;
@@ -469,10 +500,7 @@ internal class Program
         string? remaks = Console.ReadLine()!;
 
         //Check if input is empty
-        if (string.IsNullOrEmpty(description))
-        {
-            description = myMilestone.Description;
-        }
+       
         if (string.IsNullOrEmpty(alias))
         {
             alias = myMilestone.Alias;
