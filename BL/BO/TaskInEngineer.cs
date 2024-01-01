@@ -11,7 +11,9 @@ public class TaskInEngineer
         this.enumerable = enumerable;
         this.v = v;
     }
+    public override string ToString() => Tools.ToStringProperty(this);
 
     public int? Id { get; set; }
     public string? Alias { get; set; }
+
 }

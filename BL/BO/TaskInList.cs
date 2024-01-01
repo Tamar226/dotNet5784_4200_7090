@@ -9,6 +9,7 @@ public class TaskInList
         Alias = alias;
         Status = status;
     }
+    public override string ToString() => Tools.ToStringProperty(this);
 
     public int Id { get; init; }
     public string Description { get; set; }

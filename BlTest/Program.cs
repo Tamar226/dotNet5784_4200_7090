@@ -101,13 +101,13 @@ internal class Program
                 s_bl!.Task.Create(createTask());
                 break;
             case 2:
-                printTask(s_bl!.Task.Read(idToRead()));
+                Console.WriteLine(s_bl!.Task.Read(idToRead()));
                 break;
             case 3:
                 IEnumerable<BO.Task?> listOfTask = s_bl!.Task.ReadAll();
                 foreach (BO.Task? t in listOfTask)
                 {
-                    printTask(t!);
+                    Console.WriteLine(t!);
                 }
                 break;
             case 4:
@@ -180,40 +180,12 @@ internal class Program
         Console.WriteLine("Enter Id Number of Task to read:");
         return (int.Parse(Console.ReadLine()!));
     }
-    public static void printTask(BO.Task task)
-    {
-
-        Console.WriteLine("The Task");
-        try
-        {
-            Console.WriteLine("Id: " + task.IdTask);
-        }
-        catch
-        {
-            throw new BlDoesNotExistException("An object of type Task with such an ID does not exist");
-        }
-        Console.WriteLine("description: " + task.Description);
-        Console.WriteLine("alias: " + task.Alias);
-        Console.WriteLine("creation Date: " + task.CreatedAtDate);
-        Console.WriteLine("Status: " + task.Status);
-        if (task.Milestone is not null) { Console.WriteLine("milestone: \n" + "Id: " + task.Milestone!.Id + "\n" + "Alias: " + task.Milestone.Alias + "\n"); };//check if there is a milestone for the task
-        //Console.WriteLine("start Date: " + task.BaselineStartDate);
-        Console.WriteLine("start Date: " + task.StartDate);
-        Console.WriteLine("Schedual Date: " + task.SchedualStartDate);
-        Console.WriteLine("Forecast Date: " + task.ForecastDate);
-        Console.WriteLine("Deadline Date: " + task.DeadlineDate);
-        Console.WriteLine("Complete Date: " + task.CompleteDate);
-        Console.WriteLine("product: " + task.Deliverables);
-        Console.WriteLine("Remarks: " + task.Remarks);
-        if (task.Engineer is not null) { Console.WriteLine("Engineer:  \n" + task.Engineer + "Id: " + task.Engineer!.Id + "\n" + "Name: " + task.Engineer.Name + "\n"); };//check if there is a engineer for the task
-        Console.WriteLine("CopmlexityLevel: " + task.CopmlexityLevel + "\n");
-
-    }
+    
     public static BO.Task UpdateMyTask(int id)
     {
         //s_dalTask!.Update(createTask(id));
         BO.Task? myTask = s_bl!.Task.Read(id);
-        printTask(myTask!);
+        Console.WriteLine(myTask!);
         Console.WriteLine("Please enter what do you want to update in your task:");
         string? inputToUpdate = null;
         //Request new input
@@ -275,13 +247,13 @@ internal class Program
                 s_bl!.Engineer.Create(createEngineer());
                 break;
             case 2:
-                printEngineer(s_bl!.Engineer.Read(idToRead())!);
+                Console.WriteLine(s_bl!.Engineer.Read(idToRead())!);
                 break;
             case 3:
                 IEnumerable<BO.Engineer> listOfEngineers = s_bl!.Engineer.ReadAll()!;
                 foreach (BO.Engineer e in listOfEngineers)
                 {
-                    printEngineer(e);
+                    Console.WriteLine(e);
                 }
                 break;
             case 4:
@@ -340,29 +312,13 @@ internal class Program
         }
         return (new BO.Engineer { IdEngineer = idEngineer, Name = nameEngineer, Email = emailEngineer, Level = difficulty, Cost = costPerHour, Task = null });
     }
-    public static void printEngineer(BO.Engineer engineer)
-    {
-        Console.WriteLine("The Engineer: ");
-        try
-        {
-            Console.WriteLine("Id: " + engineer.IdEngineer);
-        }
-        catch
-        {
-            throw new BlDoesNotExistException("An object of type Engineer with such an ID does not exist");
-        }
-        Console.WriteLine("Name: " + engineer.Name);
-        Console.WriteLine("Alias: " + engineer.Email);
-        Console.WriteLine("Level: " + engineer.Level);
-        Console.WriteLine("Cost: " + engineer.Cost);
-        Console.WriteLine("Task: " + engineer.Task ?? "No Task \n");
-    }
+    
     public static BO.Engineer UpdateMyEngineer(int id)
     {
         //s_dalEngineer!.Update(createEngineer(id));
         BO.Engineer myEngineer = s_bl!.Engineer.Read(id)!;
         Console.WriteLine("Please enter what do you want to update in your task:");
-        printEngineer(myEngineer);
+        Console.WriteLine(myEngineer);
         //Request new input
         Console.WriteLine("Enter name:");
         string? nameEngineer = Console.ReadLine();
@@ -441,49 +397,24 @@ internal class Program
                 s_bl!.Milestone.CreateProjectSchedule(startDate,endDate);
                 break;
             case 2:
-                printMilestone(s_bl!.Milestone.Read(idToRead())!);
+                Console.WriteLine(s_bl!.Milestone.Read(idToRead())!);
 
                 break;
             case 3:
                 Console.WriteLine("Enter Id Number of Dependent Task to update:");
                 int idToUpdate = int.Parse(Console.ReadLine()!);
-                printMilestone(s_bl!.Milestone.Read(idToUpdate)!);
+                Console.WriteLine(s_bl!.Milestone.Read(idToRead())!);
                 s_bl!.Milestone.Update(UpdateMyMilestone(idToUpdate));
                 break;
             default:
                 break;
         }
     }
-    public static void printMilestone(BO.Milestone milestone)
-    {
-        Console.WriteLine("The Milestone:");
-        try
-        {
-            Console.WriteLine("Id: " + milestone.IDMilestone);
-        }
-        catch
-        {
-            throw new BlDoesNotExistException("An object of type Dependence with such an ID does not exist");
-        }
-        Console.WriteLine("Description: " + milestone.Description);
-        Console.WriteLine("Alias: " + milestone.Alias);
-        Console.WriteLine("create at date: " + milestone.CreatedAtDate);
-        Console.WriteLine("Status: " + milestone.Status);
-        Console.WriteLine("forecast date: " + milestone.ForecastDate);
-        Console.WriteLine("Deadline date: " + milestone.DeadlineDate);
-        Console.WriteLine("Complete date: " + milestone.CompleteDate);
-        Console.WriteLine("Completion percentage" + milestone.CompletionPercentage);
-        Console.WriteLine("Remarks:" + milestone.Remarks);
-        Console.WriteLine("Dependencies:");
-        foreach (var oneDep in milestone.Dependencies!)
-        {
-            Console.WriteLine("Dep: \n" + "Id: " + oneDep.IdNumberTask + "  Alias:" + oneDep.Alias + "\n");
-        }
-    }
+   
     public static BO.Milestone UpdateMyMilestone(int id)
     {
         BO.Milestone myMilestone = s_bl!.Milestone.Read(id)!;
-        printMilestone(myMilestone);
+        Console.WriteLine(myMilestone);
         Console.WriteLine("Please enter what do you want to update in your milestone:");
 
         Console.WriteLine("Enter description Task:");
@@ -526,8 +457,3 @@ internal class Program
         });
     }
 }
-//private DateTime DeterminingProjectTimes()
-//{
-//    s_bal.EndDateToProject=;
-//    s_bal.StartDateToProject;
-//}

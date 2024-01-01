@@ -1,4 +1,5 @@
-﻿namespace BO;
+﻿
+namespace BO;
 
 public class Task
 {
@@ -19,5 +20,6 @@ public class Task
     public string? Remarks { get; set; }
     public EngineerInTask? Engineer { get; init; }
     public EngineerExperience CopmlexityLevel{ get; set; }
+    public override string ToString() =>Tools.ToStringProperty( this);
 }
 
