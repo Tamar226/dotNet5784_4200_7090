@@ -1,0 +1,41 @@
+﻿<Window x:Class="PL.Engineer.EngineerListWindow"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Engineer"
+        mc:Ignorable="d"
+        Title="EngineerListWindow" Height="640" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Internal, Upper Grid-->
+        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Select Engineer Experience➡️" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+            <!--choose selection-->
+            <ComboBox Grid.Column="1" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch"
+                      ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionkey}}" 
+                      SelectedValue="{Binding engineerExperience, Mode=TwoWay}"
+                      SelectionChanged="engineerExperienceSelector_SelectionChanged"/>
+        </Grid>
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Click="showEngineer" Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" RenderTransformOrigin="-0.394,0.376"/>
+
+    </Grid>
+</Window>

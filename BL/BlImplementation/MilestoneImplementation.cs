@@ -23,7 +23,7 @@ internal class MilestoneImplementation : IMilestone
            let depList = (from dep in newList
                           select dep.DependsOnTask)
            select new { _Key = newList.Key, Value = depList.Order() }).ToList();
-        var listWithoutDuplicetes = listOfGroupDependencies;
+        var listWithoutDuplicates = listOfGroupDependencies;
         for (int i = 0; i < listOfGroupDependencies.Count(); i++)//מחיקת כפלויות
         {
             var nulla = from d in listOfGroupDependencies
@@ -31,7 +31,7 @@ internal class MilestoneImplementation : IMilestone
                         select d._Key;
             if (nulla.Count() >= 1)
             {
-                listWithoutDuplicetes.Remove(listWithoutDuplicetes[i]);
+                listWithoutDuplicates.Remove(listWithoutDuplicates[i]);
             }
         }
         int runningNameForMilestone = 1;
@@ -43,20 +43,20 @@ internal class MilestoneImplementation : IMilestone
                          select dep.DependsOnTask)
           select new { _Key = newList.Key, Value = depList.Order() }).ToList();
         //Adding a milestone with all the required parameters to the list, wherever it is intended
-        foreach (var tasks in listWithoutDuplicetes)
+        foreach (var tasks in listWithoutDuplicates)
         {
-            List<int?> nuna = new List<int?>();
+            List<int?> deptList = new List<int?>();
             int milestoneId = _dal.Task.Create(new DO.Task(0,  "milestone", "M" + runningNameForMilestone, DateTime.Now, TimeSpan.Zero, true));
             foreach (var task in tasks.Value)
             {
-                nuna.Add(task);
+                deptList.Add(task);
                 int depToAdd = _dal.Dependence.Create(new DO.Dependence(0, milestoneId, task));
                 listOfNewDependencies.Add(_dal.Dependence.Read(depToAdd)!);
             }
 
             foreach (var task in secondReadDep)
             {
-                if (task.Value.SequenceEqual(nuna))
+                if (task.Value.SequenceEqual(deptList))
                     listOfNewDependencies.Add(new DO.Dependence(0, task._Key, milestoneId));
             }
             runningNameForMilestone++;

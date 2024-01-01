@@ -2,4 +2,4 @@
 
 
 public enum status { Unscheduled, Scheduled, OnTrack, InJeopardy };//What is the status of a task at each stage
-public enum  EngineerExperience{ Novice, AdvancedBeginner, Competent, Proficient, Expert };//The level of the engineer
+public enum  EngineerExperience{ Novice, AdvancedBeginner, Competent, Proficient, Expert,All,None };//The level of the engineer

@@ -88,7 +88,49 @@ internal class EngineerImplementation : BlApi.IEngineer
 
     }
     /// <summary>
-    /// Delete engineer
+    /// Read All engineer after selection
+    /// </summary>
+    public IEnumerable<BO.Engineer> ReadAll(Func<DO.Engineer, bool>? value) //stage 5
+    {
+        var tasks = _dal.Task.ReadAll();
+        if (value != null)
+        {
+            return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+                    where value(doEngineer)
+                    select new BO.Engineer
+                    {
+                        IdEngineer = doEngineer.IdNumberEngineer,
+                        Name = doEngineer.Name,
+                        Email = doEngineer.Email,
+                        Level = (BO.EngineerExperience)doEngineer.Level,
+                        Cost = doEngineer.Cost,
+                        Task = new BO.TaskInEngineer(from task in tasks
+                                                     where task.idEngineer == doEngineer.IdNumberEngineer && task.StartDate != null && task.ActualEndDate == null
+                                                     select task.IdNumberTask
+                                , Convert.ToString(from task2 in tasks
+                                                   where task2.idEngineer == doEngineer.IdNumberEngineer && task2.StartDate != null && task2.ActualEndDate == null
+                                                   select task2.Alias)!),
+                    });
+        }
+
+        return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+                select new BO.Engineer
+                {
+                    IdEngineer = doEngineer.IdNumberEngineer,
+                    Name = doEngineer.Name,
+                    Email = doEngineer.Email,
+                    Level = (BO.EngineerExperience)doEngineer.Level,
+                    Cost = doEngineer.Cost,
+                    Task = new BO.TaskInEngineer(from task in tasks
+                                                 where task.idEngineer == doEngineer.IdNumberEngineer && task.StartDate != null && task.ActualEndDate == null
+                                                 select task.IdNumberTask
+                            , Convert.ToString(from task2 in tasks
+                                               where task2.idEngineer == doEngineer.IdNumberEngineer && task2.StartDate != null && task2.ActualEndDate == null
+                                               select task2.Alias)!),
+                });
+    }
+    /// <summary>
+    /// delete engineer
     /// </summary>
     public void Delete(int id)
     {

@@ -35,4 +35,39 @@
     <Level>Proficient</Level>
     <Cost>278</Cost>
   </Engineer>
+  <Engineer>
+    <IdNumberEngineer>390124390</IdNumberEngineer>
+    <Name>Eli Amar</Name>
+    <Email>EliAmar@org.co.il</Email>
+    <Level>Novice</Level>
+    <Cost>175</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>342771519</IdNumberEngineer>
+    <Name>Yair Cohen</Name>
+    <Email>YairCohen@net.com</Email>
+    <Level>Expert</Level>
+    <Cost>190</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>317558738</IdNumberEngineer>
+    <Name>Ariela Levin</Name>
+    <Email>ArielaLevin@gov.il</Email>
+    <Level>Expert</Level>
+    <Cost>271</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>279405358</IdNumberEngineer>
+    <Name>Dina Klein</Name>
+    <Email>DinaKlein@outlook.com</Email>
+    <Level>Expert</Level>
+    <Cost>183</Cost>
+  </Engineer>
+  <Engineer>
+    <IdNumberEngineer>362598492</IdNumberEngineer>
+    <Name>Shira Israelof</Name>
+    <Email>ShiraIsraelof@gmail.com</Email>
+    <Level>Proficient</Level>
+    <Cost>283</Cost>
+  </Engineer>
 </ArrayOfEngineer>
