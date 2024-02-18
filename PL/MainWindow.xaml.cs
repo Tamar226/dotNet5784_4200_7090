@@ -26,6 +26,13 @@ namespace PL
             MessageBoxResult result = MessageBox.Show("Would you like to create Initial data? (Y/N)", "Confirmation", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
                 DalTest.Initialization.Do();
+
+        }
+        private void resetDb(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset the database?(Y/N)", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                DalTest.Initialization.ResetDB();
         }
 
         public MainWindow()

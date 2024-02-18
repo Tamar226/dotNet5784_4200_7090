@@ -103,6 +103,14 @@ public static class Initialization
         //createDependence();
         return;
     }
+    public static void ResetDB()
+    {
+        s_dal!.Task.Reset();
+        s_dal!.Engineer.Reset();
+        s_dal!.Dependence.Reset();
+
+    }
+
 }
 
 

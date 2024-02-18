@@ -22,27 +22,34 @@ namespace PL.Engineer
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
        
-        public ObservableCollection<BO.Engineer> EngineerList
+        //public ObservableCollection<BO.Engineer> EngineerList
+        //{
+        //    get { return (ObservableCollection<BO.Engineer>)GetValue(EngineerProperty); }
+        //    set { SetValue(EngineerProperty, value); }
+        //}
+        //public static readonly DependencyProperty EngineerProperty =
+        //DependencyProperty.Register("Engineer", typeof(ObservableCollection<BO.Engineer>), typeof(EngineerWindow), new PropertyMetadata(null));
+
+        public BO.Engineer ContentEngineer
         {
-            get { return (ObservableCollection<BO.Engineer>)GetValue(EngineerProperty); }
+            get { return (BO.Engineer)GetValue(EngineerProperty); }
             set { SetValue(EngineerProperty, value); }
         }
         public static readonly DependencyProperty EngineerProperty =
-        DependencyProperty.Register("Engineer", typeof(ObservableCollection<BO.Engineer>), typeof(EngineerWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("ContentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
         public EngineerWindow(int id=0)
         {
            
             InitializeComponent();
             if (id == 0)
             {
-                var Engineer = new BO.Engineer();
+                ContentEngineer = new BO.Engineer();
             }
             else
             {
                 try
                 {
-                    BO.Engineer existingEngineer = s_bl.Engineer.Read(id)!;
-                    var  Engineer = existingEngineer;
+                    ContentEngineer = s_bl.Engineer.Read(id)!;
                 }
                 catch (Exception ex)
                 {
@@ -52,6 +59,10 @@ namespace PL.Engineer
             }
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
     
 }
