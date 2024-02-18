@@ -30,26 +30,26 @@ namespace PL.Engineer
         //public static readonly DependencyProperty EngineerProperty =
         //DependencyProperty.Register("Engineer", typeof(ObservableCollection<BO.Engineer>), typeof(EngineerWindow), new PropertyMetadata(null));
 
-        public BO.Engineer ContentEngineer
+        public BO.Engineer CurrentEngineer
         {
             get { return (BO.Engineer)GetValue(EngineerProperty); }
             set { SetValue(EngineerProperty, value); }
         }
         public static readonly DependencyProperty EngineerProperty =
-            DependencyProperty.Register("ContentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow));
         public EngineerWindow(int id=0)
         {
            
             InitializeComponent();
             if (id == 0)
             {
-                ContentEngineer = new BO.Engineer();
+                CurrentEngineer = new BO.Engineer();
             }
             else
             {
                 try
                 {
-                    ContentEngineer = s_bl.Engineer.Read(id)!;
+                    CurrentEngineer = s_bl.Engineer.Read(id)!;
                 }
                 catch (Exception ex)
                 {
@@ -58,10 +58,20 @@ namespace PL.Engineer
                 }
             }
         }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public void AddOrUpdateEngineer(object sender, RoutedEventArgs e)
         {
+            if(CurrentEngineer.IdEngineer==0)
+            {
+                s_bl.Engineer.Create(CurrentEngineer);
+                MessageBox.Show("The engineer was successfully added");
+            }
+            else
+            {
+                s_bl.Engineer.Update(CurrentEngineer);
+                MessageBox.Show("The engineer details have been successfully updated");
 
+            }
+            Close();
         }
     }
     

@@ -16,12 +16,17 @@ internal class EngineerImplementation : IEngineer
     /// Creating a new engineer and inserting it serially into an XML file
     /// </summary>
     public int Create(Engineer item)
-    { 
+    {
+        int idEng=item.IdNumberEngineer;
+        if (item.IdNumberEngineer == 0)
+        {
+            idEng = Config.NextEngineerId;
+        }
         List<Engineer>? engineers = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
         Engineer? engineer = engineers?.FirstOrDefault(engineer => engineer.IdNumberEngineer == item.IdNumberEngineer);
         if (engineer != null)
             throw new DalAlreadyExistsException($"Engineer with Id: {item.IdNumberEngineer} is already exist");
-        Engineer new_engineer = item with { };
+        Engineer new_engineer = item with {IdNumberEngineer=idEng };
         engineers?.Add(new_engineer);
         XMLTools.SaveListToXMLSerializer(engineers!, "engineers");
         return new_engineer.IdNumberEngineer;

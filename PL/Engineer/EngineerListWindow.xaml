@@ -28,7 +28,7 @@
                       SelectedValue="{Binding engineerExperience, Mode=TwoWay}"
                       SelectionChanged="engineerExperienceSelector_SelectionChanged"/>
         </Grid>
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}">
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="showEngineer">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

@@ -39,7 +39,8 @@ namespace PL.Engineer
         }
         private void showEngineer(object sender, RoutedEventArgs e)
         {
-            new EngineerWindow().Show();
+            BO.Engineer? EngineerInList = (sender as ListView)?.SelectedItem as BO.Engineer;
+            new EngineerWindow(EngineerInList!.IdEngineer).ShowDialog();
         }
         public EngineerListWindow()
         {
