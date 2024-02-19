@@ -21,15 +21,6 @@ namespace PL.Engineer
     public partial class EngineerWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-       
-        //public ObservableCollection<BO.Engineer> EngineerList
-        //{
-        //    get { return (ObservableCollection<BO.Engineer>)GetValue(EngineerProperty); }
-        //    set { SetValue(EngineerProperty, value); }
-        //}
-        //public static readonly DependencyProperty EngineerProperty =
-        //DependencyProperty.Register("Engineer", typeof(ObservableCollection<BO.Engineer>), typeof(EngineerWindow), new PropertyMetadata(null));
-
         public BO.Engineer CurrentEngineer
         {
             get { return (BO.Engineer)GetValue(EngineerProperty); }

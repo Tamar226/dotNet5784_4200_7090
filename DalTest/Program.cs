@@ -238,7 +238,12 @@ internal class Program
     }
     public static int idToRead()
     {
-        Console.WriteLine("Enter Id Number of Task to read:");
+        try
+        {
+            Console.WriteLine("Enter Id Number of Task to read:");
+        }catch { 
+            throw new DalErrorINput(" You suppose to input a correct ID");
+        }
         return (int.Parse(Console.ReadLine()!));
     }
     public static void printTask(DO.Task task)

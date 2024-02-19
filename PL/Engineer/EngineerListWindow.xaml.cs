@@ -21,7 +21,7 @@ namespace PL.Engineer
     public partial class EngineerListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public BO.EngineerExperience engineerExperience { get; set; } = BO.EngineerExperience.All;
+        public BO.EngineerExperience engineerExperience { get; set; } = BO.EngineerExperience.None;
         public ObservableCollection<BO.Engineer> EngineerList
         {
             get { return (ObservableCollection<BO.Engineer>)GetValue(EngineerListProperty); }
@@ -40,13 +40,28 @@ namespace PL.Engineer
         private void showEngineer(object sender, RoutedEventArgs e)
         {
             BO.Engineer? EngineerInList = (sender as ListView)?.SelectedItem as BO.Engineer;
-            new EngineerWindow(EngineerInList!.IdEngineer).ShowDialog();
+           if(EngineerInList is not null)
+            {
+                new EngineerWindow(EngineerInList!.IdEngineer).ShowDialog();
+            }
+            else
+            {
+                new EngineerWindow().ShowDialog();
+            }
         }
         public EngineerListWindow()
         {
             InitializeComponent();
-            var temp = s_bl?.Engineer.ReadAll();
-            EngineerList = temp == null ? new() : new(temp);
+            Activated += OnWindowActivated!;
+        }
+
+        private void OnWindowActivated(object sender, EventArgs e)
+        {
+            // קבלת רשימת המהנדסים מהשכבה העסקית
+            var engineers = s_bl?.Engineer.ReadAll();
+
+            // עדכון רשימת המהנדסים בממשק המשתמש
+            EngineerList = engineers == null ? new() : new(engineers);
         }
     }
 }
