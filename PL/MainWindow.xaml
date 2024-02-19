@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="440" Width="700">
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\chagi\source\Repos\dotNet5784_4200_7090\PL\back.jpg" />
+    </Window.Background>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontFamily" Value="Chiller" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </Window.Resources>
+    <Grid >
         <!--Handle Engineers-->
         <Button Click="showEngineers" Content="Handle Engineer" HorizontalAlignment="Left" Margin="480,0,0,0" VerticalAlignment="Center" Height="59" Width="142"/>
         <Button Click="initDb" Content="Init DB" HorizontalAlignment="Left" Margin="280,0,0,0" VerticalAlignment="Center" Height="59" Width="142"/>

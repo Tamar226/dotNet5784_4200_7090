@@ -8,33 +8,64 @@
         mc:Ignorable="d"
         Title="EngineerListWindow" Height="640" Width="800">
 
-    <Grid>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style  TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style  TargetType="ComboBox">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Bold" />
+
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Background="#E5F7FD">
         <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--Internal, Upper Grid-->
-        <Grid Background="#2196F3" Grid.Row="0" Width="auto" Margin="0,0,0,489" Grid.RowSpan="2">
+        <Grid Height="55" Grid.Row="0" VerticalAlignment="Top" Width="auto" Grid.RowSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Select Engineer Experience➡️" HorizontalAlignment="Left" Margin="13,21,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="25" Content="Engineer List" HorizontalAlignment="Left" Margin="302,10,0,0" VerticalAlignment="Top" Height="50"/>
+            <Label Grid.Column="0" Content="Choose Engineer Experience ➡️" Margin="7,86,162,-84" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="-0.468"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-0.392"/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
             <!--choose selection-->
             <ComboBox
                       ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionkey}}" 
                       SelectedValue="{Binding engineerExperience, Mode=TwoWay}"
-                      SelectionChanged="engineerExperienceSelector_SelectionChanged" Margin="180,11,75,31"/>
+                     Margin="205,89,61,-54"/>
+            <Button Click="showEngineer" Content="Add" HorizontalAlignment="Left" Height="50" Width="100" RenderTransformOrigin="-0.394,0.376" Margin="639,35,0,1" Grid.RowSpan="2"/>
         </Grid>
-        <ListView Margin="5,42,5,18" Grid.Row="1" ItemsSource="{Binding EngineerList, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="showEngineer" Grid.RowSpan="2">
+        <Button Click="showEngineer" Content="Add" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="-0.394,0.376" Margin="673,33,0,8" Grid.RowSpan="2" />
+
+        <ListView Background="#E5F7FD" Margin="10,29,0,-19" Grid.Row="2" ItemsSource="{Binding EngineerList}" MouseDoubleClick="showEngineer" Grid.RowSpan="2" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Click="showEngineer" Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" RenderTransformOrigin="-0.394,0.376"/>
 
     </Grid>
 </Window>

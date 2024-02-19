@@ -54,7 +54,6 @@ namespace PL.Engineer
             InitializeComponent();
             Activated += OnWindowActivated!;
         }
-
         private void OnWindowActivated(object sender, EventArgs e)
         {
             // קבלת רשימת המהנדסים מהשכבה העסקית
@@ -63,5 +62,7 @@ namespace PL.Engineer
             // עדכון רשימת המהנדסים בממשק המשתמש
             EngineerList = engineers == null ? new() : new(engineers);
         }
+
+      
     }
 }
