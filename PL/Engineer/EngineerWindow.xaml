@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="EngineerWindow" Height="400" Width="650">
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\chagi\source\Repos\dotNet5784_4200_7090\PL\back.jpg" />
+        <ImageBrush ImageSource="../back.jpg" />
     </Window.Background>
     <Grid Margin="10,0,49,0">
         <Grid.Resources>

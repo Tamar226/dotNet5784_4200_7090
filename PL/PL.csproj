@@ -14,8 +14,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Resource Include="back.jpg" />
 	  <ProjectReference Include="..\BL\BL.csproj" />
-	  <ProjectReference Include="..\DalTest\DalTest.csproj" />
 	</ItemGroup>
 
 </Project>

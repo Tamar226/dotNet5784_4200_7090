@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="440" Width="700">
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\chagi\source\Repos\dotNet5784_4200_7090\PL\back.jpg" />
+        <ImageBrush ImageSource="back.jpg" />
     </Window.Background>
     <Window.Resources>
         <Style TargetType="Button">
