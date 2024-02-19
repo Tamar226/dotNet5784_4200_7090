@@ -54,7 +54,8 @@
             <ComboBox
                       ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionkey}}" 
                       SelectedValue="{Binding engineerExperience, Mode=TwoWay}"
-                     Margin="205,89,61,-54"/>
+                     Margin="205,89,61,-54"
+                SelectionChanged="engineerExperienceSelector_SelectionChanged"/>
             <Button Click="showEngineer" Content="Add" HorizontalAlignment="Left" Height="50" Width="100" RenderTransformOrigin="-0.394,0.376" Margin="639,35,0,1" Grid.RowSpan="2"/>
         </Grid>
         <Button Click="showEngineer" Content="Add" HorizontalAlignment="Left" Width="64" RenderTransformOrigin="-0.394,0.376" Margin="673,33,0,8" Grid.RowSpan="2" />
