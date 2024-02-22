@@ -6,10 +6,12 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ManegerWindow" Height="450" Width="800">
+    
     <Grid>
         <Button Click="showTasks" Content="Tasks" HorizontalAlignment="Left" Margin="550,0,0,0" VerticalAlignment="Center" Height="59" Width="142"/>
         <Button Click="showEngineers" Content="Engineers" HorizontalAlignment="Left" Margin="250,0,0,0" VerticalAlignment="Center" Height="59" Width="142"/>
         <Button Click="creatProject" Content="Luz" HorizontalAlignment="Left" Margin="500,-160,0,0" VerticalAlignment="Center" Height="59" Width="142"/>
 
     </Grid>
+    
 </Window>

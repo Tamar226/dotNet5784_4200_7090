@@ -3,6 +3,7 @@ using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,15 +36,26 @@ namespace PL
         {
             InitializeComponent();
         }
-
         private void creatProject(object sender, RoutedEventArgs e)
         {
-            DateTime a =new DateTime(2/2/2024);
-            DateTime b = new DateTime(2 / 12 / 2024);
+            string first = Microsoft.VisualBasic.Interaction.InputBox("Enter a project start date", "First Date");
 
-            s_bl.Milestone.CreateProjectSchedule(a,b);
-            MessageBox.Show("The Task details have been successfully updated");
+            // בדיקה אם המשתמש הזין ID
+
+            // הצגת הודעה לאישור
+
+            // איפוס מסד הנתונים רק אם המשתמש אישר
+
+            DateTime StartDateFromUser = DateTime.Parse(first);
+            string second = Microsoft.VisualBasic.Interaction.InputBox("Enter a project completion date", "End Date");
+
+            DateTime EndDateFromUser = DateTime.Parse(second); ;
+
+            s_bl.Milestone.CreateProjectSchedule(StartDateFromUser, EndDateFromUser);
+
+            MessageBox.Show("Your project start date: " + StartDateFromUser + '\n' + "Your project end date: " + EndDateFromUser);
 
         }
+
     }
 }

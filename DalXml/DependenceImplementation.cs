@@ -85,7 +85,7 @@ internal class DependenceImplementation : IDependence
         if (filter != null)
         {
             XDocument doc = XDocument.Load("../xml/dependences.xml");
-            var foundDependence = doc!.Descendants("Dependence")
+            var foundDependence = doc!.Descendants("Dependency")
                                      .Where(dependency => filter(XMLTools.CreateDependenceFromXmlElement(dependency)))
                                      .Select(dependency => XMLTools.CreateDependenceFromXmlElement(dependency));
             return foundDependence;
@@ -93,7 +93,7 @@ internal class DependenceImplementation : IDependence
         else
         {
             XDocument doc = XDocument.Load("../xml/dependences.xml");
-            var allDependences = doc!.Descendants("Dependence")
+            var allDependences = doc!.Descendants("Dependency")
                                     .Select(dependency => XMLTools.CreateDependenceFromXmlElement(dependency));
 
             return allDependences.ToList();

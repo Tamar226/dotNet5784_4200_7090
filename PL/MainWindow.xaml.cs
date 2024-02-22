@@ -64,10 +64,10 @@ namespace PL
             DateTime currentTime = DateTime.Now;
 
             // הצגת השעה בתיבת הטקסט של השעה
-            timeText.Text = currentTime.ToString("HH:mm:ss");
+            //timeText.Text = currentTime.ToString("HH:mm:ss");
 
             // הצגת התאריך בתיבת הטקסט של התאריך
-            dateText.Text = currentTime.ToString("dddd, MMMM dd, yyyy");
+            //dateText.Text = currentTime.ToString("dddd, MMMM dd, yyyy");
         }
 
         private void ShowMangerMenu(object sender, RoutedEventArgs e)
