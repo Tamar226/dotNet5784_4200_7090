@@ -320,4 +320,52 @@
     <LastEndDate xsi:nil="true" />
     <ActualEndDate xsi:nil="true" />
   </Task>
+	<Task>
+		<IdNumberTask>3972</IdNumberTask>
+		<Description>Safety and security infrastructure</Description>
+		<Alias>Configuration management</Alias>
+		<CreatedAtDate>2020-06-11T00:00:00</CreatedAtDate>
+		<RequiredEffortTime>P5D</RequiredEffortTime>
+		<Milestone>false</Milestone>
+		<Product>Unit testing</Product>
+		<Notes>do it soon!</Notes>
+		<Level>Expert</Level>
+		<idEngineer>0</idEngineer>
+		<StartDate>2024-12-02T00:00:00+02:00</StartDate>
+		<scheduleDate xsi:nil="true" />
+		<LastEndDate xsi:nil="true" />
+		<ActualEndDate xsi:nil="true" />
+	</Task>
+	<Task>
+		<IdNumberTask>3974</IdNumberTask>
+		<Description>Start</Description>
+		<Alias>Configuration management</Alias>
+		<CreatedAtDate>2020-06-11T00:00:00</CreatedAtDate>
+		<RequiredEffortTime>P5D</RequiredEffortTime>
+		<Milestone>false</Milestone>
+		<Product>Unit testing</Product>
+		<Notes>do it soon!</Notes>
+		<Level>Expert</Level>
+		<idEngineer>0</idEngineer>
+		<StartDate>2024-12-02T00:00:00+02:00</StartDate>
+		<scheduleDate xsi:nil="true" />
+		<LastEndDate xsi:nil="true" />
+		<ActualEndDate xsi:nil="true" />
+	</Task>
+	<Task>
+		<IdNumberTask>3975</IdNumberTask>
+		<Description>End</Description>
+		<Alias>Configuration management</Alias>
+		<CreatedAtDate>2020-06-11T00:00:00</CreatedAtDate>
+		<RequiredEffortTime>P5D</RequiredEffortTime>
+		<Milestone>false</Milestone>
+		<Product>Unit testing</Product>
+		<Notes>do it soon!</Notes>
+		<Level>Expert</Level>
+		<idEngineer>0</idEngineer>
+		<StartDate>2024-12-02T00:00:00+02:00</StartDate>
+		<scheduleDate xsi:nil="true" />
+		<LastEndDate xsi:nil="true" />
+		<ActualEndDate xsi:nil="true" />
+	</Task>
 </ArrayOfTask>

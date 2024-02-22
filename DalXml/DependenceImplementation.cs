@@ -85,7 +85,7 @@ internal class DependenceImplementation : IDependence
         if (filter != null)
         {
             XDocument doc = XDocument.Load("../xml/dependences.xml");
-            var foundDependence = doc!.Descendants("Dependency")
+            var foundDependence = doc!.Descendants("Dependence")
                                      .Where(dependency => filter(XMLTools.CreateDependenceFromXmlElement(dependency)))
                                      .Select(dependency => XMLTools.CreateDependenceFromXmlElement(dependency));
             return foundDependence;
@@ -93,7 +93,7 @@ internal class DependenceImplementation : IDependence
         else
         {
             XDocument doc = XDocument.Load("../xml/dependences.xml");
-            var allDependences = doc!.Descendants("Dependency")
+            var allDependences = doc!.Descendants("Dependence")
                                     .Select(dependency => XMLTools.CreateDependenceFromXmlElement(dependency));
 
             return allDependences.ToList();
@@ -105,11 +105,11 @@ internal class DependenceImplementation : IDependence
     {
         XDocument doc = XDocument.Load("../xml/dependences.xml");
         var root=doc.Descendants("ArrayOfDependence");
-        XElement dependentToUpdate = root.Elements("Dependency")
+        XElement dependentToUpdate = root.Elements("Dependence")
                                       .First(e => e.Element("Id")?.Value == item.IdNumberDependence.ToString());
         dependentToUpdate.Remove();
         doc.Element("ArrayOfDependence")
-       !.Add(new XElement("Dependency",
+       !.Add(new XElement("Dependence",
         new XAttribute("Id", item.IdNumberDependence),
         new XAttribute("DependentTask", item!.DependentTask!),
         new XAttribute("previousIDTask", item.DependsOnTask!)));
