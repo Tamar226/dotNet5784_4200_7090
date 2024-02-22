@@ -180,7 +180,7 @@ internal class MilestoneImplementation : IMilestone
                 {
                     DO.Dependence? thisdep = _dal.Dependence.Read(dep);
                     DO.Task? thisTask= _dal.Task.Read(thisdep.DependsOnTask);
-                    BO.status status = (BO.status)(thisTask!.scheduleDate is null ? 0
+                    BO.Status status = (BO.Status)(thisTask!.scheduleDate is null ? 0
                                                : doTask!.StartDate is null ? 1
                                                : doTask.ActualEndDate is null ? 2
                                                : 3);
@@ -194,7 +194,7 @@ internal class MilestoneImplementation : IMilestone
                 Description = doTask.Description,
                 Alias = doTask.Alias,
                 CreatedAtDate = doTask.CreatedAtDate,
-                Status = (BO.status)(doTask.scheduleDate is null ? 0
+                Status = (BO.Status)(doTask.scheduleDate is null ? 0
                                                : doTask.StartDate is null ? 1
                                                : doTask.ActualEndDate is null ? 2
                                                : 3),

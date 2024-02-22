@@ -173,7 +173,7 @@ internal class Program
         EngineerExperience difficulty;
         EngineerExperience.TryParse(difficultyStr, out difficulty);
 
-        return (new BO.Task { IdTask = 0, Description = description, Alias = alias, CreatedAtDate = DateTime.Now, Status = (BO.status)0, Milestone = null!, BaselineStartDate = null!, StartDate = startDate, SchedualStartDate = null!, ForecastDate = startDate + taskDuring, DeadlineDate = null!, CompleteDate = null!, Deliverables = deliverables, Remarks = remarks, Engineer = null, CopmlexityLevel = difficulty });
+        return (new BO.Task { IdTask = 0, Description = description, Alias = alias, CreatedAtDate = DateTime.Now, Status = (BO.Status)0, Milestone = null!, BaselineStartDate = null!, StartDate = startDate, SchedualStartDate = null!, ForecastDate = startDate + taskDuring, DeadlineDate = null!, CompleteDate = null!, Deliverables = deliverables, Remarks = remarks, Engineer = null, CopmlexityLevel = difficulty });
     }
     public static int idToRead()
     {

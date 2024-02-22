@@ -6,7 +6,7 @@ namespace BlImplementation;
 
 internal class TaskImplementation : ITask
 {
-    private DalApi.IDal _dal =Factory.Get;
+    private DalApi.IDal _dal = Factory.Get;
     /// <summary>
     /// Create new Task -return a new BO.Task.
     /// </summary>
@@ -45,9 +45,9 @@ internal class TaskImplementation : ITask
                             IdTask = doTask!.IdNumberTask,
                             Description = doTask.Description,
                             Alias = doTask.Alias,
-                            Milestone=findMilestoneForTask(doTask.IdNumberTask),
+                            Milestone = findMilestoneForTask(doTask.IdNumberTask),
                             CreatedAtDate = doTask.CreatedAtDate,
-                            Status = (BO.status)(doTask.scheduleDate is null ? 0
+                            Status = (BO.Status)(doTask.scheduleDate is null ? 0
                                                : doTask.StartDate is null ? 1
                                                : doTask.ActualEndDate is null ? 2
                                                : 3),
@@ -58,20 +58,53 @@ internal class TaskImplementation : ITask
                             CompleteDate = doTask.ActualEndDate,
                             Deliverables = doTask.Product,
                             Remarks = doTask.Notes,
-                            Engineer= findEngineerForTask(doTask.IdNumberTask),
+                            Engineer = findEngineerForTask(doTask.IdNumberTask),
                             CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
                         });
 
-        List < BO.Task> boList= new List<BO.Task>();
+        List<BO.Task> boList = new List<BO.Task>();
         foreach (var task in taskList)
         {
 
         }
-            return taskList!;
+        return taskList!;
     }
-    /// <summary>
-    /// Read spesipic task by id
-    /// </summary>
+    public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null)
+    {
+        var taskList = (from DO.Task doTask in _dal.Task.ReadAll()
+                        where doTask.Milestone == false
+                        select new BO.Task
+                        {
+                            IdTask = doTask!.IdNumberTask,
+                            Description = doTask.Description,
+                            Alias = doTask.Alias,
+                            Milestone = findMilestoneForTask(doTask.IdNumberTask),
+                            CreatedAtDate = doTask.CreatedAtDate,
+                            Status = (BO.Status)(doTask.scheduleDate is null ? 0
+                                               : doTask.StartDate is null ? 1
+                                               : doTask.ActualEndDate is null ? 2
+                                               : 3),
+                            StartDate = doTask.StartDate,
+                            SchedualStartDate = doTask.scheduleDate,
+                            ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
+                            DeadlineDate = doTask.LastEndDate,
+                            CompleteDate = doTask.ActualEndDate,
+                            Deliverables = doTask.Product,
+                            Remarks = doTask.Notes,
+                            Engineer = findEngineerForTask(doTask.IdNumberTask),
+                            CopmlexityLevel = (BO.EngineerExperience)doTask.Level,
+                        });
+
+        List<BO.Task> boList = new List<BO.Task>();
+        foreach (var task in taskList)
+        {
+            if (filter!(task))
+            {
+                boList.Add(task);
+            }
+        }
+        return boList!;
+    }
     public BO.Task Read(int idTask)
     {
         try
@@ -84,7 +117,7 @@ internal class TaskImplementation : ITask
                 Alias = doTask.Alias,
                 Milestone= findMilestoneForTask(doTask.IdNumberTask),
                 CreatedAtDate = doTask.CreatedAtDate,
-                Status = (BO.status)(doTask.scheduleDate is null ? 0
+                Status = (BO.Status)(doTask.scheduleDate is null ? 0
                                                : doTask.StartDate is null ? 1
                                                : doTask.ActualEndDate is null ? 2
                                                : 3),

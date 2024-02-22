@@ -105,10 +105,10 @@ public static class Initialization
     }
     public static void ResetDB()
     {
+        s_dal = Factory.Get; //stage 4
         s_dal!.Task.Reset();
         s_dal!.Engineer.Reset();
         s_dal!.Dependence.Reset();
-
     }
 
 }

@@ -10,5 +10,4 @@ public interface ICrud<T> where T : class
     T? Read(Func<T, bool> filter); // stage 2
     public void Reset();//reset the lists of the entities from level 2+3- list+xml
     
-
 }

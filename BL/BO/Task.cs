@@ -9,7 +9,7 @@ public class Task
     public string? Alias { get; init; }
     public MilestoneInTask? Milestone { get; set; }
     public DateTime CreatedAtDate { get; init; }
-    public BO.status Status { get; set; }
+    public BO.Status Status { get; set; }
     public DateTime? BaselineStartDate { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? SchedualStartDate { get; set; }
