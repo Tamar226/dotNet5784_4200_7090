@@ -223,4 +223,4 @@ The presentation layer is built using WPF and includes:
 ## Contributors
 
 - Tamar Licht ([@Tamar226](https://github.com/Tamar226))
-- Chagit Tarab ([@Yoni4517](https://github.com/Yoni4517))
+- Chagit Tarab ([@Chagit644](https://github.com/Chagit644))
